@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/site.css?v=20260807k" />
+  <link rel="stylesheet" href="/css/site.css?v=20260807m" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -243,13 +243,21 @@
                     <span>Needs attention before sign-off</span>
                   </div>
                   <div class="field-ui__panel">
-                    <p class="field-ui__panel-label">Site snapshot</p>
-                    <div class="field-ui__stats">
-                      <div><strong>42</strong><span>Fittings</span></div>
-                      <div><strong>6</strong><span>Switches</span></div>
-                      <div><strong>96%</strong><span>Last pass</span></div>
-                      <div><strong>2</strong><span>Failures</span></div>
-                    </div>
+                    <p class="field-ui__panel-label">Monthly test</p>
+                    <ul class="field-ui__checks" aria-hidden="true">
+                      <li class="cascade-item is-pass">
+                        <span class="check-mark"></span>
+                        <span>EL-012 Stair A</span>
+                      </li>
+                      <li class="cascade-item is-pass">
+                        <span class="check-mark"></span>
+                        <span>EL-024 Corridor B</span>
+                      </li>
+                      <li class="cascade-item is-fail">
+                        <span class="check-mark"></span>
+                        <span>EL-018 Plant room</span>
+                      </li>
+                    </ul>
                   </div>
                   <nav class="field-ui__nav" aria-hidden="true">
                     <span class="is-active">
@@ -313,9 +321,15 @@
                       </header>
                       <div class="console-ui__summary">
                         <div><strong>3</strong><span>Sites</span></div>
-                        <div class="is-due"><strong>1</strong><span>Need attention</span></div>
-                        <div class="is-warn"><strong>0</strong><span>In progress</span></div>
-                        <div class="is-ok"><strong>2</strong><span>Up to date</span></div>
+                        <div class="is-due">
+                          <strong>1</strong>
+                          <span><span class="live-dot live-dot--due" aria-hidden="true"></span>Need attention</span>
+                        </div>
+                        <div class="is-warn">
+                          <strong>1</strong>
+                          <span><span class="live-dot live-dot--warn" aria-hidden="true"></span>In progress</span>
+                        </div>
+                        <div class="is-ok"><strong>1</strong><span>Up to date</span></div>
                       </div>
                       <div class="console-ui__toolbar">
                         <span class="console-ui__search">Search sites…</span>
@@ -551,7 +565,10 @@
         </div>
         <div class="feature-band__visual">
           <div class="feature-card">
-            <span class="feature-card__kicker">Sync</span>
+            <span class="feature-card__kicker">
+              <span class="live-dot live-dot--gold" aria-hidden="true"></span>
+              Sync
+            </span>
             <strong>Pending sync</strong>
             <p>3 sessions · 12 fittings updated · ready when online</p>
           </div>
@@ -576,9 +593,15 @@
         </div>
         <div class="feature-band__visual">
           <div class="feature-card feature-card--stack">
-            <div class="feature-card__row feature-card__row--ok"><span>EL-012 Stair A</span><strong>Pass</strong></div>
-            <div class="feature-card__row feature-card__row--due"><span>EL-018 Plant room</span><strong>Fail</strong></div>
-            <div class="feature-card__row feature-card__row--ok"><span>EL-024 Corridor B</span><strong>Pass</strong></div>
+            <div class="feature-card__row feature-card__row--ok cascade-item">
+              <span>EL-012 Stair A</span><strong>Pass</strong>
+            </div>
+            <div class="feature-card__row feature-card__row--due cascade-item">
+              <span>EL-018 Plant room</span><strong>Fail</strong>
+            </div>
+            <div class="feature-card__row feature-card__row--ok cascade-item">
+              <span>EL-024 Corridor B</span><strong>Pass</strong>
+            </div>
           </div>
         </div>
       </div>
@@ -602,8 +625,14 @@
         <div class="feature-band__visual">
           <div class="feature-card">
             <span class="feature-card__kicker">Annual · Switch TS-02</span>
-            <strong class="feature-card__timer">01:42:18</strong>
-            <p>Duration required 3h · In progress · 4 of 6 switches complete</p>
+            <strong class="feature-card__timer" data-countdown="6178" aria-hidden="true">01:42:18</strong>
+            <p class="feature-card__meta">
+              <span class="live-dot live-dot--warn" aria-hidden="true"></span>
+              Duration required 3h · In progress · 4 of 6 switches complete
+            </p>
+            <div class="feature-card__progress" aria-hidden="true">
+              <div class="feature-card__progress-bar" style="--progress: 66.67%"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -907,6 +936,6 @@
     </div>
   </footer>
 
-  <script src="/js/site.js" defer></script>
+  <script src="/js/site.js?v=20260807m" defer></script>
 </body>
 </html>
