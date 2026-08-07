@@ -2067,6 +2067,9 @@ a {
 }
 
 .outcome-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
   padding: 0.65rem 0.85rem;
   border-radius: 0.65rem;
   background: var(--surface);
@@ -2074,6 +2077,16 @@ a {
   font-size: 0.925rem;
   font-weight: 650;
   color: var(--ink-soft);
+}
+
+.outcome-list li::before {
+  content: '';
+  width: 0.35rem;
+  height: 0.35rem;
+  margin-top: 0.4em;
+  border-radius: 999px;
+  background: var(--gold-lo);
+  flex-shrink: 0;
 }
 
 /* FAQ */
