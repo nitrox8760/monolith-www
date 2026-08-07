@@ -1,0 +1,6 @@
+# Shorter cache for CSS/JS so HTML/CSS deploys don't mismatch at the edge
+/css/*
+  Cache-Control: public, max-age=300, must-revalidate
+
+/js/*
+  Cache-Control: public, max-age=300, must-revalidate
