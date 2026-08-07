@@ -1,0 +1,3 @@
+# Apex → www (also configure in Cloudflare if preferred)
+https://monolithcompliance.co.uk/* https://www.monolithcompliance.co.uk/:splat 301
+http://monolithcompliance.co.uk/* https://www.monolithcompliance.co.uk/:splat 301
