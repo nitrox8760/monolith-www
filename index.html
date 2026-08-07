@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/site.css?v=20260807c" />
+  <link rel="stylesheet" href="/css/site.css?v=20260807d" />
 </head>
 <body>
   <header class="topbar">
@@ -253,78 +253,385 @@
       </div>
     </section>
 
-    <!-- 3b. Sample paperwork -->
+    <!-- 4. Sample paperwork — real compliance chrome -->
     <section class="section section--cream" id="paperwork">
       <div class="section__inner reveal">
         <p class="section__label">The paperwork</p>
-        <h2 class="section__title">Issue from the visit — no rewrite in the van.</h2>
+        <h2 class="section__title">The same documents Beacon issues from a visit.</h2>
         <p class="section__lede">
-          After a test you can download a visit PIR or a site periodic certificate. Once issued, the record stays locked
-          so the PDF matches what was signed on site.
+          Previews use the real compliance layout — titles, refs, lettered sections, and sign-off — scaled for the page.
+          Issued documents lock so the PDF matches what was signed on site.
         </p>
+
         <div class="paper-samples">
           <figure class="paper-sample">
-            <div class="paper-sheet" aria-hidden="true">
-              <div class="paper-sheet__brand">
-                <img src="/assets/brand/pillar.svg" alt="" width="20" height="20" />
-                <span>Beacon<span class="tm">™</span> by Monolith</span>
+            <div class="comp-doc" aria-hidden="true">
+              <div class="comp-doc__rule"></div>
+              <header class="comp-doc__banner">
+                <div class="comp-doc__banner-main">
+                  <h3 class="comp-doc__title">Emergency Lighting Periodic Inspection Report</h3>
+                  <p class="comp-doc__sub">Issued with Monolith Beacon · visit record for an existing installation</p>
+                  <p class="comp-doc__std">BS 5266-1 · BS EN 50172 / BS 5266-8</p>
+                </div>
+                <div class="comp-doc__banner-side">
+                  <span>Beacon report</span>
+                  <span>Page 1</span>
+                  <span>Ref: PIR-A1B2C3D4</span>
+                  <span>Acme Lighting Ltd</span>
+                </div>
+              </header>
+
+              <div class="comp-doc__sec">
+                <div class="comp-doc__bar"><span>A</span> Client details</div>
+                <div class="comp-doc__fields">
+                  <div class="comp-doc__field"><label>Client</label><p>Riverside Court Management</p></div>
+                  <div class="comp-doc__field"><label>Address</label><p>12 Quay Road, Bristol, BS1 4QH</p></div>
+                </div>
               </div>
-              <p class="paper-sheet__eyebrow">Visit report</p>
-              <h3 class="paper-sheet__title">Periodic inspection report</h3>
-              <dl class="paper-sheet__meta">
-                <div><dt>Site</dt><dd>Riverside Court</dd></div>
-                <div><dt>Visit</dt><dd>Monthly function · 14 Jul 2026</dd></div>
-                <div><dt>Result</dt><dd>40 pass · 2 fail · 3 open defects</dd></div>
-              </dl>
-              <div class="paper-sheet__table">
-                <div class="paper-sheet__row paper-sheet__row--head"><span>Site ID</span><span>Location</span><span>Result</span></div>
-                <div class="paper-sheet__row"><span>EL-012</span><span>Stair A</span><span class="tone tone--ok">Pass</span></div>
-                <div class="paper-sheet__row"><span>EL-018</span><span>Plant room</span><span class="tone tone--due">Fail</span></div>
-                <div class="paper-sheet__row"><span>EL-024</span><span>Corridor B</span><span class="tone tone--ok">Pass</span></div>
+
+              <div class="comp-doc__sec">
+                <div class="comp-doc__bar"><span>C</span> Overall assessment</div>
+                <div class="comp-doc__assess comp-doc__assess--ok">SATISFACTORY</div>
+                <div class="comp-doc__fields comp-doc__fields--2">
+                  <div class="comp-doc__field"><label>Next inspection due</label><p>Aug 2026</p></div>
+                  <div class="comp-doc__field"><label>This visit</label><p>Monthly function test · 42 tested · 2 failed</p></div>
+                </div>
               </div>
-              <p class="paper-sheet__lock">Issued · immutable</p>
+
+              <div class="comp-doc__sec">
+                <div class="comp-doc__bar"><span>D</span> Inspecting organisation</div>
+                <div class="comp-doc__fields">
+                  <div class="comp-doc__field"><label>Trading title</label><p>Acme Lighting Ltd</p></div>
+                </div>
+                <div class="comp-doc__signoff">
+                  <strong>Competent person</strong>
+                  <span>J. Hart · Competent Person · 14 Jul 2026</span>
+                </div>
+              </div>
+
+              <footer class="comp-doc__footer">Prepared with Monolith Beacon · Page 1 of 2 · monolithcompliance.co.uk</footer>
             </div>
             <figcaption>
-              <strong>Visit PIR</strong>
-              Results from that visit, ready to hand over or file.
+              <strong>Emergency Lighting Periodic Inspection Report</strong>
+              Visit PIR — filename pattern <code>periodic-inspection-report-*.pdf</code>
             </figcaption>
           </figure>
+
           <figure class="paper-sample">
-            <div class="paper-sheet paper-sheet--cert" aria-hidden="true">
-              <div class="paper-sheet__brand">
-                <img src="/assets/brand/pillar.svg" alt="" width="20" height="20" />
-                <span>Beacon<span class="tm">™</span> by Monolith</span>
+            <div class="comp-doc" aria-hidden="true">
+              <div class="comp-doc__rule"></div>
+              <header class="comp-doc__banner">
+                <div class="comp-doc__banner-main">
+                  <h3 class="comp-doc__title">Emergency Lighting Periodic Inspection and Testing Certificate</h3>
+                  <p class="comp-doc__sub">For certifying continued compliance of an existing emergency lighting installation</p>
+                  <p class="comp-doc__std">BS 5266-1 · BS EN 50172 / BS 5266-8 · BS EN 1838</p>
+                </div>
+                <div class="comp-doc__banner-side">
+                  <span>Beacon certificate</span>
+                  <span>Page 1 of 4</span>
+                  <span>Ref: BCN-RIVR-20260714</span>
+                  <span>Monolith Beacon</span>
+                </div>
+              </header>
+
+              <div class="comp-doc__sec">
+                <div class="comp-doc__bar comp-doc__bar--caps"><span>A</span> Details of the client</div>
+                <div class="comp-doc__fields comp-doc__fields--2">
+                  <div class="comp-doc__field"><label>Occupier / Client</label><p>Riverside Court Management</p></div>
+                  <div class="comp-doc__field"><label>Postcode</label><p>BS1 4QH</p></div>
+                </div>
               </div>
-              <p class="paper-sheet__eyebrow">BS 5266-aware</p>
-              <h3 class="paper-sheet__title">Periodic inspection &amp; testing certificate</h3>
-              <dl class="paper-sheet__meta">
-                <div><dt>Installation</dt><dd>Riverside Court · Ground + Level 1</dd></div>
-                <div><dt>Extent</dt><dd>Emergency lighting as per site register</dd></div>
-                <div><dt>Next inspection</dt><dd>12 months</dd></div>
-              </dl>
-              <div class="paper-sheet__block">
-                <span>Deviations / defects</span>
-                <p>EL-018 Plant room — lamp failed to strike. Open on site register.</p>
+
+              <div class="comp-doc__sec">
+                <div class="comp-doc__bar comp-doc__bar--caps"><span>D</span> Certification</div>
+                <p class="comp-doc__decl">
+                  I certify that the emergency lighting installation has been inspected and tested in accordance with
+                  BS 5266-1 and BS EN 50172 / BS 5266-8…
+                </p>
+                <div class="comp-doc__signoff">
+                  <strong>Competent person</strong>
+                  <span>J. Hart · Inspector · 14 Jul 2026</span>
+                </div>
               </div>
-              <div class="paper-sheet__sign">
-                <span>Competent person sign-off</span>
-                <em>Locked after issue</em>
+
+              <div class="comp-doc__sec">
+                <div class="comp-doc__bar comp-doc__bar--caps"><span>E</span> Details of deviations</div>
+                <div class="comp-doc__table">
+                  <div class="comp-doc__trow comp-doc__trow--head"><span>Clause</span><span>Details of deviations</span></div>
+                  <div class="comp-doc__trow"><span>—</span><span>EL-018 Plant room — lamp failed to strike (open on register)</span></div>
+                </div>
               </div>
+
+              <div class="comp-doc__sec">
+                <div class="comp-doc__bar comp-doc__bar--caps"><span>G</span> Next inspection</div>
+                <p class="comp-doc__next">Recommended interval <strong>12 months</strong></p>
+              </div>
+
+              <footer class="comp-doc__footer">Prepared with Monolith Beacon · Page 1 of 4 · monolithcompliance.co.uk</footer>
             </div>
             <figcaption>
-              <strong>Periodic certificate</strong>
-              Site-level paperwork built from the register and test history.
+              <strong>Emergency Lighting Periodic Inspection and Testing Certificate</strong>
+              Site periodic certificate — filename pattern <code>periodic-certificate-*.pdf</code>
             </figcaption>
           </figure>
-        </div>
-        <div class="hero__actions hero__actions--section">
-          <a class="btn btn--primary" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
-          <a class="btn btn--ghost btn--ghost-ink" href="#how">See how it works</a>
         </div>
       </div>
     </section>
 
-    <!-- 4. How it works -->
+    <!-- 5. Feature bands -->
+    <section class="section section--elevated" id="capabilities">
+      <div class="section__inner reveal">
+        <p class="section__label">Capabilities</p>
+        <h2 class="section__title">Built for how emergency lighting is actually tested.</h2>
+        <p class="section__lede">
+          Specialist depth for monthly function and timed annual programmes — not a generic cert form with an EL
+          template bolted on.
+        </p>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--cream" id="offline">
+      <div class="feature-band__inner reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">01 · Field</p>
+          <h3 class="feature-band__title">Installable Field PWA — works offline</h3>
+          <p>
+            Test in plant rooms and basements without relying on signal. Results stay on the device and sync to your
+            organisation when you’re back online.
+          </p>
+          <ul class="feature-band__list">
+            <li>Install from the browser — no App Store required</li>
+            <li>Manual sync when you have coverage</li>
+            <li>Same site data available in Console after sync</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card">
+            <span class="feature-card__kicker">Sync</span>
+            <strong>Pending sync</strong>
+            <p>3 sessions · 12 fittings updated · ready when online</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--elevated" id="monthly">
+      <div class="feature-band__inner feature-band__inner--flip reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">02 · Monthly</p>
+          <h3 class="feature-band__title">Monthly function tests with honest due dates</h3>
+          <p>
+            Pass or fail every fitting on the visit. Incomplete programmes don’t falsely clear monthly compliance —
+            due stays visible until the work is done.
+          </p>
+          <ul class="feature-band__list">
+            <li>Per-fitting results with notes and photos</li>
+            <li>Programme progress on the site overview</li>
+            <li>Clear monthly / annual status tones</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card feature-card--stack">
+            <div class="feature-card__row feature-card__row--ok"><span>EL-012 Stair A</span><strong>Pass</strong></div>
+            <div class="feature-card__row feature-card__row--due"><span>EL-018 Plant room</span><strong>Fail</strong></div>
+            <div class="feature-card__row feature-card__row--ok"><span>EL-024 Corridor B</span><strong>Pass</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--cream" id="annual">
+      <div class="feature-band__inner reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">03 · Annual</p>
+          <h3 class="feature-band__title">Timed annual duration by test switch</h3>
+          <p>
+            Run the rated discharge locked to the site design duration. Timers and full-switch coverage come before
+            annual due clears — no ticking a box without a real test.
+          </p>
+          <ul class="feature-band__list">
+            <li>1 hour / 3 hour programmes from site setup</li>
+            <li>Per-switch duration tracking</li>
+            <li>Annual due only clears when switches are finished</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card">
+            <span class="feature-card__kicker">Annual · Switch TS-02</span>
+            <strong class="feature-card__timer">01:42:18</strong>
+            <p>Duration required 3h · In progress · 4 of 6 switches complete</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--elevated" id="pdfs">
+      <div class="feature-band__inner feature-band__inner--flip reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">04 · Documents</p>
+          <h3 class="feature-band__title">Three client-ready PDFs from the visit</h3>
+          <p>
+            Hand over a fitting test report, a visit Periodic Inspection Report, or a site periodic certificate —
+            immutable once issued, with unique refs and history.
+          </p>
+          <ul class="feature-band__list">
+            <li>Emergency lighting test report (fitting results)</li>
+            <li>Visit PIR — <a href="#paperwork">see sample</a></li>
+            <li>Periodic inspection &amp; testing certificate — <a href="#paperwork">see sample</a></li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card feature-card--docs">
+            <div><strong>Test report</strong><span>Fitting results table</span></div>
+            <div><strong>Visit PIR</strong><span>Ref PIR-…</span></div>
+            <div><strong>Periodic certificate</strong><span>Ref BCN-…</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--cream" id="defects">
+      <div class="feature-band__inner reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">05 · Defects</p>
+          <h3 class="feature-band__title">Open defects register with photo evidence</h3>
+          <p>
+            Failures open a living register on the site. Later passes or manual close clear items — without rewriting
+            paperwork you’ve already issued.
+          </p>
+          <ul class="feature-band__list">
+            <li>Open count on site overview</li>
+            <li>Photo evidence on findings</li>
+            <li>Issued PDFs stay immutable</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card feature-card--defect">
+            <strong>Open defects (3)</strong>
+            <p>EL-018 Plant room — lamp failed to strike</p>
+            <p>EL-031 Car park — battery duration short</p>
+            <span>Needs attention before sign-off</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--elevated" id="import">
+      <div class="feature-band__inner feature-band__inner--flip reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">06 · Register</p>
+          <h3 class="feature-band__title">Spreadsheet import &amp; living asset register</h3>
+          <p>
+            Map existing logbook columns into rooms, Site IDs, modes, and floors. The register carries forward visit after
+            visit — you don’t rebuild the wall every month.
+          </p>
+          <ul class="feature-band__list">
+            <li>Column mapper for CSV / spreadsheet import</li>
+            <li>Site IDs, locations, switches, floors</li>
+            <li>Assets stay linked to history and defects</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card feature-card--stack">
+            <div class="feature-card__row"><span>Site ID</span><strong>→</strong><span>localId</span></div>
+            <div class="feature-card__row"><span>Location</span><strong>→</strong><span>location</span></div>
+            <div class="feature-card__row"><span>Switch</span><strong>→</strong><span>testSwitch</span></div>
+            <div class="feature-card__row"><span>42 rows mapped</span><strong></strong><span>Ready to import</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--cream" id="setup">
+      <div class="feature-band__inner reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">07 · Setup</p>
+          <h3 class="feature-band__title">Site setup for BS 5266-credible records</h3>
+          <p>
+            Capture the responsible person, system type, design duration, ATS, and test-switch groups so timers and
+            paperwork match the installation — not a blank form.
+          </p>
+          <ul class="feature-band__list">
+            <li>Responsible person and client details</li>
+            <li>Design duration and automatic test system</li>
+            <li>Test switches that drive annual programmes</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card">
+            <span class="feature-card__kicker">Site setup</span>
+            <p><strong>Duration</strong> 3 hours</p>
+            <p><strong>ATS</strong> Not fitted</p>
+            <p><strong>Switches</strong> TS-01 · TS-02 · TS-03</p>
+            <p><strong>RP</strong> Building Manager</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--elevated" id="console-ops">
+      <div class="feature-band__inner feature-band__inner--flip reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">08 · Console</p>
+          <h3 class="feature-band__title">Multi-site Console, team, audit &amp; branding</h3>
+          <p>
+            Owners and managers see overdue monthly/annual status across sites, invite technicians, review mutation
+            audit, and put company details on PDFs so packs look like your firm.
+          </p>
+          <ul class="feature-band__list">
+            <li>Portfolio due tones and site history</li>
+            <li>Team roles and invites</li>
+            <li>Org branding on exports</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card feature-card--docs">
+            <div><strong>Sites</strong><span>3 · 1 needs attention</span></div>
+            <div><strong>Team</strong><span>Owner · Technicians</span></div>
+            <div><strong>Audit</strong><span>Who changed what</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Contrast -->
+    <section class="section section--cream" id="why">
+      <div class="section__inner reveal">
+        <p class="section__label">Why Beacon</p>
+        <h2 class="section__title">Spreadsheets and generic cert apps weren’t built for this.</h2>
+        <div class="contrast">
+          <div class="contrast__col">
+            <h3>The old way</h3>
+            <ul>
+              <li>Retype fittings into Word or Excel after every visit</li>
+              <li>Clear annual due without a real discharge timer</li>
+              <li>Defects buried in last month’s PDF</li>
+              <li>No single living register for the site</li>
+            </ul>
+          </div>
+          <div class="contrast__col contrast__col--beacon">
+            <h3>With Beacon</h3>
+            <ul>
+              <li>Issue the PIR or periodic cert from the visit data</li>
+              <li>Timed annual by test switch — due stays honest</li>
+              <li>Open defects stay on the site until closed</li>
+              <li>Site IDs, fittings, and switches carry forward</li>
+            </ul>
+          </div>
+        </div>
+        <ul class="outcome-list" aria-label="What you can do today">
+          <li>Issue a visit PIR from the test — no rewrite</li>
+          <li>Keep monthly and annual due visible per site</li>
+          <li>Import fittings from a logbook spreadsheet</li>
+        </ul>
+        <div class="hero__actions hero__actions--section">
+          <a class="btn btn--primary" href="https://beacon.monolithcompliance.co.uk/login.html">Create a free account</a>
+          <a class="btn btn--ghost btn--ghost-ink" href="#paperwork">View sample certificate</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. How it works -->
     <section class="section section--elevated" id="how">
       <div class="section__inner reveal">
         <p class="section__label">How it works</p>
@@ -355,74 +662,8 @@
       </div>
     </section>
 
-    <!-- 5. Differentiators -->
-    <section class="section section--cream" id="why">
-      <div class="section__inner reveal">
-        <p class="section__label">Why Beacon</p>
-        <h2 class="section__title">Built for how emergency lighting is actually tested.</h2>
-        <p class="section__lede">
-          Generic cert apps and spreadsheets weren’t designed around monthly function tests and timed annuals by switch.
-          Beacon was.
-        </p>
-
-        <div class="contrast">
-          <div class="contrast__col">
-            <h3>The old way</h3>
-            <ul>
-              <li>Retype fittings into Word or Excel after every visit</li>
-              <li>Clear annual due without a real discharge timer</li>
-              <li>Defects buried in last month’s PDF</li>
-              <li>No single living register for the site</li>
-            </ul>
-          </div>
-          <div class="contrast__col contrast__col--beacon">
-            <h3>With Beacon</h3>
-            <ul>
-              <li>Issue the PIR or periodic cert from the visit data</li>
-              <li>Timed annual by test switch — due stays honest</li>
-              <li>Open defects stay on the site until closed</li>
-              <li>Site IDs, fittings, and switches carry forward</li>
-            </ul>
-          </div>
-        </div>
-
-        <ul class="feature-list feature-list--grid">
-          <li>
-            <strong>Offline-first</strong>
-            Plant rooms and basements included — sync when you’re back online.
-          </li>
-          <li>
-            <strong>Timed annual by test switch</strong>
-            Real discharge timers. No clearing due without finishing the switches.
-          </li>
-          <li>
-            <strong>Living asset register</strong>
-            Site IDs, fittings, and switches that carry forward visit after visit.
-          </li>
-          <li>
-            <strong>Paperwork that matches the work</strong>
-            Test report, visit PIR, and periodic certificate — immutable once issued.
-          </li>
-          <li>
-            <strong>Open defects on the site</strong>
-            Failures become a register, not a note buried in last month’s PDF.
-          </li>
-        </ul>
-
-        <ul class="outcome-list" aria-label="What you can do today">
-          <li>Issue a visit PIR from the test — no rewrite</li>
-          <li>Keep monthly and annual due visible per site</li>
-          <li>Import fittings from a logbook spreadsheet</li>
-        </ul>
-
-        <div class="hero__actions hero__actions--section">
-          <a class="btn btn--primary" href="https://beacon.monolithcompliance.co.uk/login.html">Create a free account</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. Trust -->
-    <section class="section section--elevated" id="trust">
+    <!-- 8. Trust -->
+    <section class="section section--cream" id="trust">
       <div class="section__inner reveal">
         <p class="section__label">Trust</p>
         <h2 class="section__title">Built for people who actually test the lights.</h2>
@@ -452,8 +693,8 @@
       </div>
     </section>
 
-    <!-- 7. FAQ -->
-    <section class="section section--cream" id="faq">
+    <!-- 9. FAQ -->
+    <section class="section section--elevated" id="faq">
       <div class="section__inner reveal">
         <p class="section__label">FAQ</p>
         <h2 class="section__title">Questions before you try it.</h2>
@@ -498,15 +739,15 @@
           <details class="faq__item">
             <summary>What can I issue today?</summary>
             <p>
-              From a completed visit you can issue a visit PIR. For the site you can issue a periodic inspection and
-              testing certificate. Issued documents are immutable once locked.
+              From a completed visit you can issue a fitting test report and a visit PIR. For the site you can issue a
+              periodic inspection and testing certificate. Issued documents are immutable once locked.
             </p>
           </details>
         </div>
       </div>
     </section>
 
-    <!-- 8. CTA -->
+    <!-- 10. CTA -->
     <section class="section cta-band">
       <div class="section__inner reveal">
         <h2 class="section__title">Join the open beta</h2>
