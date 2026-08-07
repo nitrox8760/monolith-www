@@ -1,0 +1,23 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 48" role="img" aria-label="Beacon by Monolith">
+  <g transform="translate(0,4)">
+    <svg x="0" y="0" width="40" height="40" viewBox="0 0 128 128">
+      <rect width="128" height="128" rx="28" fill="#0a0a0a"/>
+      <defs>
+        <linearGradient id="faceL" x1="38" y1="16" x2="64" y2="114" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#8a8a8a"/>
+          <stop offset="1" stop-color="#4a4a4a"/>
+        </linearGradient>
+        <linearGradient id="faceR" x1="64" y1="16" x2="90" y2="114" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#5c5c5c"/>
+          <stop offset="1" stop-color="#2c2c2c"/>
+        </linearGradient>
+      </defs>
+      <path d="M64 16 46.3 30v72L64 114Z" fill="url(#faceL)"/>
+      <path d="M64 16 81.7 30v72L64 114Z" fill="url(#faceR)"/>
+      <path d="M64 16 46.3 30 64 38 81.7 30Z" fill="#9a9a9a"/>
+      <path d="M64 16 81.7 30 64 38Z" fill="#6a6a6a"/>
+    </svg>
+  </g>
+  <text x="52" y="22" font-family="Outfit, system-ui, sans-serif" font-size="20" font-weight="700" fill="#1a1714">Beacon<tspan baseline-shift="super" font-size="11">&#174;</tspan></text>
+  <text x="52" y="38" font-family="Outfit, system-ui, sans-serif" font-size="12" font-weight="500" fill="#a67c2e">by Monolith</text>
+</svg>
