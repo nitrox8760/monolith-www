@@ -1,7 +1,4 @@
-document.documentElement.classList.add('js');
-
-const yearEl = document.getElementById('y');
-if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+document.getElementById('y').textContent = String(new Date().getFullYear());
 
 const reveals = document.querySelectorAll('.reveal');
 if (reveals.length && 'IntersectionObserver' in window) {
@@ -14,7 +11,7 @@ if (reveals.length && 'IntersectionObserver' in window) {
         }
       }
     },
-    { rootMargin: '0px 0px -6% 0px', threshold: 0.08 }
+    { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
   );
   reveals.forEach((el) => io.observe(el));
 } else {

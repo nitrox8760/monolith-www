@@ -43,18 +43,13 @@ html {
   .hero__veil,
   .hero__mark,
   .hero__phone,
-  .hero__inner,
-  .js .reveal,
+  .reveal,
   .field-ui__sync--pulse {
     animation: none !important;
-    transition: none !important;
   }
 
-  .hero__mark,
-  .hero__phone,
-  .hero__inner,
-  .js .reveal,
-  .js .reveal.is-in {
+  .reveal {
+    opacity: 1 !important;
     transform: none !important;
   }
 }
@@ -82,17 +77,14 @@ a {
 .topbar {
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  width: 100%;
-  max-width: var(--max);
   padding: 1.1rem clamp(1.25rem, 4vw, 2.5rem);
-  box-sizing: border-box;
 }
 
 .topbar__brand {
@@ -139,10 +131,10 @@ a {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 6.5rem clamp(1.25rem, 4vw, 2.5rem) 3rem;
+  justify-content: flex-end;
+  padding: 7rem clamp(1.25rem, 4vw, 2.5rem) 3.5rem;
   color: var(--on-dark);
-  overflow: clip;
+  overflow: hidden;
   background:
     radial-gradient(ellipse 90% 70% at 70% 20%, rgb(201 162 74 / 0.28), transparent 55%),
     radial-gradient(ellipse 60% 50% at 15% 80%, rgb(92 74 50 / 0.55), transparent 50%),
@@ -153,7 +145,6 @@ a {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  z-index: 0;
   background-image:
     linear-gradient(rgb(245 241 234 / 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgb(245 241 234 / 0.03) 1px, transparent 1px);
@@ -173,37 +164,33 @@ a {
 
 .hero__mark {
   position: absolute;
-  right: 0;
-  top: 10%;
-  width: min(34vw, 16rem);
+  right: clamp(-2rem, -4vw, 2rem);
+  top: 12%;
+  width: min(38vw, 18rem);
   opacity: 0.1;
   filter: brightness(1.4);
-  z-index: 0;
+  animation: mark-in 1.2s var(--ease) both;
 }
 
-.hero__stage {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: var(--max);
-  margin: 0 auto;
-  display: grid;
-  gap: 2.5rem;
-  align-items: end;
-}
-
-@media (min-width: 960px) {
-  .hero__stage {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 3rem;
-    align-items: center;
+@keyframes mark-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem) scale(0.96);
+  }
+  to {
+    opacity: 0.1;
+    transform: none;
   }
 }
 
 .hero__phone {
   display: none;
-  justify-self: end;
-  transform: rotate(2.5deg);
+  pointer-events: none;
+  position: absolute;
+  right: clamp(1.5rem, 8vw, 6rem);
+  bottom: 12%;
+  z-index: 1;
+  animation: phone-in 1.1s var(--ease) 0.25s both;
 }
 
 @media (min-width: 960px) {
@@ -212,40 +199,19 @@ a {
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .hero__mark {
-    animation: mark-in 1.2s var(--ease) both;
-  }
-
-  .hero__phone {
-    animation: phone-in 1.1s var(--ease) 0.15s both;
-  }
-
-  .hero__inner {
-    animation: hero-copy 0.9s var(--ease) both;
-  }
-}
-
-@keyframes mark-in {
-  from {
-    transform: translateY(1.5rem) scale(0.96);
-  }
-  to {
-    transform: none;
-  }
-}
-
 @keyframes phone-in {
   from {
-    transform: translateY(1.5rem) rotate(2.5deg);
+    opacity: 0;
+    transform: translateY(2rem) rotate(4deg);
   }
   to {
-    transform: rotate(2.5deg);
+    opacity: 1;
+    transform: rotate(3deg);
   }
 }
 
 .hero__phone-frame {
-  width: 12rem;
+  width: 11.5rem;
   padding: 0.55rem;
   border-radius: 1.35rem;
   background: linear-gradient(160deg, #3a342c, #1a1714);
@@ -315,14 +281,18 @@ a {
 
 .hero__inner {
   position: relative;
+  z-index: 2;
   max-width: 36rem;
+  animation: hero-copy 0.9s var(--ease) 0.1s both;
 }
 
 @keyframes hero-copy {
   from {
+    opacity: 0;
     transform: translateY(1.25rem);
   }
   to {
+    opacity: 1;
     transform: none;
   }
 }
@@ -474,7 +444,7 @@ a {
   position: relative;
   padding: 0 0 0 1.35rem;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 550;
   color: var(--ink-soft);
   line-height: 1.45;
 }
@@ -550,7 +520,7 @@ a {
   border-radius: 1.25rem;
   overflow: hidden;
   background: var(--cream);
-  min-height: 28rem;
+  aspect-ratio: 9 / 17.5;
 }
 
 .device--laptop {
@@ -594,7 +564,7 @@ a {
 
 /* Field UI mock */
 .field-ui {
-  min-height: 28rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 1.65rem 0.85rem 0.65rem;
@@ -770,7 +740,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  font-weight: 600;
+  font-weight: 650;
   color: var(--stone);
 }
 
@@ -1101,12 +1071,14 @@ a {
   gap: 1rem 1.25rem;
 }
 
-/* Reveal on scroll — motion only; never hide content with opacity */
-.js .reveal {
-  transform: translateY(0.75rem);
-  transition: transform 0.7s var(--ease);
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
 }
 
-.js .reveal.is-in {
+.reveal.is-in {
+  opacity: 1;
   transform: none;
 }
