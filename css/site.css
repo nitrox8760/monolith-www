@@ -16,6 +16,7 @@
   --on-dark: #f5f1ea;
   --font: Outfit, system-ui, sans-serif;
   --max: 68rem;
+  --page-pad-x: clamp(1.25rem, 4vw, 2.5rem);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ok: #15803d;
   --ok-bg: #f0fdf4;
@@ -95,7 +96,7 @@ a {
   max-width: var(--max);
   min-height: 4.75rem;
   margin: 0 auto;
-  padding: 1.15rem clamp(1.25rem, 4vw, 2.5rem);
+  padding: 1.15rem var(--page-pad-x);
   box-sizing: border-box;
   flex-wrap: wrap;
 }
@@ -190,8 +191,16 @@ a {
 }
 
 @media (min-width: 900px) {
+  .topbar__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 1.25rem;
+  }
+
   .topbar__nav {
     display: flex;
+    justify-content: center;
   }
 
   .topbar__menu {
@@ -200,6 +209,7 @@ a {
 
   .topbar__actions {
     margin-left: 0;
+    justify-self: end;
   }
 }
 
@@ -218,12 +228,14 @@ a {
   background: var(--ink);
   color: var(--on-dark);
   border-bottom: 1px solid rgb(245 241 234 / 0.08);
-  padding: 1.15rem clamp(1.25rem, 4vw, 2.5rem);
+  padding: 1.15rem 0;
 }
 
 .trust-strip__inner {
   max-width: var(--max);
   margin: 0 auto;
+  padding: 0 var(--page-pad-x);
+  box-sizing: border-box;
   display: grid;
   gap: 0.65rem;
 }
@@ -358,7 +370,7 @@ a {
   width: 100%;
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+  padding: 0 var(--page-pad-x);
   box-sizing: border-box;
   display: grid;
   gap: 2rem;
@@ -652,12 +664,14 @@ a {
 
 /* —— Sections —— */
 .section {
-  padding: clamp(3.5rem, 8vw, 5.5rem) clamp(1.25rem, 4vw, 2.5rem);
+  padding: clamp(3.5rem, 8vw, 5.5rem) 0;
 }
 
 .section__inner {
   max-width: var(--max);
   margin: 0 auto;
+  padding: 0 var(--page-pad-x);
+  box-sizing: border-box;
 }
 
 .section--cream {
@@ -1622,7 +1636,7 @@ a {
 
 /* Feature bands */
 .feature-band {
-  padding: clamp(3rem, 7vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem);
+  padding: clamp(3rem, 7vw, 4.5rem) 0;
 }
 
 .feature-band--cream {
@@ -1637,6 +1651,8 @@ a {
 .feature-band__inner {
   max-width: var(--max);
   margin: 0 auto;
+  padding: 0 var(--page-pad-x);
+  box-sizing: border-box;
   display: grid;
   gap: 2rem;
   align-items: center;
@@ -2048,7 +2064,7 @@ a {
 
 /* —— Footer —— */
 .footer {
-  padding: 2rem clamp(1.25rem, 4vw, 2.5rem) 2.5rem;
+  padding: 2rem 0 2.5rem;
   background: #120f0d;
   color: rgb(245 241 234 / 0.55);
   font-size: 0.8125rem;
@@ -2058,6 +2074,8 @@ a {
 .footer__inner {
   max-width: var(--max);
   margin: 0 auto;
+  padding: 0 var(--page-pad-x);
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem 2rem;
