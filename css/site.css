@@ -730,12 +730,8 @@ a {
   border-bottom: 1px solid var(--border);
 }
 
-.section__inner--close {
-  max-width: 46rem;
-}
-
 .section__inner--close .section__title {
-  max-width: none;
+  max-width: 40rem;
 }
 
 .section__inner--close .contrast,
