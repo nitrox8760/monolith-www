@@ -3,58 +3,425 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Privacy — Monolith Compliance</title>
-  <meta name="robots" content="noindex" />
-  <link rel="icon" href="/assets/icons/icon-192.png" type="image/png" />
+  <title>Privacy notice — Monolith Compliance / Beacon</title>
+  <meta
+    name="description"
+    content="How Monolith Compliance collects, uses, and protects personal data for the Beacon emergency lighting app and marketing site."
+  />
+  <link rel="canonical" href="https://www.monolithcompliance.co.uk/privacy.html" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="/assets/brand/pillar.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/site.css" />
-  <style>
-    .legal {
-      max-width: 40rem;
-      margin: 0 auto;
-      padding: 6rem 1.25rem 4rem;
-    }
-    .legal h1 {
-      margin: 0 0 1rem;
-      font-size: 1.75rem;
-      letter-spacing: -0.03em;
-    }
-    .legal p {
-      color: var(--stone);
-      font-weight: 500;
-      line-height: 1.6;
-    }
-    .legal a {
-      color: var(--gold-lo);
-      font-weight: 700;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/site.css?v=20260807x" />
 </head>
 <body>
-  <header class="topbar" style="position: static; background: var(--ink)">
-    <a class="topbar__brand" href="/">
-      <img src="/assets/brand/pillar.svg" alt="" width="32" height="32" />
-      <span>Monolith</span>
-    </a>
-    <a class="topbar__cta" href="/">Home</a>
+  <header class="topbar topbar--solid">
+    <div class="topbar__inner">
+      <a class="topbar__brand" href="/" aria-label="Beacon by Monolith home">
+        <img src="/assets/brand/pillar.svg" alt="" width="40" height="40" />
+        <span class="topbar__brand-text">
+          <strong>Beacon<span class="tm">™</span></strong>
+          <span class="topbar__tagline">by Monolith</span>
+        </span>
+      </a>
+      <div class="topbar__actions">
+        <a class="topbar__cta" href="/">Back to home</a>
+      </div>
+    </div>
   </header>
+
   <main class="legal">
-    <h1>Privacy</h1>
-    <p>
-      Monolith Compliance operates the marketing site at monolithcompliance.co.uk and the Beacon application at
-      beacon.monolithcompliance.co.uk.
-    </p>
-    <p>
-      Account and site data in Beacon are processed to provide the service (authentication, sync, and compliance
-      records you create). During open beta we may also receive feedback you submit.
-    </p>
-    <p>
-      For privacy questions or data requests, contact
-      <a href="mailto:feedback@monolithcompliance.co.uk">feedback@monolithcompliance.co.uk</a>.
-      A fuller policy will replace this page before general availability.
-    </p>
+    <div class="legal__inner">
+      <p class="section__label">Legal</p>
+      <h1 class="legal__title">Privacy notice</h1>
+      <p class="legal__meta">
+        <strong>Version 1.0</strong> · Effective 7 August 2026 · Last updated 7 August 2026
+      </p>
+      <p class="legal__lede">
+        This notice explains how Monolith Compliance (“<strong>we</strong>”, “<strong>us</strong>”, “<strong>our</strong>”)
+        collects, uses, stores, and shares personal data when you use Beacon and our websites. It is written for real
+        people — not for lawyers only.
+      </p>
+
+      <aside class="legal__callout" aria-label="Summary">
+        <strong>In one minute</strong>
+        <ul>
+          <li>We process account details and the site/test data you put into Beacon to run the service.</li>
+          <li>Field can keep visit data on your device until you are back online.</li>
+          <li>We use trusted providers (including Supabase, Cloudflare, and Resend) to host and send mail.</li>
+          <li>We do not sell your data.</li>
+          <li>You can ask to access, correct, or delete your personal data — contact details below.</li>
+        </ul>
+      </aside>
+
+      <nav class="legal__toc" aria-label="Contents">
+        <strong>Contents</strong>
+        <ol>
+          <li><a href="#who">Who we are</a></li>
+          <li><a href="#scope">What this notice covers</a></li>
+          <li><a href="#collect">What we collect</a></li>
+          <li><a href="#use">How we use data and lawful bases</a></li>
+          <li><a href="#device">On-device and offline storage</a></li>
+          <li><a href="#share">Who we share data with</a></li>
+          <li><a href="#international">International transfers</a></li>
+          <li><a href="#retain">How long we keep data</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#rights">Your rights</a></li>
+          <li><a href="#cookies">Cookies and similar tech</a></li>
+          <li><a href="#children">Children</a></li>
+          <li><a href="#changes">Changes to this notice</a></li>
+          <li><a href="#contact">Contact and complaints</a></li>
+        </ol>
+      </nav>
+
+      <section class="legal__section" id="who">
+        <h2>1. Who we are</h2>
+        <p>
+          The data controller for Beacon and the Monolith Compliance websites is <strong>Monolith Compliance</strong>
+          (trading name for the Beacon product and related services).
+        </p>
+        <p>
+          <strong>Privacy contact:</strong>
+          <a href="mailto:feedback@monolithcompliance.co.uk">feedback@monolithcompliance.co.uk</a>
+        </p>
+        <p>
+          Websites and services covered:
+        </p>
+        <ul>
+          <li>Marketing site: <a href="https://www.monolithcompliance.co.uk/">www.monolithcompliance.co.uk</a></li>
+          <li>Beacon app: <a href="https://beacon.monolithcompliance.co.uk/">beacon.monolithcompliance.co.uk</a> (Field and Console)</li>
+        </ul>
+        <p>
+          If you create an organisation in Beacon, your organisation may also decide how site and compliance records
+          are used inside the service (for example, who on your team can see which sites). In that sense your
+          organisation may act as an independent controller of those operational records, while we provide the
+          platform. This notice still explains what we do as the service provider.
+        </p>
+      </section>
+
+      <section class="legal__section" id="scope">
+        <h2>2. What this notice covers</h2>
+        <p>This notice applies when you:</p>
+        <ul>
+          <li>visit our marketing website;</li>
+          <li>create a Beacon account or accept a team invite;</li>
+          <li>use Beacon Field (including offline) or Beacon Console;</li>
+          <li>issue or download reports and certificates;</li>
+          <li>send product feedback; or</li>
+          <li>email us.</li>
+        </ul>
+        <p>
+          Beacon is aimed at businesses and competent persons carrying out emergency lighting testing and related
+          record-keeping in the UK. It helps you record work and issue supporting paperwork. <strong>Duty-holders remain
+          responsible for fire-safety compliance.</strong> Beacon is not a BSI product certification.
+        </p>
+      </section>
+
+      <section class="legal__section" id="collect">
+        <h2>3. What we collect</h2>
+
+        <h3>3.1 Account and identity</h3>
+        <ul>
+          <li>Name, email address, and password (password is stored hashed by our auth provider — we do not see it in plain text).</li>
+          <li>Organisation membership and role (for example owner, manager, technician, viewer).</li>
+          <li>Email confirmation and password-reset activity.</li>
+          <li>When you accept this privacy notice at sign-up (version and time, recorded with your account metadata).</li>
+        </ul>
+
+        <h3>3.2 Organisation and site records you enter</h3>
+        <p>Depending on how you use Beacon, this may include:</p>
+        <ul>
+          <li>organisation name and branding (for example logo and report details);</li>
+          <li>site details (addresses, client/responsible-person information, system setup, test switches, design duration);</li>
+          <li>fitting / asset register data (site IDs, locations, modes, floors, and related fields);</li>
+          <li>test sessions and results (monthly function and annual duration, notes, pass/fail outcomes);</li>
+          <li>open defects and related notes;</li>
+          <li>photos and images you attach (for example evidence on findings);</li>
+          <li>competent-person / sign-off details and signature images;</li>
+          <li>issued document payloads and history (test reports, visit periodic inspection reports, site periodic certificates), including unique references and lock timestamps;</li>
+          <li>team invites (invited email and role);</li>
+          <li>audit / activity records of significant changes in Console where the product records them.</li>
+        </ul>
+        <p>
+          Some of this may include personal data about people other than you (for example a client contact, building
+          manager, or signatory). You must only enter that information where you have a lawful reason to do so.
+        </p>
+
+        <h3>3.3 Feedback and support</h3>
+        <ul>
+          <li>Messages you send via in-app feedback or email (including category, message text, organisation name, role, app version, page path, and browser user agent when submitted through the app).</li>
+        </ul>
+
+        <h3>3.4 Technical and usage data</h3>
+        <ul>
+          <li>Basic server and security logs from our hosting providers (for example IP address, timestamps, request metadata) needed to run and protect the service.</li>
+          <li>Local preferences on your device (for example theme), and offline/sync state held in browser storage.</li>
+        </ul>
+        <p>
+          We do <strong>not</strong> currently run third-party advertising trackers or sell analytics profiles on the
+          marketing site. If that changes, we will update this notice and, where required, ask for consent.
+        </p>
+      </section>
+
+      <section class="legal__section" id="use">
+        <h2>4. How we use data and lawful bases</h2>
+        <p>Under UK GDPR we need a lawful basis for each use. In practice:</p>
+        <div class="legal__table-wrap">
+          <table class="legal__table">
+            <thead>
+              <tr>
+                <th scope="col">Purpose</th>
+                <th scope="col">Examples</th>
+                <th scope="col">Lawful basis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Provide the service</td>
+                <td>Accounts, sync, sites, tests, documents, team access</td>
+                <td>Contract (Art. 6(1)(b)) — to deliver Beacon to you</td>
+              </tr>
+              <tr>
+                <td>Secure the service</td>
+                <td>Auth, abuse prevention, backups, incident response</td>
+                <td>Legitimate interests (Art. 6(1)(f)) — keeping systems safe</td>
+              </tr>
+              <tr>
+                <td>Communicate about your account</td>
+                <td>Email confirmation, password reset, important service notices</td>
+                <td>Contract / legitimate interests</td>
+              </tr>
+              <tr>
+                <td>Open beta improvement</td>
+                <td>In-app feedback you choose to send; fixing bugs</td>
+                <td>Legitimate interests — improving a free beta product you use</td>
+              </tr>
+              <tr>
+                <td>Legal obligations</td>
+                <td>Responding to lawful requests; keeping necessary records</td>
+                <td>Legal obligation (Art. 6(1)(c)) where it applies</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          We do <strong>not</strong> use your site or test data to train public AI models, and we do not sell personal
+          data. We do not send marketing emails unless you have clearly asked for them (or another lawful basis applies,
+          which we will describe if we introduce marketing).
+        </p>
+        <p>
+          <strong>Open beta:</strong> Beacon is free while we test with real sites. Features and retention practices may
+          evolve; material changes will be reflected in an updated notice (see section 13).
+        </p>
+      </section>
+
+      <section class="legal__section" id="device">
+        <h2>5. On-device and offline storage</h2>
+        <p>
+          Beacon Field is designed to work when signal is poor or missing. That means visit and site data may be stored
+          <strong>on your phone, tablet, or computer</strong> (for example in browser storage / IndexedDB) until it can
+          sync to our cloud service.
+        </p>
+        <ul>
+          <li>Anyone with access to that device may be able to access locally stored Beacon data.</li>
+          <li>Clearing site data, uninstalling the app, or using a shared device can affect what remains locally.</li>
+          <li>Syncing sends applicable records to our cloud so your organisation can use Console and recover work across devices according to product rules and permissions.</li>
+        </ul>
+      </section>
+
+      <section class="legal__section" id="share">
+        <h2>6. Who we share data with</h2>
+        <p>We share personal data only as needed to run Beacon, with instructions that protect it:</p>
+        <div class="legal__table-wrap">
+          <table class="legal__table">
+            <thead>
+              <tr>
+                <th scope="col">Provider</th>
+                <th scope="col">Role</th>
+                <th scope="col">Typical data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Supabase</strong> (Supabase Inc. / affiliated infrastructure)</td>
+                <td>Authentication, database, file storage, edge functions</td>
+                <td>Accounts, organisation/site/test data, media (for example photos and signatures), feedback records</td>
+              </tr>
+              <tr>
+                <td><strong>Cloudflare</strong></td>
+                <td>Hosting and delivery of the websites/app</td>
+                <td>Connection and security logs; static assets</td>
+              </tr>
+              <tr>
+                <td><strong>Resend</strong> (when feedback email notify is enabled)</td>
+                <td>Transactional email delivery for feedback notifications</td>
+                <td>Email content and addresses needed to send the message</td>
+              </tr>
+              <tr>
+                <td>Your organisation’s authorised users</td>
+                <td>Team access inside Beacon</td>
+                <td>Whatever your role and permissions allow them to see</td>
+              </tr>
+              <tr>
+                <td>Professional advisers / authorities</td>
+                <td>Only if required</td>
+                <td>Limited data necessary for legal advice or a lawful request</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Issued PDFs and reports you download or share outside Beacon are under <strong>your</strong> control once they
+          leave the service (for example when you email a client). Choose recipients carefully.
+        </p>
+      </section>
+
+      <section class="legal__section" id="international">
+        <h2>7. International transfers</h2>
+        <p>
+          Our core application data is processed using Supabase and delivered via Cloudflare. Provider infrastructure
+          may involve processing outside the United Kingdom. Where personal data is transferred internationally, we rely
+          on appropriate safeguards recognised under UK data protection law (for example the UK International Data
+          Transfer Agreement / Addendum, or an adequacy regulation), as offered by our providers’ terms and
+          configurations.
+        </p>
+        <p>
+          If you need more detail about the current hosting location for our Supabase project, contact us using the
+          address in section 14 and we will provide what we can from our provider settings.
+        </p>
+      </section>
+
+      <section class="legal__section" id="retain">
+        <h2>8. How long we keep data</h2>
+        <ul>
+          <li><strong>Account data</strong> — while your account is active, and for a reasonable period afterward if needed to close the account securely or resolve disputes.</li>
+          <li><strong>Organisation / site / test / document records</strong> — while the organisation uses Beacon and as required for the product’s history and issued-document features. Issued reports and certificates are designed to remain as locked snapshots for audit integrity; deleting or closing an account may not automatically erase every historical artefact if your organisation still needs them — contact us to discuss deletion.</li>
+          <li><strong>On-device offline data</strong> — until synced, cleared, or removed with browser/app data.</li>
+          <li><strong>Feedback</strong> — for as long as useful to improve the product during beta and for a limited period afterward, unless you ask us to delete it sooner where we can.</li>
+          <li><strong>Security logs</strong> — for a limited period consistent with security and abuse prevention.</li>
+        </ul>
+        <p>
+          Soft-deleted records may remain recoverable for a period according to product design before permanent removal.
+          If you need a specific retention schedule for a procurement questionnaire, email us and we will confirm the
+          current practice in writing.
+        </p>
+      </section>
+
+      <section class="legal__section" id="security">
+        <h2>9. Security</h2>
+        <p>We take appropriate technical and organisational measures for a cloud SaaS product of this type, including:</p>
+        <ul>
+          <li>encrypted transport (HTTPS);</li>
+          <li>authentication and access control (including organisation roles and database access rules);</li>
+          <li>hashed passwords via our auth provider;</li>
+          <li>separation of customer organisations in the application data model;</li>
+          <li>careful handling of signature and media uploads.</li>
+        </ul>
+        <p>
+          No method of transmission or storage is perfectly secure. You can help by using a strong unique password,
+          protecting devices that hold offline Field data, and inviting only people who should access your organisation.
+        </p>
+      </section>
+
+      <section class="legal__section" id="rights">
+        <h2>10. Your rights</h2>
+        <p>Under UK GDPR, you may have the right to:</p>
+        <ul>
+          <li><strong>Access</strong> — ask what personal data we hold about you;</li>
+          <li><strong>Rectification</strong> — correct inaccurate data;</li>
+          <li><strong>Erasure</strong> — ask us to delete personal data in certain circumstances;</li>
+          <li><strong>Restriction</strong> — ask us to limit processing in certain circumstances;</li>
+          <li><strong>Portability</strong> — receive certain data in a usable format;</li>
+          <li><strong>Object</strong> — object to processing based on legitimate interests;</li>
+          <li><strong>Withdraw consent</strong> — where processing is based on consent (not our main basis for core service data).</li>
+        </ul>
+        <p>
+          To exercise these rights, email
+          <a href="mailto:feedback@monolithcompliance.co.uk?subject=Privacy%20request">feedback@monolithcompliance.co.uk</a>
+          with enough detail for us to verify your identity and find the relevant records. We will respond within the
+          time limits required by law.
+        </p>
+        <p>
+          If you are a team member in someone else’s organisation, some requests may need to be coordinated with that
+          organisation’s owner/manager (for example site registers that belong to the business).
+        </p>
+      </section>
+
+      <section class="legal__section" id="cookies">
+        <h2>11. Cookies and similar tech</h2>
+        <h3>Marketing site (www.monolithcompliance.co.uk)</h3>
+        <p>
+          The marketing site is primarily static. We may use essential storage needed for the site to function (for
+          example remembering a UI preference if we add one). We do not currently set advertising cookies.
+        </p>
+        <h3>Beacon app (beacon.monolithcompliance.co.uk)</h3>
+        <p>
+          Beacon uses essential local storage and similar technologies that are required to sign you in, keep preferences
+          (for example theme), support offline Field use, and operate as an installable web app. These are necessary for
+          the service you request, not for advertising.
+        </p>
+      </section>
+
+      <section class="legal__section" id="children">
+        <h2>12. Children</h2>
+        <p>
+          Beacon is a business tool for emergency lighting testing and related professional use. It is not directed at
+          children, and we do not knowingly collect personal data from anyone under 16. If you believe a child has
+          provided personal data, contact us and we will delete it.
+        </p>
+      </section>
+
+      <section class="legal__section" id="changes">
+        <h2>13. Changes to this notice</h2>
+        <p>
+          We may update this notice as Beacon grows (especially during open beta). The “Last updated” date at the top
+          will change when we do. For material changes, we will take reasonable steps to notify account holders (for
+          example an in-app or email notice) and, where appropriate, ask you to review the updated notice.
+        </p>
+        <p>
+          The current version will always be published at
+          <a href="https://www.monolithcompliance.co.uk/privacy.html">https://www.monolithcompliance.co.uk/privacy.html</a>.
+        </p>
+      </section>
+
+      <section class="legal__section" id="contact">
+        <h2>14. Contact and complaints</h2>
+        <p>
+          Questions, data requests, or concerns:
+          <a href="mailto:feedback@monolithcompliance.co.uk?subject=Privacy">feedback@monolithcompliance.co.uk</a>
+        </p>
+        <p>
+          You also have the right to complain to the UK Information Commissioner’s Office (ICO):
+          <a href="https://ico.org.uk/" rel="noopener noreferrer">https://ico.org.uk/</a>
+        </p>
+        <p class="legal__footnote">
+          This notice is intended to meet UK GDPR transparency requirements for Beacon’s current open-beta operations.
+          It is not legal advice to you or your clients. If you need a signed DPA / processor terms for enterprise
+          procurement, contact us and we will confirm what we can offer at your stage of use.
+        </p>
+      </section>
+
+      <p class="legal__back">
+        <a href="/">← Back to Beacon by Monolith</a>
+      </p>
+    </div>
   </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p>© <span id="y"></span> Monolith Compliance</p>
+      <div class="footer__links">
+        <a href="https://beacon.monolithcompliance.co.uk/">Beacon app</a>
+        <a href="/">Home</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="mailto:feedback@monolithcompliance.co.uk">Contact</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('y').textContent = String(new Date().getFullYear());
+  </script>
 </body>
 </html>
