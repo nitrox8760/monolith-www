@@ -494,18 +494,6 @@ a {
   overflow: hidden;
   background: var(--cream);
   aspect-ratio: 9 / 16;
-  display: flex;
-  flex-direction: column;
-}
-
-.hero__phone-screen .phone-statusbar {
-  padding-top: 0.45rem;
-  padding-inline: 0.7rem;
-}
-
-.hero__phone-screen .mini-ui {
-  flex: 1;
-  min-height: 0;
 }
 
 .tm {
@@ -856,18 +844,19 @@ a {
   flex-direction: column;
 }
 
-/* Simple iOS-style status strip for phone mocks */
+/* Device chrome status strip — distinct from in-app UI */
 .phone-statusbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
-  padding: 0.7rem 0.85rem 0.15rem;
+  padding: 0.75rem 0.9rem 0.35rem;
   font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: var(--ink);
-  background: var(--cream);
+  color: #f5f1ea;
+  background: #1a1714;
+  border-bottom: 1px solid rgb(245 241 234 / 0.08);
   position: relative;
   z-index: 1;
 }
