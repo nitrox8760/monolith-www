@@ -2076,12 +2076,6 @@ a {
   color: var(--ink-soft);
 }
 
-.outcome-list li::before {
-  content: '→ ';
-  color: var(--gold-lo);
-  font-weight: 700;
-}
-
 /* FAQ */
 .faq {
   margin-top: 1.75rem;
