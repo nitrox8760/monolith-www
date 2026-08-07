@@ -17,3 +17,20 @@ if (reveals.length && 'IntersectionObserver' in window) {
 } else {
   reveals.forEach((el) => el.classList.add('is-in'));
 }
+
+const topbar = document.querySelector('.topbar');
+const navToggle = document.getElementById('nav-toggle');
+const topNav = document.getElementById('top-nav');
+if (topbar && navToggle && topNav) {
+  const closeNav = () => {
+    topbar.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  };
+  navToggle.addEventListener('click', () => {
+    const open = topbar.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  topNav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeNav);
+  });
+}

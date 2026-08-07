@@ -33,6 +33,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -89,19 +90,20 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.25rem;
+  gap: 1rem;
   width: 100%;
   max-width: var(--max);
   min-height: 4.75rem;
   margin: 0 auto;
   padding: 1.15rem clamp(1.25rem, 4vw, 2.5rem);
   box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 .topbar__brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.75rem;
   text-decoration: none;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -113,8 +115,60 @@ a {
   height: 2.5rem;
 }
 
-.topbar__brand span {
+.topbar__brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  line-height: 1.1;
+}
+
+.topbar__brand-text strong {
   font-size: 1.15rem;
+}
+
+.topbar__tagline {
+  font-size: 0.7rem;
+  font-weight: 650;
+  color: var(--gold-hi);
+}
+
+.topbar__nav {
+  display: none;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.topbar__nav a {
+  color: rgb(245 241 234 / 0.78);
+  text-decoration: none;
+}
+
+.topbar__nav a:hover {
+  color: var(--on-dark);
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-left: auto;
+}
+
+.topbar__menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgb(245 241 234 / 0.22);
+  background: transparent;
+  color: var(--on-dark);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .topbar__cta {
@@ -133,6 +187,150 @@ a {
 
 .topbar__cta:hover {
   background: var(--gold-hi);
+}
+
+@media (min-width: 900px) {
+  .topbar__nav {
+    display: flex;
+  }
+
+  .topbar__menu {
+    display: none;
+  }
+
+  .topbar__actions {
+    margin-left: 0;
+  }
+}
+
+.topbar.is-open .topbar__nav {
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.25rem 0 0.75rem;
+  order: 3;
+}
+
+/* Trust strip under hero */
+.trust-strip {
+  background: var(--ink);
+  color: var(--on-dark);
+  border-bottom: 1px solid rgb(245 241 234 / 0.08);
+  padding: 1.15rem clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.trust-strip__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.trust-strip__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.trust-strip__row span {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgb(245 241 234 / 0.16);
+  background: rgb(245 241 234 / 0.06);
+}
+
+.trust-strip__line {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgb(245 241 234 / 0.65);
+}
+
+/* Highlight grid */
+.highlight-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 720px) {
+  .highlight-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.15rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .highlight-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.highlight-card {
+  padding: 1.25rem 1.3rem;
+  border-radius: 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 20px rgb(26 23 20 / 0.04);
+}
+
+.highlight-card__label {
+  margin: 0 0 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-lo);
+}
+
+.highlight-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.highlight-card p {
+  margin: 0.55rem 0 0;
+  font-size: 0.925rem;
+  font-weight: 500;
+  color: var(--stone);
+  line-height: 1.5;
+}
+
+.highlight-card a {
+  color: var(--gold-lo);
+  font-weight: 700;
+}
+
+.mid-cta {
+  margin-top: 2.5rem;
+  padding: 1.35rem 1.4rem;
+  border-radius: 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mid-cta p {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.mid-cta .hero__actions {
+  margin-top: 0;
 }
 
 /* —— Hero —— */
