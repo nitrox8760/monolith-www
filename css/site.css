@@ -15,7 +15,7 @@
   --gold-lo: #a67c2e;
   --on-dark: #f5f1ea;
   --font: Outfit, system-ui, sans-serif;
-  --max: 90rem;
+  --max: 68rem;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ok: #15803d;
   --ok-bg: #f0fdf4;
@@ -309,7 +309,7 @@ a {
 .hero__inner {
   position: relative;
   z-index: 2;
-  max-width: 44rem;
+  max-width: 36rem;
   animation: hero-copy 0.9s var(--ease) 0.1s both;
 }
 
@@ -423,7 +423,7 @@ a {
 
 /* —— Sections —— */
 .section {
-  padding: clamp(4rem, 9vw, 6.5rem) clamp(1.5rem, 5vw, 3.5rem);
+  padding: clamp(3.5rem, 8vw, 5.5rem) clamp(1.25rem, 4vw, 2.5rem);
 }
 
 .section__inner {
@@ -451,8 +451,8 @@ a {
 
 .section__title {
   margin: 0;
-  max-width: 38ch;
-  font-size: clamp(1.95rem, 4vw, 2.85rem);
+  max-width: 28ch;
+  font-size: clamp(1.85rem, 4vw, 2.65rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -460,8 +460,8 @@ a {
 
 .section__lede {
   margin: 0.85rem 0 0;
-  max-width: 52rem;
-  font-size: 1.1rem;
+  max-width: 40rem;
+  font-size: 1.05rem;
   font-weight: 500;
   color: var(--stone);
   line-height: 1.6;
@@ -506,8 +506,8 @@ a {
 
 @media (min-width: 900px) {
   .showcase {
-    grid-template-columns: minmax(16rem, 20rem) 1fr;
-    gap: 4rem;
+    grid-template-columns: minmax(14rem, 18rem) 1fr;
+    gap: 3rem;
   }
 }
 
@@ -1393,7 +1393,7 @@ a {
 
 /* Feature bands */
 .feature-band {
-  padding: clamp(3rem, 7vw, 5rem) clamp(1.5rem, 5vw, 3.5rem);
+  padding: clamp(3rem, 7vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem);
 }
 
 .feature-band--cream {
@@ -1415,8 +1415,8 @@ a {
 
 @media (min-width: 900px) {
   .feature-band__inner {
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 4rem;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2.75rem;
   }
 
   .feature-band__inner--flip .feature-band__copy {
@@ -1688,7 +1688,7 @@ a {
   margin-top: 1.75rem;
   display: grid;
   gap: 0.65rem;
-  max-width: 52rem;
+  max-width: 40rem;
 }
 
 .faq__item {
