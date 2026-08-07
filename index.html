@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/site.css?v=20260807b" />
+  <link rel="stylesheet" href="/css/site.css?v=20260807c" />
 </head>
 <body>
   <header class="topbar">
@@ -73,9 +73,9 @@
         </p>
         <div class="hero__actions">
           <a class="btn btn--primary" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
-          <a class="btn btn--ghost" href="#how">See how it works</a>
+          <a class="btn btn--ghost" href="#paperwork">View sample certificate</a>
         </div>
-        <p class="hero__beta">Open beta — free while we test with real sites. Feedback welcome.</p>
+        <p class="hero__beta">Free in open beta · No card · Takes a few minutes to add a site</p>
       </div>
     </section>
 
@@ -253,8 +253,79 @@
       </div>
     </section>
 
+    <!-- 3b. Sample paperwork -->
+    <section class="section section--cream" id="paperwork">
+      <div class="section__inner reveal">
+        <p class="section__label">The paperwork</p>
+        <h2 class="section__title">Issue from the visit — no rewrite in the van.</h2>
+        <p class="section__lede">
+          After a test you can download a visit PIR or a site periodic certificate. Once issued, the record stays locked
+          so the PDF matches what was signed on site.
+        </p>
+        <div class="paper-samples">
+          <figure class="paper-sample">
+            <div class="paper-sheet" aria-hidden="true">
+              <div class="paper-sheet__brand">
+                <img src="/assets/brand/pillar.svg" alt="" width="20" height="20" />
+                <span>Beacon<span class="tm">™</span> by Monolith</span>
+              </div>
+              <p class="paper-sheet__eyebrow">Visit report</p>
+              <h3 class="paper-sheet__title">Periodic inspection report</h3>
+              <dl class="paper-sheet__meta">
+                <div><dt>Site</dt><dd>Riverside Court</dd></div>
+                <div><dt>Visit</dt><dd>Monthly function · 14 Jul 2026</dd></div>
+                <div><dt>Result</dt><dd>40 pass · 2 fail · 3 open defects</dd></div>
+              </dl>
+              <div class="paper-sheet__table">
+                <div class="paper-sheet__row paper-sheet__row--head"><span>Site ID</span><span>Location</span><span>Result</span></div>
+                <div class="paper-sheet__row"><span>EL-012</span><span>Stair A</span><span class="tone tone--ok">Pass</span></div>
+                <div class="paper-sheet__row"><span>EL-018</span><span>Plant room</span><span class="tone tone--due">Fail</span></div>
+                <div class="paper-sheet__row"><span>EL-024</span><span>Corridor B</span><span class="tone tone--ok">Pass</span></div>
+              </div>
+              <p class="paper-sheet__lock">Issued · immutable</p>
+            </div>
+            <figcaption>
+              <strong>Visit PIR</strong>
+              Results from that visit, ready to hand over or file.
+            </figcaption>
+          </figure>
+          <figure class="paper-sample">
+            <div class="paper-sheet paper-sheet--cert" aria-hidden="true">
+              <div class="paper-sheet__brand">
+                <img src="/assets/brand/pillar.svg" alt="" width="20" height="20" />
+                <span>Beacon<span class="tm">™</span> by Monolith</span>
+              </div>
+              <p class="paper-sheet__eyebrow">BS 5266-aware</p>
+              <h3 class="paper-sheet__title">Periodic inspection &amp; testing certificate</h3>
+              <dl class="paper-sheet__meta">
+                <div><dt>Installation</dt><dd>Riverside Court · Ground + Level 1</dd></div>
+                <div><dt>Extent</dt><dd>Emergency lighting as per site register</dd></div>
+                <div><dt>Next inspection</dt><dd>12 months</dd></div>
+              </dl>
+              <div class="paper-sheet__block">
+                <span>Deviations / defects</span>
+                <p>EL-018 Plant room — lamp failed to strike. Open on site register.</p>
+              </div>
+              <div class="paper-sheet__sign">
+                <span>Competent person sign-off</span>
+                <em>Locked after issue</em>
+              </div>
+            </div>
+            <figcaption>
+              <strong>Periodic certificate</strong>
+              Site-level paperwork built from the register and test history.
+            </figcaption>
+          </figure>
+        </div>
+        <div class="hero__actions hero__actions--section">
+          <a class="btn btn--primary" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
+          <a class="btn btn--ghost btn--ghost-ink" href="#how">See how it works</a>
+        </div>
+      </div>
+    </section>
+
     <!-- 4. How it works -->
-    <section class="section section--cream" id="how">
+    <section class="section section--elevated" id="how">
       <div class="section__inner reveal">
         <p class="section__label">How it works</p>
         <h2 class="section__title">Three steps from empty site to issued paperwork.</h2>
@@ -285,10 +356,36 @@
     </section>
 
     <!-- 5. Differentiators -->
-    <section class="section section--elevated" id="why">
+    <section class="section section--cream" id="why">
       <div class="section__inner reveal">
         <p class="section__label">Why Beacon</p>
         <h2 class="section__title">Built for how emergency lighting is actually tested.</h2>
+        <p class="section__lede">
+          Generic cert apps and spreadsheets weren’t designed around monthly function tests and timed annuals by switch.
+          Beacon was.
+        </p>
+
+        <div class="contrast">
+          <div class="contrast__col">
+            <h3>The old way</h3>
+            <ul>
+              <li>Retype fittings into Word or Excel after every visit</li>
+              <li>Clear annual due without a real discharge timer</li>
+              <li>Defects buried in last month’s PDF</li>
+              <li>No single living register for the site</li>
+            </ul>
+          </div>
+          <div class="contrast__col contrast__col--beacon">
+            <h3>With Beacon</h3>
+            <ul>
+              <li>Issue the PIR or periodic cert from the visit data</li>
+              <li>Timed annual by test switch — due stays honest</li>
+              <li>Open defects stay on the site until closed</li>
+              <li>Site IDs, fittings, and switches carry forward</li>
+            </ul>
+          </div>
+        </div>
+
         <ul class="feature-list feature-list--grid">
           <li>
             <strong>Offline-first</strong>
@@ -311,6 +408,13 @@
             Failures become a register, not a note buried in last month’s PDF.
           </li>
         </ul>
+
+        <ul class="outcome-list" aria-label="What you can do today">
+          <li>Issue a visit PIR from the test — no rewrite</li>
+          <li>Keep monthly and annual due visible per site</li>
+          <li>Import fittings from a logbook spreadsheet</li>
+        </ul>
+
         <div class="hero__actions hero__actions--section">
           <a class="btn btn--primary" href="https://beacon.monolithcompliance.co.uk/login.html">Create a free account</a>
         </div>
@@ -318,7 +422,7 @@
     </section>
 
     <!-- 6. Trust -->
-    <section class="section section--cream" id="trust">
+    <section class="section section--elevated" id="trust">
       <div class="section__inner reveal">
         <p class="section__label">Trust</p>
         <h2 class="section__title">Built for people who actually test the lights.</h2>
@@ -334,8 +438,12 @@
           <span class="chip">Multi-site managers</span>
         </div>
         <p class="trust">
-          Beacon helps you record tests and issue supporting paperwork. Duty-holders remain responsible for fire-safety
-          compliance. Beacon is not a BSI product certification.
+          Beacon helps you record tests and issue supporting paperwork aligned with BS 5266 practice. Duty-holders remain
+          responsible for fire-safety compliance. Beacon is not a BSI product certification.
+        </p>
+        <p class="trust">
+          Free during open beta. We’ll announce pricing before anything is charged — no surprise lock-in. Your feedback
+          shapes what ships next.
         </p>
         <p class="trust trust--link">
           <a href="mailto:feedback@monolithcompliance.co.uk?subject=Beacon%20testimonial">Got a quote to share?</a>
@@ -344,13 +452,67 @@
       </div>
     </section>
 
-    <!-- 7. CTA -->
+    <!-- 7. FAQ -->
+    <section class="section section--cream" id="faq">
+      <div class="section__inner reveal">
+        <p class="section__label">FAQ</p>
+        <h2 class="section__title">Questions before you try it.</h2>
+        <div class="faq">
+          <details class="faq__item">
+            <summary>Does Beacon work offline on site?</summary>
+            <p>
+              Yes. Field is a PWA built for plant rooms and basements. Record tests offline; sync when you’re back online.
+              Console is for office use when connected.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary>Is this enough for BS 5266?</summary>
+            <p>
+              Beacon is BS 5266-aware: monthly and annual programmes, asset register, defects, visit PIR, and periodic
+              certificate. It helps you record and issue supporting paperwork — duty-holders stay responsible for
+              compliance. It is not a BSI product certification.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary>What’s the difference between Field and Console?</summary>
+            <p>
+              Field is the phone/tablet app for the visit — testing, defects, and history offline. Console is the desktop
+              workspace for sites, team, audit, and certificates across the organisation. One login family, one sync
+              backend.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary>Can I import an existing logbook?</summary>
+            <p>
+              Yes. Create a site and import fittings from a spreadsheet, then set switches, Site IDs, and tracking before
+              you run the first test.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary>Do I need an App Store download?</summary>
+            <p>
+              No. Beacon Field installs as a progressive web app from the browser on phone or tablet. Console runs in the
+              desktop browser. No card required to start the open beta.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary>What can I issue today?</summary>
+            <p>
+              From a completed visit you can issue a visit PIR. For the site you can issue a periodic inspection and
+              testing certificate. Issued documents are immutable once locked.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. CTA -->
     <section class="section cta-band">
       <div class="section__inner reveal">
         <h2 class="section__title">Join the open beta</h2>
         <p class="section__lede">
-          Create an account, add a site, and try a real monthly or annual programme. Tell us what breaks — that’s the
-          point of this phase.
+          Create an account, add a site, and try a real monthly or annual programme. Free while we test — pricing will be
+          announced before anything is charged.
         </p>
         <div class="hero__actions">
           <a class="btn btn--primary" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
@@ -358,6 +520,7 @@
             >Send feedback</a
           >
         </div>
+        <p class="hero__beta cta-band__note">No card · Takes a few minutes to add a site</p>
       </div>
     </section>
   </main>

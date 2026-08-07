@@ -399,6 +399,16 @@ a {
   background: rgb(245 241 234 / 0.06);
 }
 
+.btn--ghost-ink {
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.btn--ghost-ink:hover {
+  border-color: var(--stone);
+  background: rgb(26 23 20 / 0.04);
+}
+
 .section--cream .btn--primary,
 .section--elevated .btn--primary {
   color: var(--ink);
@@ -1131,6 +1141,324 @@ a {
   margin-bottom: 0.15rem;
 }
 
+/* Sample paperwork */
+.paper-samples {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2.25rem;
+}
+
+@media (min-width: 800px) {
+  .paper-samples {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+}
+
+.paper-sample {
+  margin: 0;
+}
+
+.paper-sample figcaption {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--stone);
+  line-height: 1.45;
+}
+
+.paper-sample figcaption strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.paper-sheet {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+  padding: 1.15rem 1.1rem 1rem;
+  box-shadow: 0 12px 28px rgb(26 23 20 / 0.08);
+  min-height: 18rem;
+}
+
+.paper-sheet__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.paper-sheet__brand img {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.25rem;
+}
+
+.paper-sheet__eyebrow {
+  margin: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-lo);
+}
+
+.paper-sheet__title {
+  margin: 0.25rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.paper-sheet__meta {
+  margin: 0.85rem 0 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.paper-sheet__meta div {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+}
+
+.paper-sheet__meta dt {
+  margin: 0;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.paper-sheet__meta dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.paper-sheet__table {
+  margin-top: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  overflow: hidden;
+  font-size: 0.68rem;
+}
+
+.paper-sheet__row {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr 0.7fr;
+  gap: 0.25rem;
+  padding: 0.35rem 0.45rem;
+  border-top: 1px solid var(--border);
+  font-weight: 600;
+}
+
+.paper-sheet__row--head {
+  border-top: 0;
+  background: var(--cream-hi);
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.paper-sheet__lock {
+  margin: 0.75rem 0 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--gold-lo);
+}
+
+.paper-sheet__block {
+  margin-top: 0.85rem;
+  padding: 0.65rem 0.7rem;
+  border-radius: 0.4rem;
+  background: var(--cream);
+  border: 1px solid var(--border);
+}
+
+.paper-sheet__block span {
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+.paper-sheet__block p {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 550;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.paper-sheet__sign {
+  margin-top: 0.85rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 650;
+  color: var(--stone);
+}
+
+.paper-sheet__sign em {
+  font-style: normal;
+  color: var(--gold-lo);
+  font-weight: 700;
+}
+
+/* Old way vs Beacon */
+.contrast {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+@media (min-width: 720px) {
+  .contrast {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.contrast__col {
+  padding: 1.15rem 1.2rem;
+  border-radius: 0.85rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.contrast__col--beacon {
+  border-color: #e8d296;
+  background: var(--warn-bg);
+}
+
+.contrast__col h3 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.contrast__col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.contrast__col li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.9rem;
+  font-weight: 550;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.contrast__col li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.4rem;
+  height: 2px;
+  background: var(--muted);
+}
+
+.contrast__col--beacon li::before {
+  background: var(--gold-lo);
+}
+
+.outcome-list {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+  max-width: 36rem;
+}
+
+.outcome-list li {
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.65rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 0.925rem;
+  font-weight: 650;
+  color: var(--ink-soft);
+}
+
+.outcome-list li::before {
+  content: '→ ';
+  color: var(--gold-lo);
+  font-weight: 700;
+}
+
+/* FAQ */
+.faq {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 0.65rem;
+  max-width: 44rem;
+}
+
+.faq__item {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  padding: 0 1rem;
+}
+
+.faq__item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.95rem 0;
+  font-weight: 700;
+  font-size: 0.975rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq__item summary::after {
+  content: '+';
+  float: right;
+  color: var(--gold-lo);
+  font-weight: 700;
+}
+
+.faq__item[open] summary::after {
+  content: '–';
+}
+
+.faq__item p {
+  margin: 0 0 1rem;
+  font-size: 0.925rem;
+  font-weight: 500;
+  color: var(--stone);
+  line-height: 1.55;
+}
+
 /* Trust */
 .trust-row {
   display: flex;
@@ -1211,6 +1539,10 @@ a {
 
 .cta-band .btn--ghost {
   color: var(--on-dark);
+}
+
+.cta-band__note {
+  margin-top: 1rem;
 }
 
 /* —— Footer —— */
