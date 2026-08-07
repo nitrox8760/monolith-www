@@ -1,6 +1,43 @@
 document.getElementById('y').textContent = String(new Date().getFullYear());
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LITE_KEY = 'beacon-www-lite';
+
+function isLiteMode() {
+  return document.documentElement.classList.contains('is-lite');
+}
+
+function setLiteMode(on) {
+  document.documentElement.classList.toggle('is-lite', on);
+  try {
+    sessionStorage.setItem(LITE_KEY, on ? '1' : '0');
+  } catch (_) {
+    /* ignore */
+  }
+  const btn = document.getElementById('perf-toggle');
+  if (btn) {
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? 'Lite on' : 'Lite off';
+  }
+  window.dispatchEvent(new CustomEvent('beacon:litechange', { detail: { on } }));
+}
+
+try {
+  if (sessionStorage.getItem(LITE_KEY) === '1') setLiteMode(true);
+} catch (_) {
+  /* ignore */
+}
+
+const perfToggle = document.getElementById('perf-toggle');
+if (perfToggle) {
+  if (!document.documentElement.classList.contains('is-lite')) {
+    perfToggle.setAttribute('aria-pressed', 'false');
+    perfToggle.textContent = 'Lite off';
+  }
+  perfToggle.addEventListener('click', () => {
+    setLiteMode(!isLiteMode());
+  });
+}
 
 const reveals = document.querySelectorAll('.reveal');
 if (reveals.length && 'IntersectionObserver' in window) {
@@ -57,6 +94,7 @@ function startCountdown(el) {
   const resetAt = Number(el.dataset.countdown) || 6178;
   let remaining = resetAt;
   let timerId = null;
+  let started = false;
 
   const paint = () => {
     el.textContent = formatHms(remaining);
@@ -76,16 +114,21 @@ function startCountdown(el) {
   };
 
   const start = () => {
-    if (timerId != null || document.hidden) return;
+    if (timerId != null || document.hidden || isLiteMode() || prefersReducedMotion) return;
     timerId = window.setInterval(tick, 1000);
   };
 
-  paint();
-  start();
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stop();
+  const sync = () => {
+    if (isLiteMode() || prefersReducedMotion || document.hidden) stop();
     else start();
-  });
+  };
+
+  paint();
+  started = true;
+  sync();
+  document.addEventListener('visibilitychange', sync);
+  window.addEventListener('beacon:litechange', sync);
+  return started;
 }
 
 const countdownEl = document.querySelector('[data-countdown]');

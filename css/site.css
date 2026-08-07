@@ -2201,6 +2201,76 @@ a {
   gap: 1rem 1.25rem;
 }
 
+/* Dev / A-B: sticky lite mode kills paint-heavy effects */
+.perf-toggle {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 80;
+}
+
+.perf-toggle__btn {
+  appearance: none;
+  border: 1px solid rgb(26 23 20 / 0.18);
+  border-radius: 999px;
+  padding: 0.65rem 0.95rem;
+  background: rgb(255 255 255 / 0.92);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 24px rgb(26 23 20 / 0.16);
+  cursor: pointer;
+}
+
+.perf-toggle__btn:hover {
+  background: #fff;
+}
+
+html.is-lite .perf-toggle__btn {
+  background: var(--ink);
+  color: var(--on-dark);
+  border-color: transparent;
+}
+
+html.is-lite .topbar,
+html.is-lite .topbar.is-scrolled {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: #1a1714;
+  box-shadow: none;
+}
+
+html.is-lite .hero__veil,
+html.is-lite .field-ui__sync--pulse,
+html.is-lite .live-dot,
+html.is-lite .cascade-item,
+html.is-lite .hero__mark,
+html.is-lite .hero__phone,
+html.is-lite .hero__copy {
+  animation: none !important;
+}
+
+html.is-lite .hero__veil {
+  opacity: 0.35;
+}
+
+html.is-lite .hero__mark {
+  filter: none;
+}
+
+html.is-lite .btn:hover,
+html.is-lite .topbar__cta:hover,
+html.is-lite .paper-sample:hover .comp-doc {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+html.is-lite .comp-doc {
+  transition: none;
+}
+
 /* Reveal on scroll */
 .reveal {
   opacity: 0;
