@@ -43,12 +43,18 @@ html {
   .hero__veil,
   .hero__mark,
   .hero__phone,
-  .reveal,
+  .hero__inner,
+  .js .reveal,
   .field-ui__sync--pulse {
     animation: none !important;
+    transition: none !important;
   }
 
-  .reveal {
+  .hero__mark,
+  .hero__phone,
+  .hero__inner,
+  .js .reveal,
+  .js .reveal.is-in {
     opacity: 1 !important;
     transform: none !important;
   }
@@ -84,7 +90,11 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
   padding: 1.1rem clamp(1.25rem, 4vw, 2.5rem);
+  box-sizing: border-box;
 }
 
 .topbar__brand {
@@ -134,7 +144,7 @@ a {
   justify-content: flex-end;
   padding: 7rem clamp(1.25rem, 4vw, 2.5rem) 3.5rem;
   color: var(--on-dark);
-  overflow: hidden;
+  overflow: clip;
   background:
     radial-gradient(ellipse 90% 70% at 70% 20%, rgb(201 162 74 / 0.28), transparent 55%),
     radial-gradient(ellipse 60% 50% at 15% 80%, rgb(92 74 50 / 0.55), transparent 50%),
@@ -145,6 +155,7 @@ a {
   pointer-events: none;
   position: absolute;
   inset: 0;
+  z-index: 0;
   background-image:
     linear-gradient(rgb(245 241 234 / 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgb(245 241 234 / 0.03) 1px, transparent 1px);
@@ -164,12 +175,57 @@ a {
 
 .hero__mark {
   position: absolute;
-  right: clamp(-2rem, -4vw, 2rem);
-  top: 12%;
-  width: min(38vw, 18rem);
+  right: 0;
+  top: 10%;
+  width: min(34vw, 16rem);
   opacity: 0.1;
   filter: brightness(1.4);
-  animation: mark-in 1.2s var(--ease) both;
+  z-index: 0;
+}
+
+.hero__stage {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+  align-items: end;
+}
+
+@media (min-width: 960px) {
+  .hero__stage {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 3rem;
+    align-items: center;
+  }
+}
+
+.hero__phone {
+  display: none;
+  justify-self: end;
+  transform: rotate(2.5deg);
+}
+
+@media (min-width: 960px) {
+  .hero__phone {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__mark {
+    animation: mark-in 1.2s var(--ease) both;
+  }
+
+  .hero__phone {
+    animation: phone-in 1.1s var(--ease) 0.15s both;
+  }
+
+  .hero__inner {
+    animation: hero-copy 0.9s var(--ease) both;
+  }
 }
 
 @keyframes mark-in {
@@ -183,35 +239,19 @@ a {
   }
 }
 
-.hero__phone {
-  display: none;
-  pointer-events: none;
-  position: absolute;
-  right: clamp(1.5rem, 8vw, 6rem);
-  bottom: 12%;
-  z-index: 1;
-  animation: phone-in 1.1s var(--ease) 0.25s both;
-}
-
-@media (min-width: 960px) {
-  .hero__phone {
-    display: block;
-  }
-}
-
 @keyframes phone-in {
   from {
     opacity: 0;
-    transform: translateY(2rem) rotate(4deg);
+    transform: translateY(1.5rem) rotate(2.5deg);
   }
   to {
     opacity: 1;
-    transform: rotate(3deg);
+    transform: rotate(2.5deg);
   }
 }
 
 .hero__phone-frame {
-  width: 11.5rem;
+  width: 12rem;
   padding: 0.55rem;
   border-radius: 1.35rem;
   background: linear-gradient(160deg, #3a342c, #1a1714);
@@ -281,9 +321,7 @@ a {
 
 .hero__inner {
   position: relative;
-  z-index: 2;
   max-width: 36rem;
-  animation: hero-copy 0.9s var(--ease) 0.1s both;
 }
 
 @keyframes hero-copy {
@@ -444,7 +482,7 @@ a {
   position: relative;
   padding: 0 0 0 1.35rem;
   font-size: 1rem;
-  font-weight: 550;
+  font-weight: 600;
   color: var(--ink-soft);
   line-height: 1.45;
 }
@@ -520,7 +558,7 @@ a {
   border-radius: 1.25rem;
   overflow: hidden;
   background: var(--cream);
-  aspect-ratio: 9 / 17.5;
+  min-height: 28rem;
 }
 
 .device--laptop {
@@ -564,7 +602,7 @@ a {
 
 /* Field UI mock */
 .field-ui {
-  height: 100%;
+  min-height: 28rem;
   display: flex;
   flex-direction: column;
   padding: 1.65rem 0.85rem 0.65rem;
@@ -740,7 +778,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  font-weight: 650;
+  font-weight: 600;
   color: var(--stone);
 }
 
@@ -1071,14 +1109,14 @@ a {
   gap: 1rem 1.25rem;
 }
 
-/* Reveal on scroll */
-.reveal {
+/* Reveal on scroll — only hide when JS is active */
+.js .reveal {
   opacity: 0;
   transform: translateY(1rem);
   transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
 }
 
-.reveal.is-in {
+.js .reveal.is-in {
   opacity: 1;
   transform: none;
 }
