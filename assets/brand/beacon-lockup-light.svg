@@ -18,6 +18,6 @@
       <path d="M64 16 81.7 30 64 38Z" fill="#6a6a6a"/>
     </svg>
   </g>
-  <text x="52" y="22" font-family="Outfit, system-ui, sans-serif" font-size="20" font-weight="700" fill="#1a1714">Beacon<tspan baseline-shift="super" font-size="11">&#174;</tspan></text>
+  <text x="52" y="22" font-family="Outfit, system-ui, sans-serif" font-size="20" font-weight="700" fill="#1a1714">Beacon<tspan baseline-shift="super" font-size="11">&#8482;</tspan></text>
   <text x="52" y="38" font-family="Outfit, system-ui, sans-serif" font-size="12" font-weight="500" fill="#a67c2e">by Monolith</text>
 </svg>
