@@ -55,7 +55,6 @@ html {
   .hero__inner,
   .js .reveal,
   .js .reveal.is-in {
-    opacity: 1 !important;
     transform: none !important;
   }
 }
@@ -230,22 +229,18 @@ a {
 
 @keyframes mark-in {
   from {
-    opacity: 0;
     transform: translateY(1.5rem) scale(0.96);
   }
   to {
-    opacity: 0.1;
     transform: none;
   }
 }
 
 @keyframes phone-in {
   from {
-    opacity: 0;
     transform: translateY(1.5rem) rotate(2.5deg);
   }
   to {
-    opacity: 1;
     transform: rotate(2.5deg);
   }
 }
@@ -326,11 +321,9 @@ a {
 
 @keyframes hero-copy {
   from {
-    opacity: 0;
     transform: translateY(1.25rem);
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }
@@ -1109,14 +1102,12 @@ a {
   gap: 1rem 1.25rem;
 }
 
-/* Reveal on scroll — only hide when JS is active */
+/* Reveal on scroll — motion only; never hide content with opacity */
 .js .reveal {
-  opacity: 0;
-  transform: translateY(1rem);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transform: translateY(0.75rem);
+  transition: transform 0.7s var(--ease);
 }
 
 .js .reveal.is-in {
-  opacity: 1;
   transform: none;
 }

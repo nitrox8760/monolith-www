@@ -29,12 +29,6 @@
   <link rel="stylesheet" href="/css/site.css" />
   <script>
     document.documentElement.classList.add('js');
-    // Failsafe: never leave sections stuck invisible if site.js fails to load
-    setTimeout(function () {
-      document.querySelectorAll('.reveal:not(.is-in)').forEach(function (el) {
-        el.classList.add('is-in');
-      });
-    }, 2500);
   </script>
 </head>
 <body>
