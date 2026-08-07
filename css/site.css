@@ -823,18 +823,6 @@ a {
   position: relative;
 }
 
-.device__notch {
-  position: absolute;
-  top: 0.85rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4.5rem;
-  height: 1rem;
-  border-radius: 99px;
-  background: #0a0908;
-  z-index: 2;
-}
-
 .device__screen {
   border-radius: 1.25rem;
   overflow: hidden;
@@ -842,84 +830,6 @@ a {
   aspect-ratio: 9 / 17.5;
   display: flex;
   flex-direction: column;
-}
-
-/* Device chrome status strip — distinct from in-app UI */
-.phone-statusbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-shrink: 0;
-  padding: 0.75rem 0.9rem 0.35rem;
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #f5f1ea;
-  background: #1a1714;
-  border-bottom: 1px solid rgb(245 241 234 / 0.08);
-  position: relative;
-  z-index: 1;
-}
-
-.phone-statusbar__time {
-  min-width: 2.2rem;
-}
-
-.phone-statusbar__icons {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.28rem;
-}
-
-.phone-statusbar__signal {
-  display: block;
-  width: 0.72rem;
-  height: 0.55rem;
-  background:
-    linear-gradient(currentColor, currentColor) 0 100% / 2px 40% no-repeat,
-    linear-gradient(currentColor, currentColor) 3px 100% / 2px 55% no-repeat,
-    linear-gradient(currentColor, currentColor) 6px 100% / 2px 75% no-repeat,
-    linear-gradient(currentColor, currentColor) 9px 100% / 2px 100% no-repeat;
-}
-
-.phone-statusbar__wifi {
-  width: 0.7rem;
-  height: 0.55rem;
-  background:
-    radial-gradient(circle at 50% 100%, transparent 0.22rem, currentColor 0.22rem 0.28rem, transparent 0.29rem),
-    radial-gradient(circle at 50% 100%, transparent 0.1rem, currentColor 0.1rem 0.16rem, transparent 0.17rem),
-    radial-gradient(circle at 50% 100%, currentColor 0.05rem, transparent 0.06rem);
-}
-
-.phone-statusbar__battery {
-  width: 1.05rem;
-  height: 0.52rem;
-  border: 1.5px solid currentColor;
-  border-radius: 0.12rem;
-  position: relative;
-  box-sizing: border-box;
-}
-
-.phone-statusbar__battery::before {
-  content: '';
-  position: absolute;
-  inset: 1.5px;
-  right: 2.5px;
-  background: currentColor;
-  border-radius: 0.05rem;
-  width: 70%;
-}
-
-.phone-statusbar__battery::after {
-  content: '';
-  position: absolute;
-  right: -3px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 2px;
-  height: 0.22rem;
-  border-radius: 0 1px 1px 0;
-  background: currentColor;
 }
 
 .device--laptop {

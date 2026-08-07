@@ -2,25 +2,6 @@ document.getElementById('y').textContent = String(new Date().getFullYear());
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const phoneClocks = document.querySelectorAll('[data-phone-clock]');
-if (phoneClocks.length) {
-  const paintPhoneClock = () => {
-    const text = new Intl.DateTimeFormat(undefined, {
-      hour: 'numeric',
-      minute: '2-digit',
-    }).format(new Date());
-    phoneClocks.forEach((el) => {
-      el.textContent = text;
-    });
-  };
-  paintPhoneClock();
-  const msToNextMinute = 60000 - (Date.now() % 60000) + 50;
-  window.setTimeout(() => {
-    paintPhoneClock();
-    window.setInterval(paintPhoneClock, 60000);
-  }, msToNextMinute);
-}
-
 const reveals = document.querySelectorAll('.reveal');
 if (reveals.length && 'IntersectionObserver' in window) {
   const io = new IntersectionObserver(
