@@ -494,6 +494,18 @@ a {
   overflow: hidden;
   background: var(--cream);
   aspect-ratio: 9 / 16;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero__phone-screen .phone-statusbar {
+  padding-top: 0.45rem;
+  padding-inline: 0.7rem;
+}
+
+.hero__phone-screen .mini-ui {
+  flex: 1;
+  min-height: 0;
 }
 
 .tm {
@@ -840,6 +852,85 @@ a {
   overflow: hidden;
   background: var(--cream);
   aspect-ratio: 9 / 17.5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Simple iOS-style status strip for phone mocks */
+.phone-statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding: 0.7rem 0.85rem 0.15rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: var(--cream);
+  position: relative;
+  z-index: 1;
+}
+
+.phone-statusbar__time {
+  min-width: 2.2rem;
+}
+
+.phone-statusbar__icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.phone-statusbar__signal {
+  display: block;
+  width: 0.72rem;
+  height: 0.55rem;
+  background:
+    linear-gradient(currentColor, currentColor) 0 100% / 2px 40% no-repeat,
+    linear-gradient(currentColor, currentColor) 3px 100% / 2px 55% no-repeat,
+    linear-gradient(currentColor, currentColor) 6px 100% / 2px 75% no-repeat,
+    linear-gradient(currentColor, currentColor) 9px 100% / 2px 100% no-repeat;
+}
+
+.phone-statusbar__wifi {
+  width: 0.7rem;
+  height: 0.55rem;
+  background:
+    radial-gradient(circle at 50% 100%, transparent 0.22rem, currentColor 0.22rem 0.28rem, transparent 0.29rem),
+    radial-gradient(circle at 50% 100%, transparent 0.1rem, currentColor 0.1rem 0.16rem, transparent 0.17rem),
+    radial-gradient(circle at 50% 100%, currentColor 0.05rem, transparent 0.06rem);
+}
+
+.phone-statusbar__battery {
+  width: 1.05rem;
+  height: 0.52rem;
+  border: 1.5px solid currentColor;
+  border-radius: 0.12rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.phone-statusbar__battery::before {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  right: 2.5px;
+  background: currentColor;
+  border-radius: 0.05rem;
+  width: 70%;
+}
+
+.phone-statusbar__battery::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 0.22rem;
+  border-radius: 0 1px 1px 0;
+  background: currentColor;
 }
 
 .device--laptop {
@@ -883,13 +974,15 @@ a {
 
 /* Field UI mock — stylised Field overview */
 .field-ui {
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  padding: 1.55rem 0 0;
+  padding: 0;
   font-size: 0.68rem;
   color: var(--ink);
   background: var(--cream);
+  overflow: hidden;
 }
 
 .field-ui__header {
