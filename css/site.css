@@ -459,6 +459,8 @@ a {
   justify-self: end;
   transform: rotate(2.5deg);
   animation: phone-in 1.1s var(--ease) 0.25s both;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 @media (min-width: 960px) {
@@ -798,6 +800,16 @@ a {
   color: var(--ink);
   font-weight: 700;
   margin-bottom: 0.15rem;
+}
+
+/* Decorative product/PDF chrome — read as screenshots, not copy */
+.device,
+.feature-band__visual,
+.comp-doc,
+.hero__phone-frame {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .device--phone {
