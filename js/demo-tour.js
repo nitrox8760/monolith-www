@@ -162,12 +162,12 @@
     }
   }
 
-  function desktopCodaEnabled() {
-    return DESKTOP_MQ.matches;
+  function codaEnabled() {
+    return true;
   }
 
   function stepCount() {
-    return desktopCodaEnabled() ? 5 : 4;
+    return 5;
   }
 
   function clearTimers() {
@@ -431,7 +431,7 @@
     setScreen(step.screen, { animate: false });
     setHeader(step.header, step.screen === 'sites' ? 'brand' : 'site');
     applySpot(step.spot);
-    setConsoleFocus(!!step.consoleFocus && desktopCodaEnabled());
+    setConsoleFocus(!!step.consoleFocus && codaEnabled());
 
     if (index >= 2) {
       setRowPassed('el012', true);

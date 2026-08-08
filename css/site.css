@@ -116,6 +116,10 @@ a {
   color: inherit;
 }
 
+html {
+  scroll-padding-top: 5.5rem;
+}
+
 /* —— Top bar —— */
 .topbar {
   position: sticky;
@@ -269,10 +273,28 @@ a {
   display: flex;
   flex-basis: 100%;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.25rem 0 0.75rem;
+  align-items: stretch;
+  gap: 0.15rem;
+  margin-top: 0.35rem;
+  padding: 0.35rem 0 0.4rem;
+  border-top: 1px solid rgb(245 241 234 / 0.14);
   order: 3;
+}
+
+.topbar.is-open .topbar__nav a {
+  padding: 0.85rem 0.35rem;
+  border-radius: 0.6rem;
+  font-size: 1.02rem;
+  color: var(--on-dark);
+  border-bottom: 1px solid rgb(245 241 234 / 0.08);
+}
+
+.topbar.is-open .topbar__nav a:last-child {
+  border-bottom: 0;
+}
+
+.topbar.is-open .topbar__nav a:active {
+  background: rgb(245 241 234 / 0.08);
 }
 
 /* Trust strip under hero */
@@ -615,6 +637,70 @@ a {
   .demo-tour__stage-col {
     overflow: visible;
     width: min(100%, 32rem);
+  }
+}
+
+@media (max-width: 899px) {
+  /* Lead with the phone; step copy and controls sit beneath it */
+  .demo-tour__layout {
+    gap: 1.15rem;
+  }
+
+  .demo-tour__stage-col {
+    order: 1;
+  }
+
+  .demo-tour__rail {
+    order: 2;
+    max-width: 32rem;
+    margin-inline: auto;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .demo-tour__tip {
+    text-align: left;
+  }
+
+  /* Back/Next carry navigation on mobile — the full list is redundant */
+  .demo-tour__steps {
+    display: none;
+  }
+
+  .demo-tour__controls {
+    justify-content: center;
+  }
+
+  .demo-tour__cta {
+    justify-content: center;
+  }
+
+  /* Console payoff becomes an in-flow card in place of the phone */
+  .demo-tour.is-console-focus .demo-tour__stage {
+    width: 100%;
+  }
+
+  .demo-tour.is-console-focus .demo-tour__phone-wrap {
+    display: none;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus {
+    display: block;
+    width: min(100%, 24rem);
+    margin-inline: auto;
+  }
+
+  .demo-console-focus__label {
+    text-align: center;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__shell {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__nav {
+    display: none;
   }
 }
 
