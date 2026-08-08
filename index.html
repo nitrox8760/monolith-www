@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/site.css?v=20260807w" />
+  <link rel="stylesheet" href="/css/site.css?v=20260808a" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -113,14 +113,14 @@
       <nav class="topbar__nav" id="top-nav" aria-label="Page">
         <a href="#product">Product</a>
         <a href="#paperwork">Paperwork</a>
-        <a href="#how">How it works</a>
+        <a href="#capabilities">Capabilities</a>
         <a href="#faq">FAQ</a>
       </nav>
       <div class="topbar__actions">
         <button type="button" class="topbar__menu" id="nav-toggle" aria-expanded="false" aria-controls="top-nav">
           Menu
         </button>
-        <a class="topbar__cta" href="https://beacon.monolithcompliance.co.uk/login.html">Try it free</a>
+        <a class="topbar__cta" data-cta="nav" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
       </div>
     </div>
   </header>
@@ -139,8 +139,8 @@
             the site logbook alive, and turns the visit into paperwork you can hand over — not rewrite in the van.
           </p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
-            <a class="btn btn--ghost" href="#paperwork">See sample paperwork</a>
+            <a class="btn btn--primary" data-cta="hero" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
+            <a class="btn btn--ghost" href="#demo">See the demo</a>
           </div>
           <p class="hero__beta">Free in open beta · No card · A few minutes to add your first site</p>
         </div>
@@ -402,7 +402,292 @@
       </div>
     </section>
 
-    <!-- 5. Sample paperwork — real compliance chrome -->
+    <!-- Risk reversal -->
+    <section class="risk-strip" aria-label="What you can count on">
+      <div class="risk-strip__inner reveal">
+        <ul class="risk-strip__list">
+          <li>Free in open beta</li>
+          <li>No card</li>
+          <li>Your data stays yours</li>
+          <li>We’ll warn before pricing</li>
+          <li>Not a BSI product certification</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Product demo placeholder — HTML walkthrough comes next -->
+    <section class="section section--elevated" id="demo">
+      <div class="section__inner reveal">
+        <p class="section__label">See it move</p>
+        <h2 class="section__title">A short visit, from fail to paperwork.</h2>
+        <p class="section__lede">
+          We’re building a crafted on-page walkthrough here — Field from fail to paperwork, without a screen recording.
+          The stage below is reserved for it.
+        </p>
+        <div class="demo-slot" data-demo-root>
+          <div class="demo-slot__stage" aria-hidden="true">
+            <div class="demo-slot__frame">
+              <span class="demo-slot__badge">Demo coming soon</span>
+              <p class="demo-slot__hint">HTML walkthrough · Visit, defect, then report</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Feature bands -->
+    <section class="section section--cream" id="capabilities">
+      <div class="section__inner reveal">
+        <p class="section__label">What you get</p>
+        <h2 class="section__title">Built for how emergency lighting is actually tested.</h2>
+        <p class="section__lede">
+          Offline visits, paperwork from the test, a register that carries forward — not a generic cert form with
+          “emergency lighting” stuck on the side.
+        </p>
+      </div>
+    </section>
+
+    <div class="feature-cluster">
+      <div class="feature-cluster__inner">
+        <p class="feature-cluster__label">On the visit</p>
+        <p class="feature-cluster__text">Offline testing, monthly function, and timed annuals.</p>
+      </div>
+    </div>
+
+    <section class="feature-band feature-band--elevated" id="offline">
+      <div class="feature-band__inner reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">01 · Field</p>
+          <h3 class="feature-band__title">Works underground. Literally.</h3>
+          <p>
+            Plant rooms and basements don’t care about your signal bars. Keep testing anyway — results stay on the phone
+            and catch up when you’re back upstairs.
+          </p>
+          <ul class="feature-band__list">
+            <li>Add to your home screen from the browser — no App Store dance</li>
+            <li>Push your work up when you’ve got coverage</li>
+            <li>Same sites ready in Console for the office</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card">
+            <span class="feature-card__kicker">
+              <span class="live-dot live-dot--gold" aria-hidden="true"></span>
+              Waiting to catch up
+            </span>
+            <strong>3 visits ready</strong>
+            <p>12 fittings updated · will send when you’re online</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--cream feature-band--compact" id="monthly">
+      <div class="feature-band__inner feature-band__inner--flip reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">02 · Monthly</p>
+          <h3 class="feature-band__title">Monthly function as you walk the building</h3>
+          <p>
+            Pass or fail each fitting as you go — with notes and photos where you need them. The visit stays on the site,
+            not scattered across phones and scraps of paper.
+          </p>
+          <ul class="feature-band__list">
+            <li>Results on every fitting you touch</li>
+            <li>Notes and photos when something’s wrong</li>
+            <li>See how far through the visit you are</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card feature-card--stack">
+            <div class="feature-card__row feature-card__row--ok cascade-item">
+              <span>EL-012 Stair A</span><strong>Pass</strong>
+            </div>
+            <div class="feature-card__row feature-card__row--due cascade-item">
+              <span>EL-018 Plant room</span><strong>Fail</strong>
+            </div>
+            <div class="feature-card__row feature-card__row--ok cascade-item">
+              <span>EL-024 Corridor B</span><strong>Pass</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--elevated" id="annual">
+      <div class="feature-band__inner reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">03 · Annual</p>
+          <h3 class="feature-band__title">Annual duration with a real clock</h3>
+          <p>
+            Run the discharge for the time the site was designed for, switch by switch — with a timer on each one. Not a
+            hopeful tick from the car park.
+          </p>
+          <ul class="feature-band__list">
+            <li>One-hour or three-hour runs from how the site is set up</li>
+            <li>A timer per test switch so nothing gets skipped</li>
+            <li>Results saved as you go through the building</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card">
+            <span class="feature-card__kicker">Annual · Switch TS-02</span>
+            <strong class="feature-card__timer" data-countdown="6178" aria-hidden="true">01:42:18</strong>
+            <p class="feature-card__meta">
+              <span class="live-dot live-dot--warn" aria-hidden="true"></span>
+              Needs 3 hours · Running now · 4 of 6 switches done
+            </p>
+            <div class="feature-card__progress" aria-hidden="true">
+              <div class="feature-card__progress-bar" style="--progress: 66.67%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="feature-cluster">
+      <div class="feature-cluster__inner">
+        <p class="feature-cluster__label">After the visit</p>
+        <p class="feature-cluster__text">Client-ready documents and defects that don’t disappear.</p>
+      </div>
+    </div>
+
+    <section class="feature-band feature-band--cream" id="pdfs">
+      <div class="feature-band__inner feature-band__inner--flip reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">04 · Documents</p>
+          <h3 class="feature-band__title">Paperwork you can hand over before you leave</h3>
+          <p>
+            Fitting results, a visit inspection report, or a site certificate — each with its own reference. Once it’s
+            issued and locked, it stays that way. History keeps the trail.
+          </p>
+          <ul class="feature-band__list">
+            <li>Test report with the fittings you covered</li>
+            <li>Visit inspection report — <a href="#paperwork">see sample</a></li>
+            <li>Site periodic certificate — <a href="#paperwork">see sample</a></li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card feature-card--docs">
+            <div><strong>Test report</strong><span>What passed and what didn’t</span></div>
+            <div><strong>Visit report</strong><span>Ref PIR-…</span></div>
+            <div><strong>Site certificate</strong><span>Ref BCN-…</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--elevated" id="defects">
+      <div class="feature-band__inner reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">05 · Defects</p>
+          <h3 class="feature-band__title">Failed fittings don’t get to ghost the next visit</h3>
+          <p>
+            When something fails, it stays open on the site until it’s fixed or closed properly. Photos travel with it.
+            Paperwork you’ve already issued doesn’t get rewritten to hide the mess.
+          </p>
+          <ul class="feature-band__list">
+            <li>Open defects right there on the site overview</li>
+            <li>Photos on the findings that need proving</li>
+            <li>Issued documents stay as they were signed</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card feature-card--defect">
+            <strong>Open defects (3)</strong>
+            <p>EL-018 Plant room — lamp failed to strike</p>
+            <p>EL-031 Car park — battery didn’t last</p>
+            <span>Sort these before you sign off</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="feature-cluster">
+      <div class="feature-cluster__inner">
+        <p class="feature-cluster__label">The site over time</p>
+        <p class="feature-cluster__text">Import the register, set the site up once, run it from Console.</p>
+      </div>
+    </div>
+
+    <section class="feature-band feature-band--cream" id="import">
+      <div class="feature-band__inner feature-band__inner--flip reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">06 · Register</p>
+          <h3 class="feature-band__title">Bring the spreadsheet. Keep the register alive.</h3>
+          <p>
+            Point your old logbook columns at rooms, site IDs, switches, and floors. Next month you’re not retyping the
+            building — the register comes with you.
+          </p>
+          <ul class="feature-band__list">
+            <li>Import from the spreadsheet you already have</li>
+            <li>Site IDs, locations, switches, floors — kept tidy</li>
+            <li>History and defects stay tied to the same fittings</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card feature-card--stack">
+            <div class="feature-card__row"><span>Your Site ID</span><strong>→</strong><span>Beacon</span></div>
+            <div class="feature-card__row"><span>Location</span><strong>→</strong><span>Room / area</span></div>
+            <div class="feature-card__row"><span>Switch</span><strong>→</strong><span>Test switch</span></div>
+            <div class="feature-card__row"><span>42 rows ready</span><strong></strong><span>Import</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--elevated" id="setup">
+      <div class="feature-band__inner reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">07 · Setup</p>
+          <h3 class="feature-band__title">Set the site up once — properly</h3>
+          <p>
+            Responsible person, how long the batteries should last, whether there’s an automatic test system, which
+            switches run the annual. Timers and paperwork then match the building, not a blank form.
+          </p>
+          <ul class="feature-band__list">
+            <li>Client and responsible person details</li>
+            <li>Design duration and automatic test system</li>
+            <li>Test switches that drive the annual run</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card">
+            <span class="feature-card__kicker">Site setup</span>
+            <p><strong>Duration</strong> 3 hours</p>
+            <p><strong>Auto test</strong> Not fitted</p>
+            <p><strong>Switches</strong> TS-01 · TS-02 · TS-03</p>
+            <p><strong>Responsible</strong> Building Manager</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--cream feature-band--compact" id="console-ops">
+      <div class="feature-band__inner feature-band__inner--flip reveal">
+        <div class="feature-band__copy">
+          <p class="section__label">08 · Console</p>
+          <h3 class="feature-band__title">The office view that doesn’t need a chase-up call</h3>
+          <p>
+            See every site in one place, invite your technicians, check who changed what, and put your company details on
+            the PDFs so the pack looks like it came from you — because it did.
+          </p>
+          <ul class="feature-band__list">
+            <li>Sites, history, and paperwork in one desk view</li>
+            <li>Invite the team and keep roles clear</li>
+            <li>Your branding on the paperwork you issue</li>
+          </ul>
+        </div>
+        <div class="feature-band__visual">
+          <div class="feature-card feature-card--docs">
+            <div><strong>Sites</strong><span>3 · 1 needs a look</span></div>
+            <div><strong>Team</strong><span>Owner · Technicians</span></div>
+            <div><strong>History</strong><span>Who changed what</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Sample paperwork — proof climax -->
     <section class="section section--elevated" id="paperwork">
       <div class="section__inner reveal">
         <p class="section__label">The paperwork</p>
@@ -527,245 +812,20 @@
         <div class="mid-cta reveal">
           <p>Want to issue one of these from a real visit?</p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
-            <a class="btn btn--ghost btn--ghost-ink" href="#capabilities">See what else it does</a>
+            <a class="btn btn--primary" data-cta="mid" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
+            <a
+              class="btn btn--ghost btn--ghost-ink"
+              data-cta="mid-walkthrough"
+              href="mailto:feedback@monolithcompliance.co.uk?subject=Beacon%20walkthrough%20request"
+              >Book a 15-min walkthrough</a
+            >
           </div>
+          <p class="mid-cta__note">No card · Free in open beta · Managers welcome</p>
         </div>
       </div>
     </section>
 
-    <!-- 6. Feature bands -->
-    <section class="section section--cream" id="capabilities">
-      <div class="section__inner reveal">
-        <p class="section__label">What you get</p>
-        <h2 class="section__title">Built for how emergency lighting is actually tested.</h2>
-        <p class="section__lede">
-          Offline visits, paperwork from the test, a register that carries forward — not a generic cert form with
-          “emergency lighting” stuck on the side.
-        </p>
-      </div>
-    </section>
-
-    <section class="feature-band feature-band--elevated" id="offline">
-      <div class="feature-band__inner reveal">
-        <div class="feature-band__copy">
-          <p class="section__label">01 · Field</p>
-          <h3 class="feature-band__title">Works underground. Literally.</h3>
-          <p>
-            Plant rooms and basements don’t care about your signal bars. Keep testing anyway — results stay on the phone
-            and catch up when you’re back upstairs.
-          </p>
-          <ul class="feature-band__list">
-            <li>Add to your home screen from the browser — no App Store dance</li>
-            <li>Push your work up when you’ve got coverage</li>
-            <li>Same sites ready in Console for the office</li>
-          </ul>
-        </div>
-        <div class="feature-band__visual">
-          <div class="feature-card">
-            <span class="feature-card__kicker">
-              <span class="live-dot live-dot--gold" aria-hidden="true"></span>
-              Waiting to catch up
-            </span>
-            <strong>3 visits ready</strong>
-            <p>12 fittings updated · will send when you’re online</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="feature-band feature-band--cream" id="monthly">
-      <div class="feature-band__inner feature-band__inner--flip reveal">
-        <div class="feature-band__copy">
-          <p class="section__label">02 · Monthly</p>
-          <h3 class="feature-band__title">Monthly function as you walk the building</h3>
-          <p>
-            Pass or fail each fitting as you go — with notes and photos where you need them. The visit stays on the site,
-            not scattered across phones and scraps of paper.
-          </p>
-          <ul class="feature-band__list">
-            <li>Results on every fitting you touch</li>
-            <li>Notes and photos when something’s wrong</li>
-            <li>See how far through the visit you are</li>
-          </ul>
-        </div>
-        <div class="feature-band__visual">
-          <div class="feature-card feature-card--stack">
-            <div class="feature-card__row feature-card__row--ok cascade-item">
-              <span>EL-012 Stair A</span><strong>Pass</strong>
-            </div>
-            <div class="feature-card__row feature-card__row--due cascade-item">
-              <span>EL-018 Plant room</span><strong>Fail</strong>
-            </div>
-            <div class="feature-card__row feature-card__row--ok cascade-item">
-              <span>EL-024 Corridor B</span><strong>Pass</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="feature-band feature-band--elevated" id="annual">
-      <div class="feature-band__inner reveal">
-        <div class="feature-band__copy">
-          <p class="section__label">03 · Annual</p>
-          <h3 class="feature-band__title">Annual duration with a real clock</h3>
-          <p>
-            Run the discharge for the time the site was designed for, switch by switch — with a timer on each one. Not a
-            hopeful tick from the car park.
-          </p>
-          <ul class="feature-band__list">
-            <li>One-hour or three-hour runs from how the site is set up</li>
-            <li>A timer per test switch so nothing gets skipped</li>
-            <li>Results saved as you go through the building</li>
-          </ul>
-        </div>
-        <div class="feature-band__visual">
-          <div class="feature-card">
-            <span class="feature-card__kicker">Annual · Switch TS-02</span>
-            <strong class="feature-card__timer" data-countdown="6178" aria-hidden="true">01:42:18</strong>
-            <p class="feature-card__meta">
-              <span class="live-dot live-dot--warn" aria-hidden="true"></span>
-              Needs 3 hours · Running now · 4 of 6 switches done
-            </p>
-            <div class="feature-card__progress" aria-hidden="true">
-              <div class="feature-card__progress-bar" style="--progress: 66.67%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="feature-band feature-band--cream" id="pdfs">
-      <div class="feature-band__inner feature-band__inner--flip reveal">
-        <div class="feature-band__copy">
-          <p class="section__label">04 · Documents</p>
-          <h3 class="feature-band__title">Paperwork you can hand over before you leave</h3>
-          <p>
-            Fitting results, a visit inspection report, or a site certificate — each with its own reference. Once it’s
-            issued and locked, it stays that way. History keeps the trail.
-          </p>
-          <ul class="feature-band__list">
-            <li>Test report with the fittings you covered</li>
-            <li>Visit inspection report — <a href="#paperwork">see sample</a></li>
-            <li>Site periodic certificate — <a href="#paperwork">see sample</a></li>
-          </ul>
-        </div>
-        <div class="feature-band__visual">
-          <div class="feature-card feature-card--docs">
-            <div><strong>Test report</strong><span>What passed and what didn’t</span></div>
-            <div><strong>Visit report</strong><span>Ref PIR-…</span></div>
-            <div><strong>Site certificate</strong><span>Ref BCN-…</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="feature-band feature-band--elevated" id="defects">
-      <div class="feature-band__inner reveal">
-        <div class="feature-band__copy">
-          <p class="section__label">05 · Defects</p>
-          <h3 class="feature-band__title">Failed fittings don’t get to ghost the next visit</h3>
-          <p>
-            When something fails, it stays open on the site until it’s fixed or closed properly. Photos travel with it.
-            Paperwork you’ve already issued doesn’t get rewritten to hide the mess.
-          </p>
-          <ul class="feature-band__list">
-            <li>Open defects right there on the site overview</li>
-            <li>Photos on the findings that need proving</li>
-            <li>Issued documents stay as they were signed</li>
-          </ul>
-        </div>
-        <div class="feature-band__visual">
-          <div class="feature-card feature-card--defect">
-            <strong>Open defects (3)</strong>
-            <p>EL-018 Plant room — lamp failed to strike</p>
-            <p>EL-031 Car park — battery didn’t last</p>
-            <span>Sort these before you sign off</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="feature-band feature-band--cream" id="import">
-      <div class="feature-band__inner feature-band__inner--flip reveal">
-        <div class="feature-band__copy">
-          <p class="section__label">06 · Register</p>
-          <h3 class="feature-band__title">Bring the spreadsheet. Keep the register alive.</h3>
-          <p>
-            Point your old logbook columns at rooms, site IDs, switches, and floors. Next month you’re not retyping the
-            building — the register comes with you.
-          </p>
-          <ul class="feature-band__list">
-            <li>Import from the spreadsheet you already have</li>
-            <li>Site IDs, locations, switches, floors — kept tidy</li>
-            <li>History and defects stay tied to the same fittings</li>
-          </ul>
-        </div>
-        <div class="feature-band__visual">
-          <div class="feature-card feature-card--stack">
-            <div class="feature-card__row"><span>Your Site ID</span><strong>→</strong><span>Beacon</span></div>
-            <div class="feature-card__row"><span>Location</span><strong>→</strong><span>Room / area</span></div>
-            <div class="feature-card__row"><span>Switch</span><strong>→</strong><span>Test switch</span></div>
-            <div class="feature-card__row"><span>42 rows ready</span><strong></strong><span>Import</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="feature-band feature-band--elevated" id="setup">
-      <div class="feature-band__inner reveal">
-        <div class="feature-band__copy">
-          <p class="section__label">07 · Setup</p>
-          <h3 class="feature-band__title">Set the site up once — properly</h3>
-          <p>
-            Responsible person, how long the batteries should last, whether there’s an automatic test system, which
-            switches run the annual. Timers and paperwork then match the building, not a blank form.
-          </p>
-          <ul class="feature-band__list">
-            <li>Client and responsible person details</li>
-            <li>Design duration and automatic test system</li>
-            <li>Test switches that drive the annual run</li>
-          </ul>
-        </div>
-        <div class="feature-band__visual">
-          <div class="feature-card">
-            <span class="feature-card__kicker">Site setup</span>
-            <p><strong>Duration</strong> 3 hours</p>
-            <p><strong>Auto test</strong> Not fitted</p>
-            <p><strong>Switches</strong> TS-01 · TS-02 · TS-03</p>
-            <p><strong>Responsible</strong> Building Manager</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="feature-band feature-band--cream" id="console-ops">
-      <div class="feature-band__inner feature-band__inner--flip reveal">
-        <div class="feature-band__copy">
-          <p class="section__label">08 · Console</p>
-          <h3 class="feature-band__title">The office view that doesn’t need a chase-up call</h3>
-          <p>
-            See every site in one place, invite your technicians, check who changed what, and put your company details on
-            the PDFs so the pack looks like it came from you — because it did.
-          </p>
-          <ul class="feature-band__list">
-            <li>Sites, history, and paperwork in one desk view</li>
-            <li>Invite the team and keep roles clear</li>
-            <li>Your branding on the paperwork you issue</li>
-          </ul>
-        </div>
-        <div class="feature-band__visual">
-          <div class="feature-card feature-card--docs">
-            <div><strong>Sites</strong><span>3 · 1 needs a look</span></div>
-            <div><strong>Team</strong><span>Owner · Technicians</span></div>
-            <div><strong>History</strong><span>Who changed what</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. Contrast -->
+    <!-- 8. Why / contrast -->
     <section class="section section--close section--elevated" id="why">
       <div class="section__inner section__inner--close reveal">
         <p class="section__label">Why Beacon</p>
@@ -796,7 +856,7 @@
           <li>Bring fittings across from the logbook spreadsheet you already have</li>
         </ul>
         <div class="hero__actions hero__actions--section">
-          <a class="btn btn--primary" href="https://beacon.monolithcompliance.co.uk/login.html">Create a free account</a>
+          <a class="btn btn--primary" data-cta="why" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
           <a class="btn btn--ghost btn--ghost-ink" href="#paperwork">See sample paperwork</a>
         </div>
       </div>
@@ -909,8 +969,11 @@
           we’ll tell you before anything costs money.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
-          <a class="btn btn--ghost" href="mailto:feedback@monolithcompliance.co.uk?subject=Beacon%20beta%20feedback"
+          <a class="btn btn--primary" data-cta="final" href="https://beacon.monolithcompliance.co.uk/login.html">Try Beacon free</a>
+          <a
+            class="btn btn--ghost"
+            data-cta="final-feedback"
+            href="mailto:feedback@monolithcompliance.co.uk?subject=Beacon%20beta%20feedback"
             >Tell us what you think</a
           >
         </div>
@@ -934,6 +997,6 @@
     </div>
   </footer>
 
-  <script src="/js/site.js?v=20260807s" defer></script>
+  <script src="/js/site.js?v=20260808a" defer></script>
 </body>
 </html>

@@ -108,3 +108,27 @@ if (countdownEl && !prefersReducedMotion) {
     startCountdown(countdownEl);
   }
 }
+
+/** Lightweight CTA funnel hooks — works with Plausible if present; always logs locally for debug. */
+function trackCta(name) {
+  if (!name) return;
+  try {
+    if (typeof window.plausible === 'function') {
+      window.plausible('CTA', { props: { id: name } });
+    }
+  } catch (_) {
+    /* ignore */
+  }
+  try {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'beacon_cta', cta_id: name });
+  } catch (_) {
+    /* ignore */
+  }
+}
+
+document.querySelectorAll('[data-cta]').forEach((el) => {
+  el.addEventListener('click', () => {
+    trackCta(el.getAttribute('data-cta'));
+  });
+});

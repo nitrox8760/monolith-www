@@ -371,6 +371,136 @@ a {
   margin-top: 0;
 }
 
+.mid-cta__note {
+  flex: 1 0 100%;
+  margin: 0 !important;
+  font-size: 0.8rem !important;
+  font-weight: 650 !important;
+  color: var(--stone) !important;
+  letter-spacing: 0 !important;
+}
+
+/* Early risk reversal */
+.risk-strip {
+  padding: 1.15rem 0;
+  background: var(--ink);
+  border-block: 1px solid rgb(245 241 234 / 0.08);
+}
+
+.risk-strip__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad-x);
+  box-sizing: border-box;
+}
+
+.risk-strip__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem 1.25rem;
+}
+
+.risk-strip__list li {
+  position: relative;
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: rgb(245 241 234 / 0.82);
+}
+
+.risk-strip__list li:not(:last-child)::after {
+  content: '·';
+  position: absolute;
+  right: -0.75rem;
+  color: rgb(245 241 234 / 0.35);
+}
+
+@media (max-width: 720px) {
+  .risk-strip__list li:not(:last-child)::after {
+    content: none;
+  }
+}
+
+/* Demo placeholder stage */
+.demo-slot {
+  margin-top: 1.75rem;
+}
+
+.demo-slot__stage {
+  border-radius: 1.15rem;
+  border: 1px dashed rgb(26 23 20 / 0.18);
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgb(201 162 74 / 0.12), transparent 70%),
+    linear-gradient(165deg, #2a241c 0%, #1a1714 100%);
+  min-height: clamp(16rem, 42vw, 22rem);
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.25rem;
+}
+
+.demo-slot__frame {
+  text-align: center;
+  max-width: 22rem;
+}
+
+.demo-slot__badge {
+  display: inline-block;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgb(245 241 234 / 0.22);
+  background: rgb(245 241 234 / 0.06);
+  color: var(--gold-hi);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.demo-slot__hint {
+  margin: 0.85rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: rgb(245 241 234 / 0.72);
+  line-height: 1.45;
+}
+
+/* Feature cluster labels */
+.feature-cluster {
+  padding: 2.25rem 0 0.25rem;
+}
+
+.feature-cluster__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad-x);
+  box-sizing: border-box;
+}
+
+.feature-cluster__label {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-lo);
+}
+
+.feature-cluster__text {
+  margin: 0.35rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--ink-soft);
+  max-width: 36rem;
+}
+
+.feature-band--compact {
+  padding: clamp(2.25rem, 5vw, 3.25rem) 0;
+}
+
 /* —— Hero —— */
 .hero {
   position: relative;

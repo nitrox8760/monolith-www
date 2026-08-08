@@ -14,6 +14,11 @@
 
 Push to `master` auto-deploys. Do **not** attach www/apex to the Beacon Worker (`monolith-beacon`).
 
+### Analytics (optional)
+
+- Enable **Cloudflare Web Analytics** on the `monolith-www` Pages project (dashboard — no code required).
+- Homepage CTAs emit `data-cta` events via `js/site.js` into `dataLayer` / Plausible if you add that later.
+
 ### Leave alone
 
 - `beacon.monolithcompliance.co.uk` → Worker **monolith-beacon**
