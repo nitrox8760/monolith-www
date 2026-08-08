@@ -35,6 +35,7 @@
   const codaRow = root.querySelector('[data-demo-coda-row]');
   const codaSummary = root.querySelector('[data-demo-coda-summary]');
   const testNav = root.querySelector('[data-nav="test"]');
+  const completeBtn = root.querySelector('[data-demo-complete]');
 
   const rows = {
     el012: {
@@ -393,6 +394,7 @@
     if (codaRow) codaRow.classList.remove('is-pulse', 'is-spotlight');
     if (codaSummary) codaSummary.classList.remove('is-pulse');
     if (testNav) testNav.classList.remove('is-press');
+    if (completeBtn) completeBtn.classList.remove('is-press');
   }
 
   function applySpot(spot) {
@@ -517,6 +519,21 @@
     later(() => showToast(false), 2000);
   }
 
+  function completeTestThenAdvance() {
+    if (REDUCE_MQ.matches || !completeBtn) {
+      scheduleAdvance(REDUCE_MQ.matches ? 0 : 1600);
+      return;
+    }
+    // Reveal the button, then show a clear press before moving on
+    const testBody = screenEls.test;
+    if (testBody) testBody.scrollTo({ top: testBody.scrollHeight, behavior: 'smooth' });
+    later(() => completeBtn.classList.add('is-press'), 650);
+    later(() => {
+      completeBtn.classList.remove('is-press');
+      scheduleAdvance(700);
+    }, 1150);
+  }
+
   function passFitting(key, done) {
     const row = rows[key];
     if (!row?.el) {
@@ -583,11 +600,12 @@
       return;
     }
 
-    // Small browse scroll first, then settle on Riverside
+    // Browse down through the list first, then settle back up on Riverside
     later(() => {
       if (!sitesScroll) return;
-      sitesScroll.scrollTo({ top: 56, behavior: 'smooth' });
-    }, 280);
+      const maxTop = Math.max(0, sitesScroll.scrollHeight - sitesScroll.clientHeight);
+      sitesScroll.scrollTo({ top: Math.min(maxTop, 190), behavior: 'smooth' });
+    }, 320);
 
     later(() => {
       if (!sitesScroll || !riversideBtn) {
@@ -597,7 +615,7 @@
       const top =
         riversideBtn.offsetTop - sitesScroll.clientHeight / 2 + riversideBtn.clientHeight / 2;
       sitesScroll.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-    }, 900);
+    }, 1150);
 
     later(() => {
       if (riversideBtn) riversideBtn.classList.add('is-active');
@@ -662,7 +680,7 @@
         passFitting('el012', () => {
           later(() => {
             passFitting('el024', () => {
-              later(() => runFailAutofill(() => scheduleAdvance(1600)), reduced ? 0 : 450);
+              later(() => runFailAutofill(() => completeTestThenAdvance()), reduced ? 0 : 450);
             });
           }, reduced ? 0 : 400);
         });

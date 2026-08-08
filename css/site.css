@@ -618,6 +618,17 @@ a {
   }
 }
 
+/* Playback only — the mock stage isn't selectable or clickable */
+.demo-tour__stage {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.demo-field,
+.demo-console-focus {
+  pointer-events: none;
+}
+
 .demo-tour__phone-wrap {
   width: min(100%, 17.5rem);
   margin-inline: auto;
@@ -1647,6 +1658,36 @@ a {
   background: rgb(201 162 74 / 0.16);
   transform: scale(0.94);
   box-shadow: 0 0 0 1px rgb(201 162 74 / 0.35);
+}
+
+.demo-field__test-foot {
+  padding: 0.6rem 0.1rem 0.3rem;
+}
+
+.demo-field__complete {
+  appearance: none;
+  border: 0;
+  width: 100%;
+  border-radius: 0.55rem;
+  padding: 0.6rem;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #f5f1ea;
+  background: #1a1714;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease),
+    background 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
+
+.demo-field__complete.is-press {
+  transform: scale(0.97);
+  background: #c9a24a;
+  color: #1a1714;
+  box-shadow: 0 0 0 3px rgb(201 162 74 / 0.3);
 }
 
 .demo-field__toast {
