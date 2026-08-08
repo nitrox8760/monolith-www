@@ -1,6 +1,6 @@
 /**
- * Field-led homepage demo — simplified real Field flow.
- * Autoplays once on first view; manual Back/Next always runs step animations.
+ * Field-led homepage demo — sites → overview → pass/pass/fail → defect → Console focus.
+ * Autoplays once; manual Back/Next always runs step animations.
  */
 (function () {
   const root = document.querySelector('[data-demo-root]');
@@ -15,11 +15,12 @@
   const prevBtn = root.querySelector('[data-demo-prev]');
   const nextBtn = root.querySelector('[data-demo-next]');
   const replayBtn = root.querySelector('[data-demo-replay]');
+  const headerTitle = root.querySelector('[data-demo-header-title]');
 
   const screenEls = {
+    sites: root.querySelector('[data-demo-screen="sites"]'),
     overview: root.querySelector('[data-demo-screen="overview"]'),
     test: root.querySelector('[data-demo-screen="test"]'),
-    console: root.querySelector('[data-demo-screen="console"]'),
   };
 
   const navItems = {
@@ -27,19 +28,42 @@
     test: root.querySelector('[data-nav="test"]'),
   };
 
-  const el018 = root.querySelector('[data-demo-row="el018"]');
-  const el018Badge = root.querySelector('[data-demo-el018-badge]');
-  const el018Fault = root.querySelector('[data-demo-el018-fault]');
-  const el018Change = root.querySelector('[data-demo-el018-change]');
-  const el018Actions = root.querySelector('[data-demo-actions]');
-  const failBtn = root.querySelector('[data-demo-fail]');
-  const passBtn = root.querySelector('[data-demo-pass]');
+  const sitesScroll = root.querySelector('[data-demo-sites-scroll]');
+  const riversideBtn = root.querySelector('[data-demo-site-riverside]');
+  const consoleFocus = root.querySelector('[data-demo-console-focus]');
+  const codaRow = root.querySelector('[data-demo-coda-row]');
+
+  const rows = {
+    el012: {
+      el: root.querySelector('[data-demo-row="el012"]'),
+      badge: root.querySelector('[data-demo-el012-badge]'),
+      actions: root.querySelector('[data-demo-el012-actions]'),
+      change: root.querySelector('[data-demo-el012-change]'),
+      passBtn: root.querySelector('[data-demo-pass-el012]'),
+    },
+    el024: {
+      el: root.querySelector('[data-demo-row="el024"]'),
+      badge: root.querySelector('[data-demo-el024-badge]'),
+      actions: root.querySelector('[data-demo-el024-actions]'),
+      change: root.querySelector('[data-demo-el024-change]'),
+      passBtn: root.querySelector('[data-demo-pass-el024]'),
+    },
+    el018: {
+      el: root.querySelector('[data-demo-row="el018"]'),
+      badge: root.querySelector('[data-demo-el018-badge]'),
+      actions: root.querySelector('[data-demo-actions]'),
+      change: root.querySelector('[data-demo-el018-change]'),
+      fault: root.querySelector('[data-demo-el018-fault]'),
+      failBtn: root.querySelector('[data-demo-fail]'),
+      passBtn: root.querySelector('[data-demo-pass]'),
+    },
+  };
+
   const defects = root.querySelector('[data-demo-defects]');
   const defectTitle = root.querySelector('[data-demo-defect-title]');
   const defectNew = root.querySelector('[data-demo-defect-new]');
   const snapDefects = root.querySelector('[data-demo-snap-defects]');
   const syncIcon = root.querySelector('[data-demo-sync]');
-  const codaRow = root.querySelector('[data-demo-coda-row]');
   const toast = root.querySelector('[data-demo-toast]');
   const progressLabel = root.querySelector('[data-demo-progress-label]');
   const progressPct = root.querySelector('[data-demo-progress-pct]');
@@ -64,41 +88,46 @@
 
   const STEPS = [
     {
-      title: 'Open Riverside Court',
-      narration:
-        'Overview is the site home — status for the period, and any open defects still on the register.',
+      title: 'Find Riverside Court',
+      narration: 'Start from your sites list — scroll to the job, open it, and you’re on site.',
+      tip: 'Riverside Court in the sites list',
+      screen: 'sites',
+      header: 'Sites',
+    },
+    {
+      title: 'On the site',
+      narration: 'Overview is the site home — period status and anything still open on the register.',
       tip: 'the sync icon — green when the site is up to date',
       screen: 'overview',
+      header: 'Riverside Court',
       spot: 'sync',
     },
     {
-      title: 'Fail EL-018 on Test',
-      narration:
-        'On Test, each fitting has PASS and FAIL. Fail opens Log failure — reason, optional notes, and a defect photo.',
-      tip: 'PASS / FAIL on the fitting row — same as in Field',
+      title: 'Test the visit',
+      narration: 'Pass the fittings that are fine, then Fail the one that isn’t — Log failure keeps the reason with it.',
+      tip: 'PASS, PASS, then FAIL on EL-018',
       screen: 'test',
-      spot: 'fail',
+      header: 'Riverside Court',
     },
     {
       title: 'Defect stays on the site',
-      narration:
-        'After you save, the fail is on the checklist — and Open defects on Overview keeps it until it’s cleared.',
+      narration: 'The fail doesn’t vanish when you leave Test — Open defects keeps it on the site until it’s cleared.',
       tip: 'Open defects — the new EL-018 row on the register',
       screen: 'overview',
+      header: 'Riverside Court',
       spot: 'defects',
     },
     {
       title: 'Office sees it',
-      narration:
-        'Same site in Console — needs attention shows up for the office, without a photo of a paper checklist.',
-      tip: 'Console Sites list — Riverside Court needs attention',
-      screen: 'console',
-      spot: null,
+      narration: 'In Console, the same site shows needs attention — so the office isn’t waiting on a photo of a checklist.',
+      tip: 'Console Sites — Riverside Court needs attention',
+      screen: 'overview',
+      header: 'Riverside Court',
+      consoleFocus: true,
     },
   ];
 
   let stepIndex = 0;
-  /** One-shot guided play; false after finish or any user control click. */
   let autoplayActive = !REDUCE_MQ.matches;
   let autoplayFinished = false;
   let inView = true;
@@ -106,6 +135,8 @@
   let timers = [];
   let completedTracked = false;
   let failComplete = false;
+  let passed012 = false;
+  let passed024 = false;
   let typingToken = 0;
   let selectedReason = '';
 
@@ -131,7 +162,7 @@
   }
 
   function stepCount() {
-    return desktopCodaEnabled() ? 4 : 3;
+    return desktopCodaEnabled() ? 5 : 4;
   }
 
   function clearTimers() {
@@ -163,6 +194,13 @@
     return 'Use Back and Next to explore — animations play on each step.';
   }
 
+  function setConsoleFocus(on) {
+    root.classList.toggle('is-console-focus', on);
+    if (consoleFocus) {
+      consoleFocus.setAttribute('aria-hidden', on ? 'false' : 'true');
+    }
+  }
+
   function setScreen(name) {
     root.dataset.screen = name;
     Object.entries(screenEls).forEach(([key, el]) => {
@@ -171,6 +209,10 @@
     Object.entries(navItems).forEach(([key, el]) => {
       if (el) el.classList.toggle('is-active', key === name);
     });
+  }
+
+  function setHeader(title) {
+    if (headerTitle) headerTitle.textContent = title;
   }
 
   function setFailSheetOpen(open) {
@@ -207,8 +249,7 @@
 
   function updateSaveEnabled() {
     if (!saveFailBtn) return;
-    const hasPhoto = photo?.classList.contains('is-ready');
-    saveFailBtn.disabled = !(selectedReason && hasPhoto);
+    saveFailBtn.disabled = !(selectedReason && photo?.classList.contains('is-ready'));
   }
 
   function selectReason(label) {
@@ -250,35 +291,51 @@
       }
       notesText.textContent += text[i];
       i += 1;
-      later(tick, 48);
+      later(tick, 42);
     };
-    later(tick, 80);
+    later(tick, 60);
+  }
+
+  function updateProgress() {
+    let n = 0;
+    if (passed012) n += 1;
+    if (passed024) n += 1;
+    if (failComplete) n += 1;
+    const pct = Math.round((n / 3) * 100);
+    if (progressLabel) progressLabel.textContent = `${n}/3 tested`;
+    if (progressPct) progressPct.textContent = `${pct}%`;
+    if (progressBar) progressBar.style.width = `${pct}%`;
+    if (groupCount) groupCount.textContent = `${n}/3 tested`;
+  }
+
+  function setRowPassed(key, passed) {
+    const row = rows[key];
+    if (!row?.el) return;
+    if (key === 'el012') passed012 = passed;
+    if (key === 'el024') passed024 = passed;
+    row.el.classList.toggle('is-pass', passed);
+    row.el.classList.toggle('is-pending', !passed);
+    row.el.classList.remove('is-active', 'is-fail');
+    if (row.badge) row.badge.hidden = !passed;
+    if (row.actions) row.actions.hidden = passed;
+    if (row.change) row.change.hidden = !passed;
+    if (row.passBtn) row.passBtn.classList.remove('is-pulse');
+    updateProgress();
   }
 
   function setEl018Failed(failed) {
     failComplete = failed;
-    if (el018) {
-      el018.classList.toggle('is-fail', failed);
-      el018.classList.toggle('is-pending', !failed);
-      el018.classList.toggle('is-active', !failed && stepIndex === 1);
-    }
-    if (el018Actions) el018Actions.hidden = failed;
-    if (el018Badge) el018Badge.hidden = !failed;
-    if (el018Fault) el018Fault.hidden = !failed;
-    if (el018Change) el018Change.hidden = !failed;
-    if (failBtn) failBtn.classList.remove('is-pulse');
-
-    if (failed) {
-      if (progressLabel) progressLabel.textContent = '3/3 tested';
-      if (progressPct) progressPct.textContent = '100%';
-      if (progressBar) progressBar.style.width = '100%';
-      if (groupCount) groupCount.textContent = '3/3 tested';
-    } else {
-      if (progressLabel) progressLabel.textContent = '2/3 tested';
-      if (progressPct) progressPct.textContent = '67%';
-      if (progressBar) progressBar.style.width = '67%';
-      if (groupCount) groupCount.textContent = '2/3 tested';
-    }
+    const row = rows.el018;
+    if (!row?.el) return;
+    row.el.classList.toggle('is-fail', failed);
+    row.el.classList.toggle('is-pending', !failed);
+    row.el.classList.toggle('is-active', !failed && stepIndex === 2);
+    if (row.actions) row.actions.hidden = failed;
+    if (row.badge) row.badge.hidden = !failed;
+    if (row.fault) row.fault.hidden = !failed;
+    if (row.change) row.change.hidden = !failed;
+    if (row.failBtn) row.failBtn.classList.remove('is-pulse');
+    updateProgress();
   }
 
   function setDefectsOpen(open) {
@@ -290,40 +347,56 @@
     if (snapDefects) {
       snapDefects.innerHTML = open ? '<strong>2</strong> Open defects' : '<strong>1</strong> Open defect';
     }
-    if (defects) defects.classList.toggle('is-spot', open && stepIndex === 2);
+    if (defects) defects.classList.toggle('is-spot', open && stepIndex === 3);
   }
 
   function clearSpots() {
     if (syncIcon) syncIcon.classList.remove('is-spot');
     if (defects) defects.classList.remove('is-spot');
-    if (failBtn) failBtn.classList.remove('is-pulse');
+    if (rows.el018.failBtn) rows.el018.failBtn.classList.remove('is-pulse');
+    if (riversideBtn) riversideBtn.classList.remove('is-active', 'is-press');
   }
 
   function applySpot(spot) {
     clearSpots();
     if (spot === 'sync' && syncIcon) syncIcon.classList.add('is-spot');
-    if (spot === 'fail' && failBtn && !failComplete) failBtn.classList.add('is-pulse');
     if (spot === 'defects' && defects) defects.classList.add('is-spot');
+  }
+
+  function resetChecklist() {
+    setRowPassed('el012', false);
+    setRowPassed('el024', false);
+    setEl018Failed(false);
+    if (rows.el012.el) rows.el012.el.classList.remove('is-active');
+    if (rows.el024.el) rows.el024.el.classList.remove('is-active');
+    if (rows.el018.el) rows.el018.el.classList.remove('is-active');
   }
 
   function resetChrome() {
     resetFailSheet();
-    setEl018Failed(false);
+    resetChecklist();
     setDefectsOpen(false);
     clearSpots();
     showToast(false);
+    setConsoleFocus(false);
     if (codaRow) codaRow.classList.remove('is-pulse');
+    if (sitesScroll) sitesScroll.scrollTop = 0;
   }
 
   function applyEndState(index) {
     resetChrome();
     const step = STEPS[index];
     setScreen(step.screen);
+    setHeader(step.header);
     applySpot(step.spot);
+    setConsoleFocus(!!step.consoleFocus && desktopCodaEnabled());
 
-    if (index >= 1) setEl018Failed(true);
-    if (index >= 2) setDefectsOpen(true);
-    if (index === 1) clearSpots();
+    if (index >= 2) {
+      setRowPassed('el012', true);
+      setRowPassed('el024', true);
+      setEl018Failed(true);
+    }
+    if (index >= 3) setDefectsOpen(true);
   }
 
   function updateCopy() {
@@ -401,17 +474,28 @@
   function completeFailFromSheet() {
     setFailSheetOpen(false);
     setEl018Failed(true);
-    if (el018) el018.classList.remove('is-active');
+    if (rows.el018.el) rows.el018.el.classList.remove('is-active');
     showToast(true);
-    later(() => showToast(false), 2200);
+    later(() => showToast(false), 2000);
+  }
+
+  function passFitting(key, done) {
+    const row = rows[key];
+    if (!row?.el) {
+      done?.();
+      return;
+    }
+    row.el.classList.add('is-active');
+    if (row.passBtn) row.passBtn.classList.add('is-pulse');
+    later(() => {
+      setRowPassed(key, true);
+      done?.();
+    }, REDUCE_MQ.matches ? 0 : 550);
   }
 
   function runFailAutofill(onDone) {
-    setScreen('test');
-    setEl018Failed(false);
-    resetFailSheet();
-    if (el018) el018.classList.add('is-active');
-    if (failBtn) failBtn.classList.add('is-pulse');
+    if (rows.el018.el) rows.el018.el.classList.add('is-active');
+    if (rows.el018.failBtn) rows.el018.failBtn.classList.add('is-pulse');
 
     if (REDUCE_MQ.matches) {
       selectReason('Lamp fault');
@@ -423,17 +507,14 @@
       return;
     }
 
-    // Let people notice FAIL before the sheet opens
     later(() => {
-      if (failBtn) failBtn.classList.remove('is-pulse');
+      if (rows.el018.failBtn) rows.el018.failBtn.classList.remove('is-pulse');
       setFailSheetOpen(true);
       if (reasonOptions) reasonOptions.hidden = false;
-    }, 1600);
+    }, 1100);
 
-    // Pause on the open sheet, then pick a reason
-    later(() => selectReason('Lamp fault'), 2800);
+    later(() => selectReason('Lamp fault'), 2200);
 
-    // Brief beat after reason, then type notes slowly
     later(() => {
       typeNotes(NOTES, () => {
         later(() => {
@@ -443,13 +524,49 @@
             later(() => {
               if (saveFailBtn) saveFailBtn.classList.remove('is-pulse');
               completeFailFromSheet();
-              // Hold on the failed row + toast before leaving
-              later(() => onDone?.(), 2800);
-            }, 1200);
-          }, 900);
-        }, 700);
+              later(() => onDone?.(), 2200);
+            }, 1000);
+          }, 700);
+        }, 550);
       });
-    }, 3600);
+    }, 2900);
+  }
+
+  function runSitesTimeline(onDone) {
+    setScreen('sites');
+    setHeader('Sites');
+    setConsoleFocus(false);
+    if (riversideBtn) riversideBtn.classList.remove('is-active', 'is-press');
+    if (sitesScroll) sitesScroll.scrollTop = 0;
+
+    if (REDUCE_MQ.matches) {
+      if (riversideBtn) riversideBtn.classList.add('is-active');
+      onDone?.();
+      return;
+    }
+
+    later(() => {
+      if (!sitesScroll || !riversideBtn) {
+        onDone?.();
+        return;
+      }
+      const top =
+        riversideBtn.offsetTop - sitesScroll.clientHeight / 2 + riversideBtn.clientHeight / 2;
+      sitesScroll.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }, 350);
+
+    later(() => {
+      if (riversideBtn) riversideBtn.classList.add('is-active');
+    }, 1100);
+
+    later(() => {
+      if (riversideBtn) riversideBtn.classList.add('is-press');
+    }, 1700);
+
+    later(() => {
+      if (riversideBtn) riversideBtn.classList.remove('is-press');
+      onDone?.();
+    }, 2100);
   }
 
   function runStepTimeline(index) {
@@ -457,47 +574,76 @@
     const reduced = REDUCE_MQ.matches;
 
     if (index === 0) {
-      applyEndState(0);
-      // First look at Overview — enough time to read status + tip
-      scheduleAdvance(6500);
+      resetChrome();
+      runSitesTimeline(() => scheduleAdvance(900));
       return;
     }
 
     if (index === 1) {
-      runFailAutofill(() => scheduleAdvance(2000));
+      resetChrome();
+      setScreen('overview');
+      setHeader('Riverside Court');
+      later(() => {
+        if (syncIcon) syncIcon.classList.add('is-spot');
+        scheduleAdvance(2400);
+      }, reduced ? 0 : 200);
       return;
     }
 
     if (index === 2) {
       resetChrome();
-      setEl018Failed(true);
-      setScreen('overview');
-      applySpot(null);
+      setScreen('test');
+      setHeader('Riverside Court');
+      // Pass two, then fail one
       later(() => {
-        setDefectsOpen(true);
-        if (defects) defects.classList.add('is-spot');
-        // Give time to notice the new defect row
-        scheduleAdvance(4800);
-      }, reduced ? 0 : 900);
+        passFitting('el012', () => {
+          later(() => {
+            passFitting('el024', () => {
+              later(() => runFailAutofill(() => scheduleAdvance(1600)), reduced ? 0 : 450);
+            });
+          }, reduced ? 0 : 400);
+        });
+      }, reduced ? 0 : 350);
       return;
     }
 
     if (index === 3) {
       resetChrome();
+      setRowPassed('el012', true);
+      setRowPassed('el024', true);
       setEl018Failed(true);
-      setDefectsOpen(true);
-      setScreen('console');
+      setScreen('overview');
+      setHeader('Riverside Court');
       later(() => {
-        if (codaRow) codaRow.classList.add('is-pulse');
-      }, reduced ? 0 : 600);
-      later(() => {
-        if (codaRow) codaRow.classList.remove('is-pulse');
-        scheduleAdvance(0);
-      }, reduced ? 0 : 5200);
+        setDefectsOpen(true);
+        if (defects) defects.classList.add('is-spot');
+        scheduleAdvance(4800);
+      }, reduced ? 0 : 900);
       return;
     }
 
-    scheduleAdvance(3000);
+    if (index === 4) {
+      resetChrome();
+      setRowPassed('el012', true);
+      setRowPassed('el024', true);
+      setEl018Failed(true);
+      setDefectsOpen(true);
+      setScreen('overview');
+      setHeader('Riverside Court');
+      later(() => {
+        setConsoleFocus(true);
+        later(() => {
+          if (codaRow) codaRow.classList.add('is-pulse');
+        }, 400);
+        later(() => {
+          if (codaRow) codaRow.classList.remove('is-pulse');
+          scheduleAdvance(0);
+        }, 4800);
+      }, reduced ? 0 : 300);
+      return;
+    }
+
+    scheduleAdvance(2000);
   }
 
   function goTo(index) {
@@ -536,18 +682,18 @@
   }
 
   function openFailInteractive() {
-    if (stepIndex !== 1 || failComplete) return;
+    if (stepIndex !== 2 || failComplete) return;
     trackDemo('demo_fail_tap');
     stopAutoplay();
     autoplayFinished = true;
     updateControls();
     setFailSheetOpen(true);
-    if (failBtn) failBtn.classList.remove('is-pulse');
+    if (rows.el018.failBtn) rows.el018.failBtn.classList.remove('is-pulse');
     if (reasonOptions) reasonOptions.hidden = false;
   }
 
   function saveFailInteractive() {
-    if (stepIndex !== 1 || saveFailBtn?.disabled) return;
+    if (stepIndex !== 2 || saveFailBtn?.disabled) return;
     trackDemo('demo_fail_save');
     stopAutoplay();
     autoplayFinished = true;
@@ -574,21 +720,47 @@
     goTo(0);
   });
 
-  failBtn?.addEventListener('click', (e) => {
+  riversideBtn?.addEventListener('click', () => {
+    if (stepIndex !== 0) return;
+    trackDemo('demo_site_open');
+    stopAutoplay();
+    autoplayFinished = true;
+    userGoTo(1);
+  });
+
+  rows.el012.passBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (stepIndex !== 2 || passed012) return;
+    stopAutoplay();
+    autoplayFinished = true;
+    passFitting('el012');
+    updateControls();
+  });
+
+  rows.el024.passBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (stepIndex !== 2 || passed024) return;
+    stopAutoplay();
+    autoplayFinished = true;
+    passFitting('el024');
+    updateControls();
+  });
+
+  rows.el018.failBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     openFailInteractive();
   });
 
-  passBtn?.addEventListener('click', (e) => {
+  rows.el018.passBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     stopAutoplay();
     autoplayFinished = true;
     updateControls();
-    if (failBtn) failBtn.classList.add('is-pulse');
+    if (rows.el018.failBtn) rows.el018.failBtn.classList.add('is-pulse');
   });
 
   reasonSelect?.addEventListener('click', () => {
-    if (stepIndex !== 1 || !failSheet?.classList.contains('is-open')) return;
+    if (stepIndex !== 2 || !failSheet?.classList.contains('is-open')) return;
     stopAutoplay();
     autoplayFinished = true;
     updateControls();
@@ -597,7 +769,7 @@
 
   reasonButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      if (stepIndex !== 1) return;
+      if (stepIndex !== 2) return;
       stopAutoplay();
       autoplayFinished = true;
       updateControls();
@@ -613,7 +785,7 @@
   });
 
   photo?.addEventListener('click', () => {
-    if (stepIndex !== 1 || !failSheet?.classList.contains('is-open')) return;
+    if (stepIndex !== 2 || !failSheet?.classList.contains('is-open')) return;
     stopAutoplay();
     autoplayFinished = true;
     updateControls();

@@ -57,10 +57,17 @@ html {
   .demo-fail-sheet__panel,
   .demo-fail-sheet__caret,
   .demo-fail-sheet__save,
-  .demo-console__row.is-alert.is-pulse,
-  .demo-console {
+  .demo-console-focus__row.is-alert.is-pulse,
+  .demo-tour__phone-wrap,
+  .demo-console-focus {
     animation: none !important;
     transition: none !important;
+  }
+
+  .demo-tour.is-console-focus .demo-tour__phone-wrap {
+    filter: none;
+    opacity: 0.55;
+    transform: none;
   }
 
   .demo-fail-sheet.is-open .demo-fail-sheet__panel {
@@ -450,7 +457,7 @@ a {
 
 @media (min-width: 900px) {
   .demo-tour__layout {
-    grid-template-columns: minmax(15rem, 1fr) minmax(18rem, 20rem);
+    grid-template-columns: minmax(15rem, 1fr) minmax(22rem, 28rem);
     gap: 1.5rem 2.25rem;
     align-items: center;
   }
@@ -592,9 +599,241 @@ a {
   margin-inline: auto;
 }
 
+@media (min-width: 900px) {
+  .demo-tour__stage {
+    width: min(100%, 28rem);
+    min-height: 34rem;
+    overflow: visible;
+  }
+
+  .demo-tour__stage-col {
+    overflow: visible;
+    width: min(100%, 28rem);
+  }
+}
+
+.demo-tour__phone-wrap {
+  width: min(100%, 17.5rem);
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+  transition:
+    transform 0.45s var(--ease),
+    opacity 0.45s var(--ease),
+    filter 0.45s var(--ease);
+}
+
+.demo-tour.is-console-focus .demo-tour__phone-wrap {
+  transform: scale(0.9) translateX(-0.75rem);
+  opacity: 0.4;
+  filter: blur(2.5px);
+  pointer-events: none;
+}
+
 .demo-tour__phone {
   width: 100%;
   margin: 0 auto;
+}
+
+/* Home sites list */
+.demo-tour[data-screen='sites'] .demo-field__nav {
+  display: none;
+}
+
+.demo-tour[data-screen='sites'] .demo-field__sync {
+  visibility: hidden;
+}
+
+.demo-sites {
+  padding: 0.55rem 0.55rem 0.7rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.demo-sites__label {
+  margin: 0 0 0.4rem;
+  font-size: 0.5rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9a9184;
+}
+
+.demo-sites__scroller {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: grid;
+  gap: 0.35rem;
+  padding-right: 0.15rem;
+  scroll-behavior: smooth;
+}
+
+.demo-sites__row {
+  appearance: none;
+  border: 1px solid #e4ddd2;
+  background: #fff;
+  border-radius: 0.65rem;
+  padding: 0.55rem 0.6rem;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  display: grid;
+  gap: 0.15rem;
+  transition:
+    border-color 0.25s var(--ease),
+    box-shadow 0.25s var(--ease),
+    background 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+
+.demo-sites__row strong {
+  font-size: 0.72rem;
+  color: #1a1714;
+}
+
+.demo-sites__row span {
+  font-size: 0.55rem;
+  font-weight: 650;
+  color: #6b6358;
+}
+
+.demo-sites__row span.is-warn {
+  color: #991b1b;
+}
+
+.demo-sites__row.is-active,
+.demo-sites__row.is-press {
+  border-color: #c9a24a;
+  box-shadow: 0 0 0 2px rgb(201 162 74 / 0.28);
+  background: rgb(250 243 224);
+}
+
+.demo-sites__row.is-press {
+  transform: scale(0.98);
+}
+
+/* Console focus overlay — desktop coda, no layout jump */
+.demo-console-focus {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .demo-console-focus {
+    display: block;
+    position: absolute;
+    right: -0.25rem;
+    top: 18%;
+    width: 15.5rem;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(0.6rem) scale(0.96);
+    pointer-events: none;
+    transition:
+      opacity 0.4s var(--ease),
+      transform 0.4s var(--ease),
+      visibility 0.4s;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+.demo-console-focus__label {
+  margin: 0 0 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-lo);
+}
+
+.demo-console-focus__panel {
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  background: var(--surface);
+  box-shadow: 0 16px 36px rgb(26 23 20 / 0.14);
+  overflow: hidden;
+}
+
+.demo-console-focus__top {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  background: #faf7f2;
+}
+
+.demo-console-focus__top strong {
+  display: block;
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.demo-console-focus__top span {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--stone);
+}
+
+.demo-console-focus__table {
+  background: #fff;
+}
+
+.demo-console-focus__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 650;
+  border-top: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.demo-console-focus__row--head {
+  border-top: 0;
+  background: #faf7f2;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.demo-console-focus__row.is-alert {
+  background: var(--due-bg);
+}
+
+.demo-console-focus__row.is-alert.is-pulse {
+  animation: demo-coda-pulse 1.2s var(--ease) 1;
+}
+
+.demo-console-focus__tone {
+  color: var(--due);
+  font-weight: 800;
+  font-size: 0.7rem;
+}
+
+.demo-console-focus__tone.is-ok {
+  color: var(--ok);
+}
+
+.demo-console-focus__hint {
+  margin: 0;
+  padding: 0.55rem 0.75rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--stone);
+  border-top: 1px solid var(--border);
+  background: #faf7f2;
 }
 
 /* Field chrome — simplified real app */
@@ -1292,132 +1531,6 @@ a {
   font-size: 0.65rem;
   font-weight: 700;
   cursor: default;
-}
-
-/* Console coda — same phone frame, no layout shift */
-.demo-tour[data-screen='console'] .demo-field__header,
-.demo-tour[data-screen='console'] .demo-field__nav {
-  display: none;
-}
-
-.demo-console {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 0.65rem 0.6rem 0.75rem;
-  background: #f5f1ea;
-  animation: demo-console-in 0.45s var(--ease);
-}
-
-@keyframes demo-console-in {
-  from {
-    opacity: 0;
-    transform: translateY(0.35rem);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.demo-console__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding-bottom: 0.55rem;
-  margin-bottom: 0.55rem;
-  border-bottom: 1px solid #e4ddd2;
-  background: #fff;
-  margin: -0.65rem -0.6rem 0.55rem;
-  padding: 0.65rem 0.7rem;
-}
-
-.demo-console__header strong {
-  display: block;
-  font-size: 0.82rem;
-  letter-spacing: -0.02em;
-  color: #1a1714;
-}
-
-.demo-console__header span {
-  display: block;
-  font-size: 0.52rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #a67c2e;
-}
-
-.demo-console__org {
-  font-size: 0.55rem !important;
-  font-weight: 650 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  color: #6b6358 !important;
-  padding-top: 0.15rem;
-}
-
-.demo-console__eyebrow {
-  margin: 0 0 0.35rem;
-  font-size: 0.5rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #9a9184;
-}
-
-.demo-console__card {
-  border: 1px solid #e4ddd2;
-  border-radius: 0.65rem;
-  overflow: hidden;
-  background: #fff;
-}
-
-.demo-console__row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.5rem;
-  padding: 0.5rem 0.55rem;
-  font-size: 0.65rem;
-  font-weight: 650;
-  border-top: 1px solid #e4ddd2;
-  color: #1a1714;
-}
-
-.demo-console__row--head {
-  border-top: 0;
-  background: #faf7f2;
-  font-size: 0.5rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #9a9184;
-}
-
-.demo-console__row.is-alert {
-  background: #fef2f2;
-}
-
-.demo-console__row.is-alert.is-pulse {
-  animation: demo-coda-pulse 1.2s var(--ease) 1;
-}
-
-.demo-console__tone {
-  color: #991b1b;
-  font-weight: 800;
-  font-size: 0.58rem;
-}
-
-.demo-console__tone--ok {
-  color: #15803d;
-}
-
-.demo-console__hint {
-  margin: 0.65rem 0 0;
-  font-size: 0.62rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: #6b6358;
 }
 
 @keyframes demo-coda-pulse {
