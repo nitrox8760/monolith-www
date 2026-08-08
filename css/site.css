@@ -2237,14 +2237,20 @@ html {
 
 @media (max-width: 899px) {
   .hero {
-    /* Fill the first screen (the +1rem covers the header pulled over the hero) so the
-       next section never peeks before scrolling. Content is anchored to the top, so a
-       tall screen only ever adds space at the bottom — never an odd gap at the top. */
-    min-height: calc(100vh + 1rem);
-    min-height: calc(100svh + 1rem);
+    /* Leave room for the (dark) trust strip so hero + strip fill the first screen as
+       one block. Content is anchored to the top, so a tall screen only ever adds space
+       at the bottom — never an odd gap at the top. */
+    min-height: calc(100vh - 9rem);
+    min-height: calc(100svh - 9rem);
     justify-content: flex-start;
     padding-top: clamp(7rem, 4.75rem + 6svh, 9.5rem);
-    padding-bottom: 2.75rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Dark cushion below the strip keeps the "For contractors…" line above the fold while
+     ensuring the light section below never peeks in before scrolling. */
+  .trust-strip {
+    padding-bottom: 3.25rem;
   }
 }
 
