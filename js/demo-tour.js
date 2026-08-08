@@ -517,8 +517,6 @@
     setFailSheetOpen(false);
     setEl018Failed(true);
     if (rows.el018.el) rows.el018.el.classList.remove('is-active');
-    showToast(true);
-    later(() => showToast(false), 2000);
   }
 
   function completeTestThenAdvance() {
@@ -702,7 +700,7 @@
       later(() => {
         setDefectsOpen(true);
         if (defects) defects.classList.add('is-spot');
-        scheduleAdvance(4800);
+        scheduleAdvance(3800);
       }, reduced ? 0 : 1100);
       return;
     }
