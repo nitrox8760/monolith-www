@@ -33,6 +33,8 @@
   const riversideBtn = root.querySelector('[data-demo-site-riverside]');
   const consoleFocus = root.querySelector('[data-demo-console-focus]');
   const codaRow = root.querySelector('[data-demo-coda-row]');
+  const codaSummary = root.querySelector('[data-demo-coda-summary]');
+  const testNav = root.querySelector('[data-nav="test"]');
 
   const rows = {
     el012: {
@@ -388,7 +390,9 @@
     if (defects) defects.classList.remove('is-spot');
     if (rows.el018.failBtn) rows.el018.failBtn.classList.remove('is-pulse');
     if (riversideBtn) riversideBtn.classList.remove('is-active', 'is-press');
-    if (codaRow) codaRow.classList.remove('is-pulse');
+    if (codaRow) codaRow.classList.remove('is-pulse', 'is-spotlight');
+    if (codaSummary) codaSummary.classList.remove('is-pulse');
+    if (testNav) testNav.classList.remove('is-press');
   }
 
   function applySpot(spot) {
@@ -579,6 +583,12 @@
       return;
     }
 
+    // Small browse scroll first, then settle on Riverside
+    later(() => {
+      if (!sitesScroll) return;
+      sitesScroll.scrollTo({ top: 56, behavior: 'smooth' });
+    }, 280);
+
     later(() => {
       if (!sitesScroll || !riversideBtn) {
         onDone?.();
@@ -587,20 +597,20 @@
       const top =
         riversideBtn.offsetTop - sitesScroll.clientHeight / 2 + riversideBtn.clientHeight / 2;
       sitesScroll.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-    }, 350);
+    }, 900);
 
     later(() => {
       if (riversideBtn) riversideBtn.classList.add('is-active');
-    }, 1100);
+    }, 1550);
 
     later(() => {
       if (riversideBtn) riversideBtn.classList.add('is-press');
-    }, 1700);
+    }, 2100);
 
     later(() => {
       if (riversideBtn) riversideBtn.classList.remove('is-press');
       onDone?.();
-    }, 2100);
+    }, 2500);
   }
 
   function runStepTimeline(index) {
@@ -614,7 +624,7 @@
     }
 
     if (index === 1) {
-      // Coming from sites — animate into Overview
+      // Coming from sites — animate into Overview, then tap Test
       setConsoleFocus(false);
       setDefectsOpen(false);
       resetChecklist();
@@ -623,8 +633,15 @@
       setHeader('Riverside Court', 'site');
       later(() => {
         if (syncIcon) syncIcon.classList.add('is-spot');
-        scheduleAdvance(2400);
       }, reduced ? 0 : 450);
+      later(() => {
+        if (syncIcon) syncIcon.classList.remove('is-spot');
+        if (testNav) testNav.classList.add('is-press');
+      }, reduced ? 0 : 1800);
+      later(() => {
+        if (testNav) testNav.classList.remove('is-press');
+        scheduleAdvance(350);
+      }, reduced ? 0 : 2300);
       return;
     }
 
@@ -636,6 +653,10 @@
       resetFailSheet();
       showToast(false);
       setHeader('Riverside Court', 'site');
+      if (testNav) {
+        testNav.classList.add('is-active');
+        navItems.overview?.classList.remove('is-active');
+      }
       setScreen('test', { animate: true });
       later(() => {
         passFitting('el012', () => {
@@ -676,12 +697,13 @@
       later(() => {
         setConsoleFocus(true);
         later(() => {
-          if (codaRow) codaRow.classList.add('is-pulse');
-        }, 450);
+          if (codaSummary) codaSummary.classList.add('is-pulse');
+          if (codaRow) codaRow.classList.add('is-spotlight');
+        }, 400);
         later(() => {
-          if (codaRow) codaRow.classList.remove('is-pulse');
+          if (codaSummary) codaSummary.classList.remove('is-pulse');
           scheduleAdvance(0);
-        }, 5000);
+        }, 5200);
       }, reduced ? 0 : 300);
       return;
     }

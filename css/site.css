@@ -1108,6 +1108,23 @@ a {
 
 .demo-console-focus__summary .is-due.is-pulse {
   animation: demo-coda-pulse 1.2s var(--ease) 1;
+  box-shadow: 0 0 0 2px rgb(153 27 27 / 0.28);
+}
+
+.demo-console-focus__row.is-alert.is-spotlight {
+  box-shadow: inset 0 0 0 2px rgb(153 27 27 / 0.45);
+  animation: demo-console-spotlight 1.4s var(--ease) 1;
+}
+
+@keyframes demo-console-spotlight {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 2px rgb(153 27 27 / 0.35);
+  }
+  40% {
+    box-shadow: inset 0 0 0 2px rgb(153 27 27 / 0.7);
+    background: #fee2e2;
+  }
 }
 
 .demo-console-focus__toolbar {
@@ -1540,13 +1557,18 @@ a {
   font: inherit;
   font-size: 0.62rem;
   font-weight: 800;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: #fff;
   cursor: pointer;
 }
 
 .demo-field__pass {
   background: #16a34a;
+}
+
+.demo-field__pass.is-pulse {
+  animation: demo-pass-pulse 0.85s var(--ease) 1;
 }
 
 .demo-field__fail {
@@ -1558,6 +1580,11 @@ a {
   animation: demo-fail-pulse 0.9s var(--ease) infinite;
 }
 
+.demo-field__badge {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 @keyframes demo-fail-pulse {
   0%,
   100% {
@@ -1567,6 +1594,18 @@ a {
   50% {
     transform: scale(1.03);
     box-shadow: 0 0 0 3px rgb(220 38 38 / 0.25);
+  }
+}
+
+@keyframes demo-pass-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+  45% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 3px rgb(22 163 74 / 0.28);
   }
 }
 
@@ -1589,7 +1628,13 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 0.12rem;
-  padding: 0.15rem 0;
+  padding: 0.2rem 0.1rem;
+  border-radius: 0.4rem;
+  transition:
+    color 0.2s var(--ease),
+    background 0.2s var(--ease),
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
 }
 
 .demo-field__nav svg {
@@ -1599,6 +1644,13 @@ a {
 
 .demo-field__nav .is-active {
   color: #c9a24a;
+}
+
+.demo-field__nav .is-press {
+  color: #c9a24a;
+  background: rgb(201 162 74 / 0.16);
+  transform: scale(0.94);
+  box-shadow: 0 0 0 1px rgb(201 162 74 / 0.35);
 }
 
 .demo-field__toast {
