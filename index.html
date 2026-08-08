@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/site.css?v=20260808h" />
+  <link rel="stylesheet" href="/css/site.css?v=20260808i" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -468,60 +468,122 @@
                   <div class="device device--phone demo-tour__phone">
                     <div class="device__screen">
                       <div class="demo-field" data-demo-field>
-                        <header class="demo-field__header">
+                        <header class="demo-field__header" data-demo-header data-mode="brand">
+                          <div class="demo-field__brand" data-demo-brand>
+                            <img src="/assets/brand/pillar.svg" alt="" width="18" height="18" />
+                            <strong>Beacon</strong>
+                          </div>
                           <span class="demo-field__icon-btn" aria-hidden="true" data-demo-home-icon>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                               <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z" />
                             </svg>
                           </span>
-                          <span class="demo-field__title" data-demo-header-title>Sites</span>
-                          <span class="demo-field__sync" data-demo-sync title="Synced" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path
-                                d="M21 12a9 9 0 0 0-15.5-6.3M3 4v5h5M3 12a9 9 0 0 0 15.5 6.3M21 20v-5h-5"
-                              />
-                            </svg>
-                          </span>
+                          <span class="demo-field__title" data-demo-header-title>Riverside Court</span>
+                          <div class="demo-field__header-actions">
+                            <span class="demo-field__sync" data-demo-sync title="Synced" aria-hidden="true">
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path
+                                  d="M21 12a9 9 0 0 0-15.5-6.3M3 4v5h5M3 12a9 9 0 0 0 15.5 6.3M21 20v-5h-5"
+                                />
+                              </svg>
+                            </span>
+                            <span class="demo-field__icon-btn demo-field__gear" aria-hidden="true">
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3" />
+                                <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                              </svg>
+                            </span>
+                          </div>
                         </header>
 
-                        <div class="demo-field__body" data-demo-screen="sites">
+                        <div class="demo-field__stage" data-demo-screen-stage>
+                        <div class="demo-field__body is-shown" data-demo-screen="sites">
                           <div class="demo-sites">
-                            <p class="demo-sites__label">Your sites</p>
-                            <div class="demo-sites__scroller" data-demo-sites-scroll>
-                              <button type="button" class="demo-sites__row" tabindex="-1">
-                                <strong>Ashton Mill</strong>
-                                <span>Up to date</span>
-                              </button>
-                              <button type="button" class="demo-sites__row" tabindex="-1">
-                                <strong>Harbour House</strong>
-                                <span>Monthly due</span>
-                              </button>
-                              <button type="button" class="demo-sites__row" tabindex="-1">
-                                <strong>Quay Point</strong>
-                                <span>Up to date</span>
-                              </button>
-                              <button
-                                type="button"
-                                class="demo-sites__row"
-                                data-demo-site-riverside
-                                aria-label="Open Riverside Court"
-                              >
-                                <strong>Riverside Court</strong>
-                                <span class="is-warn">1 open defect</span>
-                              </button>
-                              <button type="button" class="demo-sites__row" tabindex="-1">
-                                <strong>Station Road</strong>
-                                <span>Annual due</span>
-                              </button>
-                              <button type="button" class="demo-sites__row" tabindex="-1">
-                                <strong>Westgate Hub</strong>
-                                <span>Up to date</span>
-                              </button>
+                            <div class="demo-sites__toolbar">
+                              <div class="demo-sites__search">Search site, client, or address…</div>
+                              <div class="demo-sites__filters" aria-hidden="true">
+                                <span class="is-active">All</span>
+                                <span>Testing</span>
+                                <span>Due</span>
+                              </div>
                             </div>
+                            <div class="demo-sites__scroller" data-demo-sites-scroll>
+                              <article class="demo-site-card">
+                                <div class="demo-site-card__main">
+                                  <strong>Ashton Mill</strong>
+                                  <p class="demo-site-card__client">Northside Estates</p>
+                                  <div class="demo-site-card__badges">
+                                    <span class="is-ok">Monthly · Jul 2026 · Next Aug</span>
+                                    <span class="is-ok">Annual · May 2026 · Next May</span>
+                                  </div>
+                                  <div class="demo-site-card__meta"><span><b>36</b> fittings</span><span><b>0</b> unassigned</span></div>
+                                </div>
+                                <span class="demo-site-card__chev" aria-hidden="true">›</span>
+                              </article>
+                              <article class="demo-site-card">
+                                <div class="demo-site-card__main">
+                                  <strong>Harbour House</strong>
+                                  <p class="demo-site-card__client">Quay Holdings</p>
+                                  <div class="demo-site-card__badges">
+                                    <span class="is-due">Monthly · Not done yet</span>
+                                    <span class="is-ok">Annual · Jun 2026 · Next Jun</span>
+                                  </div>
+                                  <div class="demo-site-card__meta"><span><b>28</b> fittings</span><span><b>2</b> unassigned</span></div>
+                                </div>
+                                <span class="demo-site-card__chev" aria-hidden="true">›</span>
+                              </article>
+                              <article class="demo-site-card">
+                                <div class="demo-site-card__main">
+                                  <strong>Quay Point</strong>
+                                  <div class="demo-site-card__badges">
+                                    <span class="is-ok">Monthly · Jul 2026 · Next Aug</span>
+                                    <span class="is-ok">Annual · Apr 2026 · Next Apr</span>
+                                  </div>
+                                  <div class="demo-site-card__meta"><span><b>22</b> fittings</span><span><b>0</b> unassigned</span></div>
+                                </div>
+                                <span class="demo-site-card__chev" aria-hidden="true">›</span>
+                              </article>
+                              <article class="demo-site-card" data-demo-site-riverside>
+                                <div class="demo-site-card__main">
+                                  <strong>Riverside Court</strong>
+                                  <p class="demo-site-card__client">Riverside Group</p>
+                                  <p class="demo-site-card__addr">14 Quay Lane</p>
+                                  <div class="demo-site-card__badges">
+                                    <span class="is-progress">Monthly · In progress — Jul 2026</span>
+                                    <span class="is-due">Annual · Due from Aug 2026</span>
+                                  </div>
+                                  <div class="demo-site-card__meta"><span><b>48</b> fittings</span><span><b>1</b> unassigned</span></div>
+                                </div>
+                                <span class="demo-site-card__chev" aria-hidden="true">›</span>
+                              </article>
+                              <article class="demo-site-card">
+                                <div class="demo-site-card__main">
+                                  <strong>Station Road</strong>
+                                  <div class="demo-site-card__badges">
+                                    <span class="is-ok">Monthly · Jul 2026 · Next Aug</span>
+                                    <span class="is-due">Annual · Due from Jul 2026</span>
+                                  </div>
+                                  <div class="demo-site-card__meta"><span><b>19</b> fittings</span><span><b>0</b> unassigned</span></div>
+                                </div>
+                                <span class="demo-site-card__chev" aria-hidden="true">›</span>
+                              </article>
+                              <article class="demo-site-card">
+                                <div class="demo-site-card__main">
+                                  <strong>Westgate Hub</strong>
+                                  <div class="demo-site-card__badges">
+                                    <span class="is-ok">Monthly · Jul 2026 · Next Aug</span>
+                                    <span class="is-ok">Annual · May 2026 · Next May</span>
+                                  </div>
+                                  <div class="demo-site-card__meta"><span><b>61</b> fittings</span><span><b>0</b> unassigned</span></div>
+                                </div>
+                                <span class="demo-site-card__chev" aria-hidden="true">›</span>
+                              </article>
+                            </div>
+                            <span class="demo-sites__fab" aria-hidden="true">+</span>
                           </div>
                         </div>
 
-                        <div class="demo-field__body" data-demo-screen="overview" hidden>
+                        <div class="demo-field__body" data-demo-screen="overview">
                           <div class="demo-field__panel">
                             <p class="demo-field__panel-title">Status</p>
                             <div class="demo-field__status">
@@ -552,7 +614,7 @@
                           </div>
                         </div>
 
-                        <div class="demo-field__body" data-demo-screen="test" hidden>
+                        <div class="demo-field__body" data-demo-screen="test">
                           <div class="demo-field__sticky">
                             <p class="demo-field__sticky-eye">July monthly test</p>
                             <div class="demo-field__progress">
@@ -617,6 +679,8 @@
                               <p class="demo-field__change" data-demo-el018-change hidden>Tap to change result</p>
                             </article>
                           </div>
+                        </div>
+
                         </div>
 
                         <div class="demo-fail-sheet" data-demo-fail-sheet aria-hidden="true">
@@ -702,31 +766,61 @@
 
                 <aside class="demo-console-focus" data-demo-console-focus aria-hidden="true">
                   <p class="demo-console-focus__label">Console</p>
-                  <div class="demo-console-focus__panel">
-                    <div class="demo-console-focus__top">
-                      <div>
-                        <strong>Sites</strong>
+                  <div class="demo-console-focus__shell">
+                    <aside class="demo-console-focus__nav" aria-hidden="true">
+                      <div class="demo-console-focus__brand">
+                        <img src="/assets/brand/pillar.svg" alt="" width="16" height="16" />
+                        <div>
+                          <strong>Beacon</strong>
+                          <span>Console</span>
+                        </div>
+                      </div>
+                      <nav class="demo-console-focus__links">
+                        <span class="is-active">Sites</span>
+                        <span>History</span>
+                        <span>Team</span>
+                        <span>Organisation</span>
+                      </nav>
+                    </aside>
+                    <div class="demo-console-focus__main">
+                      <header class="demo-console-focus__top">
+                        <div>
+                          <p>Beacon Console</p>
+                          <strong>Sites</strong>
+                        </div>
                         <span>Riverside Group</span>
+                      </header>
+                      <div class="demo-console-focus__summary">
+                        <div><strong>6</strong><span>Sites</span></div>
+                        <div class="is-due" data-demo-coda-row><strong>1</strong><span>Need attention</span></div>
+                        <div class="is-warn"><strong>1</strong><span>In progress</span></div>
+                        <div class="is-ok"><strong>4</strong><span>Up to date</span></div>
+                      </div>
+                      <div class="demo-console-focus__toolbar">
+                        <span class="demo-console-focus__search">Search sites…</span>
+                        <span class="demo-console-focus__add">Add site</span>
+                      </div>
+                      <div class="demo-console-focus__table">
+                        <div class="demo-console-focus__row demo-console-focus__row--head">
+                          <span>Site</span><span>Monthly</span><span>Annual</span>
+                        </div>
+                        <div class="demo-console-focus__row is-alert">
+                          <span class="demo-console-focus__site">Riverside Court</span>
+                          <span class="tone-progress">In progress</span>
+                          <span class="tone-due">Due from Aug</span>
+                        </div>
+                        <div class="demo-console-focus__row">
+                          <span class="demo-console-focus__site">Harbour House</span>
+                          <span class="tone-due">Not done yet</span>
+                          <span class="tone-ok">Next Jun</span>
+                        </div>
+                        <div class="demo-console-focus__row">
+                          <span class="demo-console-focus__site">Ashton Mill</span>
+                          <span class="tone-ok">Next Aug</span>
+                          <span class="tone-ok">Next May</span>
+                        </div>
                       </div>
                     </div>
-                    <div class="demo-console-focus__table">
-                      <div class="demo-console-focus__row demo-console-focus__row--head">
-                        <span>Site</span><span>Status</span>
-                      </div>
-                      <div class="demo-console-focus__row is-alert" data-demo-coda-row>
-                        <span>Riverside Court</span>
-                        <span class="demo-console-focus__tone">Needs attention</span>
-                      </div>
-                      <div class="demo-console-focus__row">
-                        <span>Harbour House</span>
-                        <span class="demo-console-focus__tone is-ok">Up to date</span>
-                      </div>
-                      <div class="demo-console-focus__row">
-                        <span>Ashton Mill</span>
-                        <span class="demo-console-focus__tone is-ok">Up to date</span>
-                      </div>
-                    </div>
-                    <p class="demo-console-focus__hint">Same site record — visible in the office.</p>
                   </div>
                 </aside>
               </div>
@@ -1277,7 +1371,7 @@
     </div>
   </footer>
 
-  <script src="/js/site.js?v=20260808h" defer></script>
-  <script src="/js/demo-tour.js?v=20260808h" defer></script>
+  <script src="/js/site.js?v=20260808i" defer></script>
+  <script src="/js/demo-tour.js?v=20260808i" defer></script>
 </body>
 </html>

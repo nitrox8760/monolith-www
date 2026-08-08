@@ -16,6 +16,7 @@
   const nextBtn = root.querySelector('[data-demo-next]');
   const replayBtn = root.querySelector('[data-demo-replay]');
   const headerTitle = root.querySelector('[data-demo-header-title]');
+  const headerEl = root.querySelector('[data-demo-header]');
 
   const screenEls = {
     sites: root.querySelector('[data-demo-screen="sites"]'),
@@ -92,7 +93,7 @@
       narration: 'Start from your sites list — scroll to the job, open it, and you’re on site.',
       tip: 'Riverside Court in the sites list',
       screen: 'sites',
-      header: 'Sites',
+      header: 'Beacon',
     },
     {
       title: 'On the site',
@@ -201,18 +202,50 @@
     }
   }
 
-  function setScreen(name) {
+  function setHeaderMode(mode) {
+    if (headerEl) headerEl.setAttribute('data-mode', mode === 'brand' ? 'brand' : 'site');
+  }
+
+  function setScreen(name, opts = {}) {
+    const animate = opts.animate !== false && !REDUCE_MQ.matches;
+    const prev = root.dataset.screen;
     root.dataset.screen = name;
-    Object.entries(screenEls).forEach(([key, el]) => {
-      if (el) el.hidden = key !== name;
-    });
+
     Object.entries(navItems).forEach(([key, el]) => {
       if (el) el.classList.toggle('is-active', key === name);
     });
+
+    const fromEl = prev && prev !== name ? screenEls[prev] : null;
+    const toEl = screenEls[name];
+
+    if (!animate || !fromEl || !toEl) {
+      Object.entries(screenEls).forEach(([key, el]) => {
+        if (!el) return;
+        el.classList.remove('is-leaving', 'is-entering');
+        el.classList.toggle('is-shown', key === name);
+      });
+      return;
+    }
+
+    fromEl.classList.remove('is-shown', 'is-entering');
+    fromEl.classList.add('is-leaving');
+    toEl.classList.remove('is-leaving');
+    toEl.classList.add('is-shown', 'is-entering');
+
+    later(() => {
+      fromEl.classList.remove('is-leaving');
+      toEl.classList.remove('is-entering');
+      Object.entries(screenEls).forEach(([key, el]) => {
+        if (!el || key === name) return;
+        el.classList.remove('is-shown', 'is-entering', 'is-leaving');
+      });
+    }, 360);
   }
 
-  function setHeader(title) {
+  function setHeader(title, mode) {
     if (headerTitle) headerTitle.textContent = title;
+    if (mode) setHeaderMode(mode);
+    else setHeaderMode(title === 'Sites' || title === 'Beacon' ? 'brand' : 'site');
   }
 
   function setFailSheetOpen(open) {
@@ -355,6 +388,7 @@
     if (defects) defects.classList.remove('is-spot');
     if (rows.el018.failBtn) rows.el018.failBtn.classList.remove('is-pulse');
     if (riversideBtn) riversideBtn.classList.remove('is-active', 'is-press');
+    if (codaRow) codaRow.classList.remove('is-pulse');
   }
 
   function applySpot(spot) {
@@ -386,8 +420,8 @@
   function applyEndState(index) {
     resetChrome();
     const step = STEPS[index];
-    setScreen(step.screen);
-    setHeader(step.header);
+    setScreen(step.screen, { animate: false });
+    setHeader(step.header, step.screen === 'sites' ? 'brand' : 'site');
     applySpot(step.spot);
     setConsoleFocus(!!step.consoleFocus && desktopCodaEnabled());
 
@@ -533,8 +567,8 @@
   }
 
   function runSitesTimeline(onDone) {
-    setScreen('sites');
-    setHeader('Sites');
+    setScreen('sites', { animate: false });
+    setHeader('Beacon', 'brand');
     setConsoleFocus(false);
     if (riversideBtn) riversideBtn.classList.remove('is-active', 'is-press');
     if (sitesScroll) sitesScroll.scrollTop = 0;
@@ -580,21 +614,29 @@
     }
 
     if (index === 1) {
-      resetChrome();
-      setScreen('overview');
-      setHeader('Riverside Court');
+      // Coming from sites — animate into Overview
+      setConsoleFocus(false);
+      setDefectsOpen(false);
+      resetChecklist();
+      resetFailSheet();
+      setScreen('overview', { animate: true });
+      setHeader('Riverside Court', 'site');
       later(() => {
         if (syncIcon) syncIcon.classList.add('is-spot');
         scheduleAdvance(2400);
-      }, reduced ? 0 : 200);
+      }, reduced ? 0 : 450);
       return;
     }
 
     if (index === 2) {
-      resetChrome();
-      setScreen('test');
-      setHeader('Riverside Court');
-      // Pass two, then fail one
+      // Overview → Test with crossfade, then pass/pass/fail
+      setConsoleFocus(false);
+      setDefectsOpen(false);
+      resetChecklist();
+      resetFailSheet();
+      showToast(false);
+      setHeader('Riverside Court', 'site');
+      setScreen('test', { animate: true });
       later(() => {
         passFitting('el012', () => {
           later(() => {
@@ -603,42 +645,43 @@
             });
           }, reduced ? 0 : 400);
         });
-      }, reduced ? 0 : 350);
+      }, reduced ? 0 : 500);
       return;
     }
 
     if (index === 3) {
-      resetChrome();
+      // Stay visually continuous: leave Test → Overview, then defect lands
+      setConsoleFocus(false);
       setRowPassed('el012', true);
       setRowPassed('el024', true);
       setEl018Failed(true);
-      setScreen('overview');
-      setHeader('Riverside Court');
+      setDefectsOpen(false);
+      setHeader('Riverside Court', 'site');
+      setScreen('overview', { animate: true });
       later(() => {
         setDefectsOpen(true);
         if (defects) defects.classList.add('is-spot');
         scheduleAdvance(4800);
-      }, reduced ? 0 : 900);
+      }, reduced ? 0 : 1100);
       return;
     }
 
     if (index === 4) {
-      resetChrome();
       setRowPassed('el012', true);
       setRowPassed('el024', true);
       setEl018Failed(true);
       setDefectsOpen(true);
-      setScreen('overview');
-      setHeader('Riverside Court');
+      setScreen('overview', { animate: false });
+      setHeader('Riverside Court', 'site');
       later(() => {
         setConsoleFocus(true);
         later(() => {
           if (codaRow) codaRow.classList.add('is-pulse');
-        }, 400);
+        }, 450);
         later(() => {
           if (codaRow) codaRow.classList.remove('is-pulse');
           scheduleAdvance(0);
-        }, 4800);
+        }, 5000);
       }, reduced ? 0 : 300);
       return;
     }
