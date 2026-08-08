@@ -1,32 +1,113 @@
 /**
  * Field-led homepage demo stepper.
- * Autoplay fills out a failed fitting, then advances through the visit story.
+ * Side narration + fail-sheet autofill + light annotations.
  */
 (function () {
   const root = document.querySelector('[data-demo-root]');
   if (!root) return;
 
-  const captionEl = root.querySelector('[data-demo-caption]');
-  const dotsEl = root.querySelector('[data-demo-dots]');
+  const kickerEl = root.querySelector('[data-demo-kicker]');
+  const titleEl = root.querySelector('[data-demo-title]');
+  const narrationEl = root.querySelector('[data-demo-narration]');
+  const hintEl = root.querySelector('[data-demo-hint]');
+  const stepsEl = root.querySelector('[data-demo-steps]');
   const prevBtn = root.querySelector('[data-demo-prev]');
   const nextBtn = root.querySelector('[data-demo-next]');
   const autoplayBtn = root.querySelector('[data-demo-autoplay]');
   const replayBtn = root.querySelector('[data-demo-replay]');
+
+  const screenEls = {
+    overview: root.querySelector('[data-demo-screen="overview"]'),
+    test: root.querySelector('[data-demo-screen="test"]'),
+    report: root.querySelector('[data-demo-screen="report"]'),
+  };
+
+  const annotEls = {
+    sync: root.querySelector('[data-annot="sync"]'),
+    fail: root.querySelector('[data-annot="fail"]'),
+    defects: root.querySelector('[data-annot="defects"]'),
+    issued: root.querySelector('[data-annot="issued"]'),
+  };
+
   const el018 = root.querySelector('[data-demo-row="el018"]');
   const el018Result = root.querySelector('[data-demo-el018-result]');
+  const el018Actions = root.querySelector('[data-demo-actions]');
+  const failBtn = root.querySelector('[data-demo-fail]');
+  const passBtn = root.querySelector('[data-demo-pass]');
+  const tapHint = root.querySelector('[data-demo-tap-hint]');
+  const previewEl018 = root.querySelector('[data-demo-preview-el018]');
+  const previewResult = root.querySelector('[data-demo-preview-result]');
   const defects = root.querySelector('[data-demo-defects]');
   const defectTitle = root.querySelector('[data-demo-defect-title]');
   const defectSub = root.querySelector('[data-demo-defect-sub]');
   const issued = root.querySelector('[data-demo-issued]');
+  const syncIcon = root.querySelector('[data-demo-sync]');
   const coda = root.querySelector('[data-demo-coda]');
   const codaRow = root.querySelector('[data-demo-coda-row]');
+
+  const failSheet = root.querySelector('[data-demo-fail-sheet]');
+  const notesText = root.querySelector('[data-demo-notes-text]');
+  const caret = root.querySelector('[data-demo-caret]');
+  const saveFailBtn = root.querySelector('[data-demo-save-fail]');
+  const reasonChips = Array.from(root.querySelectorAll('[data-reason]'));
 
   const DESKTOP_MQ = window.matchMedia('(min-width: 900px)');
   const REDUCE_MQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  const STEP_HOLD_MS = 2200;
-  const FAIL_PULSE_MS = 600;
-  const FAIL_MARK_MS = 1200;
+  const NOTES = 'Lamp failed to strike';
+  const STEP_HOLD_MS = 2800;
+
+  const STEPS = [
+    {
+      title: 'Open Riverside Court',
+      narration:
+        'You’re on site. Status and open defects sit at the top — so you know what you’re walking into before you test.',
+      hint: 'Or just watch — autoplay walks through it.',
+      screen: 'overview',
+      annot: 'sync',
+    },
+    {
+      title: 'Fail EL-018 Plant room',
+      narration:
+        'Tap Fail on a fitting, pick a fault reason, and save. The defect is logged with the test — not scribbled for later.',
+      hint: 'You can tap Fail on the phone, or let autoplay fill it in.',
+      screen: 'test',
+      annot: 'fail',
+    },
+    {
+      title: 'Defect stays on the site',
+      narration:
+        'Failed fittings don’t disappear when you leave. They stay on the site record until someone clears them.',
+      hint: 'Next shows how that visit becomes paperwork.',
+      screen: 'overview',
+      annot: 'defects',
+    },
+    {
+      title: 'Issue the visit report',
+      narration:
+        'When the visit is done, issue the report. Assessment and the fail travel with it — ready for the file.',
+      hint: 'This is stylised Field chrome, not a live login.',
+      screen: 'report',
+      annot: 'issued',
+    },
+    {
+      title: 'Office sees it',
+      narration:
+        'Back in Console, the same site shows needs attention — so the office isn’t waiting on a WhatsApp photo of a checklist.',
+      hint: 'Desktop only for this last beat.',
+      screen: 'report',
+      annot: null,
+    },
+  ];
+
+  let stepIndex = 0;
+  let autoplayOn = !REDUCE_MQ.matches;
+  let playing = false;
+  let inView = true;
+  let timers = [];
+  let completedTracked = false;
+  let failComplete = false;
+  let typingToken = 0;
 
   function trackDemo(name) {
     if (!name) return;
@@ -53,30 +134,10 @@
     return desktopCodaEnabled() ? 5 : 4;
   }
 
-  function captions(index) {
-    const total = stepCount();
-    const titles = [
-      'Open Riverside Court',
-      'Fail EL-018 Plant room',
-      'Defect stays on the site',
-      'Issue the visit report',
-      'Office sees it',
-    ];
-    return `Step ${index + 1} of ${total} — ${titles[index]}`;
-  }
-
-  let stepIndex = 0;
-  let autoplayOn = !REDUCE_MQ.matches;
-  let playing = false;
-  let inView = true;
-  let pausedByHover = false;
-  let pausedByFocus = false;
-  let timers = [];
-  let completedTracked = false;
-
   function clearTimers() {
     timers.forEach((id) => clearTimeout(id));
     timers = [];
+    typingToken += 1;
   }
 
   function later(fn, ms) {
@@ -85,120 +146,185 @@
     return id;
   }
 
-  function resetFieldChrome() {
-    if (el018) {
-      el018.classList.remove('is-active', 'is-fail');
-      el018.classList.add('is-pending');
+  function setScreen(name) {
+    root.dataset.screen = name;
+    Object.entries(screenEls).forEach(([key, el]) => {
+      if (!el) return;
+      el.hidden = key !== name;
+    });
+  }
+
+  function setAnnot(name) {
+    Object.entries(annotEls).forEach(([key, el]) => {
+      if (!el) return;
+      el.hidden = key !== name;
+    });
+  }
+
+  function setFailSheetOpen(open) {
+    if (!failSheet) return;
+    failSheet.classList.toggle('is-open', open);
+    failSheet.setAttribute('aria-hidden', open ? 'false' : 'true');
+  }
+
+  function resetFailSheet() {
+    setFailSheetOpen(false);
+    reasonChips.forEach((chip) => chip.classList.remove('is-selected'));
+    if (notesText) notesText.textContent = '';
+    if (caret) caret.hidden = true;
+    if (saveFailBtn) {
+      saveFailBtn.disabled = true;
+      saveFailBtn.classList.remove('is-pulse');
     }
-    if (el018Result) el018Result.textContent = '—';
-    if (defects) defects.classList.remove('is-bump');
-    if (defectTitle) defectTitle.textContent = 'Open defects (2)';
-    if (defectSub) defectSub.textContent = 'EL-031 still open from last visit';
-    if (issued) issued.hidden = true;
+  }
+
+  function selectReason(label) {
+    reasonChips.forEach((chip) => {
+      chip.classList.toggle('is-selected', chip.getAttribute('data-reason') === label);
+    });
+    if (saveFailBtn && notesText && notesText.textContent.length > 0) {
+      saveFailBtn.disabled = false;
+    }
+  }
+
+  function typeNotes(text, done) {
+    if (!notesText) {
+      done?.();
+      return;
+    }
+    const token = ++typingToken;
+    notesText.textContent = '';
+    if (caret) caret.hidden = false;
+    let i = 0;
+
+    const tick = () => {
+      if (token !== typingToken) return;
+      if (i >= text.length) {
+        if (caret) caret.hidden = true;
+        if (saveFailBtn) saveFailBtn.disabled = false;
+        done?.();
+        return;
+      }
+      notesText.textContent += text[i];
+      i += 1;
+      later(tick, 28);
+    };
+
+    later(tick, 40);
+  }
+
+  function setEl018Failed(failed) {
+    failComplete = failed;
+    if (el018) {
+      el018.classList.toggle('is-fail', failed);
+      el018.classList.toggle('is-pending', !failed);
+      el018.classList.toggle('is-active', !failed && stepIndex === 1);
+    }
+    if (el018Actions) el018Actions.hidden = failed;
+    if (el018Result) el018Result.hidden = !failed;
+    if (tapHint) tapHint.hidden = failed;
+    if (failBtn) failBtn.classList.remove('is-pulse');
+
+    if (previewEl018) {
+      previewEl018.classList.toggle('is-fail', failed);
+      previewEl018.classList.toggle('is-pending', !failed);
+      previewEl018.classList.toggle('is-pass', false);
+    }
+    if (previewResult) previewResult.textContent = failed ? 'Fail' : '—';
+  }
+
+  function setDefectsOpen(open) {
+    if (defectTitle) defectTitle.textContent = open ? 'Open defects (3)' : 'Open defects (2)';
+    if (defectSub) {
+      defectSub.textContent = open
+        ? 'EL-018 Plant room — lamp failed to strike'
+        : 'EL-031 still open from last visit';
+    }
+    if (defects) defects.classList.toggle('is-spot', open && stepIndex === 2);
+  }
+
+  function resetChrome() {
+    resetFailSheet();
+    setEl018Failed(false);
+    setDefectsOpen(false);
+    if (defects) defects.classList.remove('is-bump', 'is-spot');
+    if (syncIcon) syncIcon.classList.remove('is-spot');
+    if (issued) issued.classList.remove('is-spot');
     if (coda) coda.setAttribute('aria-hidden', 'true');
     if (codaRow) codaRow.classList.remove('is-pulse');
   }
 
   function applyEndState(index) {
-    resetFieldChrome();
+    resetChrome();
+    const step = STEPS[index];
+    setScreen(step.screen);
+    setAnnot(step.annot);
 
-    if (index >= 1) {
-      if (el018) {
-        el018.classList.remove('is-pending', 'is-active');
-        el018.classList.add('is-fail');
-      }
-      if (el018Result) el018Result.textContent = 'Failed';
-    }
+    if (index >= 1) setEl018Failed(true);
+    if (index >= 2) setDefectsOpen(true);
 
-    if (index >= 2) {
-      if (defectTitle) defectTitle.textContent = 'Open defects (3)';
-      if (defectSub) defectSub.textContent = 'EL-018 Plant room — lamp failed to strike';
-    }
-
-    if (index >= 3) {
-      if (issued) issued.hidden = false;
-    }
+    if (index === 0 && syncIcon) syncIcon.classList.add('is-spot');
+    if (index === 2 && defects) defects.classList.add('is-spot');
+    if (index === 3 && issued) issued.classList.add('is-spot');
 
     if (index >= 4 && desktopCodaEnabled()) {
       if (coda) coda.setAttribute('aria-hidden', 'false');
     }
   }
 
-  function runStepTimeline(index) {
-    clearTimers();
-    applyEndState(index > 0 ? index - 1 : -1);
-    if (index === 0) resetFieldChrome();
+  function updateCopy() {
+    const total = stepCount();
+    const step = STEPS[stepIndex];
+    if (kickerEl) kickerEl.textContent = `Step ${stepIndex + 1} of ${total}`;
+    if (titleEl) titleEl.textContent = step.title;
+    if (narrationEl) narrationEl.textContent = step.narration;
+    if (hintEl) hintEl.textContent = step.hint;
+  }
 
-    const reduced = REDUCE_MQ.matches;
-    if (reduced) {
-      applyEndState(index);
-      scheduleAdvance();
-      return;
+  function buildSteps() {
+    if (!stepsEl) return;
+    const n = stepCount();
+    stepsEl.innerHTML = '';
+    for (let i = 0; i < n; i += 1) {
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'demo-tour__step';
+      btn.setAttribute('aria-current', i === stepIndex ? 'step' : 'false');
+      btn.innerHTML =
+        `<span class="demo-tour__step-num">${i + 1}</span>` +
+        `<span class="demo-tour__step-label">${STEPS[i].title}</span>`;
+      btn.addEventListener('click', () => {
+        trackDemo('demo_dot');
+        goTo(i, { instant: true });
+      });
+      li.appendChild(btn);
+      stepsEl.appendChild(li);
     }
+  }
 
-    if (index === 0) {
-      scheduleAdvance(4500);
-      return;
+  function updateControls() {
+    const last = stepCount() - 1;
+    if (prevBtn) prevBtn.disabled = stepIndex <= 0;
+    if (nextBtn) {
+      nextBtn.disabled = stepIndex >= last;
+      nextBtn.hidden = stepIndex >= last;
     }
-
-    if (index === 1) {
-      // Hero micro-anim: highlight EL-018 → mark Fail
-      resetFieldChrome();
-      later(() => {
-        if (el018) el018.classList.add('is-active');
-      }, FAIL_PULSE_MS);
-      later(() => {
-        if (el018) {
-          el018.classList.remove('is-pending', 'is-active');
-          el018.classList.add('is-fail');
-        }
-        if (el018Result) el018Result.textContent = 'Failed';
-      }, FAIL_MARK_MS);
-      later(() => scheduleAdvance(2000), FAIL_MARK_MS + 900);
-      return;
+    if (replayBtn) replayBtn.hidden = stepIndex < last;
+    if (autoplayBtn) {
+      autoplayBtn.setAttribute('aria-pressed', autoplayOn ? 'true' : 'false');
+      autoplayBtn.textContent = autoplayOn ? 'Autoplay on' : 'Autoplay off';
+      autoplayBtn.disabled = REDUCE_MQ.matches;
     }
-
-    if (index === 2) {
-      applyEndState(1);
-      later(() => {
-        if (defectTitle) defectTitle.textContent = 'Open defects (3)';
-        if (defectSub) defectSub.textContent = 'EL-018 Plant room — lamp failed to strike';
-        if (defects) defects.classList.add('is-bump');
-      }, 400);
-      later(() => {
-        if (defects) defects.classList.remove('is-bump');
-        scheduleAdvance(2000);
-      }, 1600);
-      return;
+    if (stepsEl) {
+      stepsEl.querySelectorAll('.demo-tour__step').forEach((btn, i) => {
+        btn.setAttribute('aria-current', i === stepIndex ? 'step' : 'false');
+      });
     }
-
-    if (index === 3) {
-      applyEndState(2);
-      later(() => {
-        if (issued) issued.hidden = false;
-      }, 300);
-      later(() => scheduleAdvance(2400), 900);
-      return;
-    }
-
-    if (index === 4) {
-      applyEndState(3);
-      if (coda) coda.setAttribute('aria-hidden', 'false');
-      later(() => {
-        if (codaRow) codaRow.classList.add('is-pulse');
-      }, 350);
-      later(() => {
-        if (codaRow) codaRow.classList.remove('is-pulse');
-        scheduleAdvance(0);
-      }, 2200);
-      return;
-    }
-
-    scheduleAdvance();
   }
 
   function canAutoplay() {
-    return autoplayOn && playing && inView && !pausedByHover && !pausedByFocus && !REDUCE_MQ.matches;
+    return autoplayOn && playing && inView && !REDUCE_MQ.matches;
   }
 
   function finishAutoplay() {
@@ -220,57 +346,126 @@
     later(() => goTo(stepIndex + 1, { fromAutoplay: true }), holdMs);
   }
 
-  function buildDots() {
-    if (!dotsEl) return;
-    const n = stepCount();
-    dotsEl.innerHTML = '';
-    for (let i = 0; i < n; i += 1) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'demo-tour__dot';
-      btn.setAttribute('role', 'tab');
-      btn.setAttribute('aria-label', `Go to step ${i + 1}`);
-      btn.setAttribute('aria-selected', i === stepIndex ? 'true' : 'false');
-      btn.addEventListener('click', () => {
-        trackDemo('demo_dot');
-        goTo(i, { instant: true });
-      });
-      dotsEl.appendChild(btn);
-    }
+  function completeFailFromSheet() {
+    setFailSheetOpen(false);
+    setEl018Failed(true);
+    if (el018) el018.classList.remove('is-active');
   }
 
-  function updateControls() {
-    const last = stepCount() - 1;
-    if (prevBtn) prevBtn.disabled = stepIndex <= 0;
-    if (nextBtn) {
-      nextBtn.disabled = stepIndex >= last;
-      nextBtn.hidden = stepIndex >= last;
+  function runFailAutofill(onDone) {
+    setScreen('test');
+    setAnnot('fail');
+    setEl018Failed(false);
+    resetFailSheet();
+    if (el018) el018.classList.add('is-active');
+    if (failBtn) failBtn.classList.add('is-pulse');
+
+    if (REDUCE_MQ.matches) {
+      selectReason('Lamp fault');
+      if (notesText) notesText.textContent = NOTES;
+      if (saveFailBtn) saveFailBtn.disabled = false;
+      completeFailFromSheet();
+      onDone?.();
+      return;
     }
-    if (replayBtn) replayBtn.hidden = stepIndex < last;
-    if (autoplayBtn) {
-      autoplayBtn.setAttribute('aria-pressed', autoplayOn ? 'true' : 'false');
-      autoplayBtn.textContent = autoplayOn ? 'Autoplay on' : 'Autoplay off';
-      autoplayBtn.disabled = REDUCE_MQ.matches;
-    }
-    if (dotsEl) {
-      dotsEl.querySelectorAll('.demo-tour__dot').forEach((dot, i) => {
-        dot.setAttribute('aria-selected', i === stepIndex ? 'true' : 'false');
+
+    later(() => {
+      if (failBtn) failBtn.classList.remove('is-pulse');
+      setFailSheetOpen(true);
+    }, 900);
+
+    later(() => {
+      selectReason('Lamp fault');
+    }, 1500);
+
+    later(() => {
+      typeNotes(NOTES, () => {
+        if (saveFailBtn) saveFailBtn.classList.add('is-pulse');
+        later(() => {
+          if (saveFailBtn) saveFailBtn.classList.remove('is-pulse');
+          completeFailFromSheet();
+          onDone?.();
+        }, 900);
       });
+    }, 1900);
+  }
+
+  function runStepTimeline(index) {
+    clearTimers();
+    const reduced = REDUCE_MQ.matches;
+
+    if (index === 0) {
+      applyEndState(0);
+      if (syncIcon && !reduced) {
+        later(() => syncIcon.classList.add('is-spot'), 300);
+      }
+      scheduleAdvance(4200);
+      return;
     }
+
+    if (index === 1) {
+      runFailAutofill(() => scheduleAdvance(2200));
+      return;
+    }
+
+    if (index === 2) {
+      applyEndState(1);
+      setScreen('overview');
+      setAnnot('defects');
+      later(() => {
+        setDefectsOpen(true);
+        if (defects) defects.classList.add('is-bump');
+      }, reduced ? 0 : 400);
+      later(() => {
+        if (defects) {
+          defects.classList.remove('is-bump');
+          defects.classList.add('is-spot');
+        }
+        scheduleAdvance(2400);
+      }, reduced ? 0 : 1600);
+      return;
+    }
+
+    if (index === 3) {
+      applyEndState(2);
+      setScreen('report');
+      setAnnot('issued');
+      later(() => {
+        if (issued) issued.classList.add('is-spot');
+        scheduleAdvance(2600);
+      }, reduced ? 0 : 450);
+      return;
+    }
+
+    if (index === 4) {
+      applyEndState(3);
+      setScreen('report');
+      setAnnot(null);
+      if (coda) coda.setAttribute('aria-hidden', 'false');
+      later(() => {
+        if (codaRow) codaRow.classList.add('is-pulse');
+      }, reduced ? 0 : 400);
+      later(() => {
+        if (codaRow) codaRow.classList.remove('is-pulse');
+        scheduleAdvance(0);
+      }, reduced ? 0 : 2400);
+      return;
+    }
+
+    scheduleAdvance();
   }
 
   function goTo(index, opts = {}) {
     const last = stepCount() - 1;
-    const next = Math.max(0, Math.min(last, index));
+    stepIndex = Math.max(0, Math.min(last, index));
     clearTimers();
-    stepIndex = next;
     root.dataset.step = String(stepIndex + 1);
-    if (captionEl) captionEl.textContent = captions(stepIndex);
+    updateCopy();
     updateControls();
 
     if (opts.instant || REDUCE_MQ.matches) {
       applyEndState(stepIndex);
-      if (stepIndex >= stepCount() - 1 && opts.fromAutoplay) {
+      if (stepIndex >= last && opts.fromAutoplay) {
         finishAutoplay();
         return;
       }
@@ -287,19 +482,42 @@
 
   function onViewportChange() {
     const last = stepCount() - 1;
-    if (stepIndex > last) {
-      goTo(last, { instant: true });
-      return;
-    }
-    buildDots();
-    if (captionEl) captionEl.textContent = captions(stepIndex);
+    buildSteps();
+    updateCopy();
     updateControls();
-    if (stepIndex === 4 && !desktopCodaEnabled()) {
-      goTo(3, { instant: true });
+    if (stepIndex > last || (stepIndex === 4 && !desktopCodaEnabled())) {
+      goTo(Math.min(stepIndex, last), { instant: true });
     }
   }
 
-  // Controls
+  function openFailInteractive() {
+    if (stepIndex !== 1 || failComplete) return;
+    trackDemo('demo_fail_tap');
+    clearTimers();
+    playing = false;
+    setFailSheetOpen(true);
+    if (failBtn) failBtn.classList.remove('is-pulse');
+    later(() => selectReason('Lamp fault'), REDUCE_MQ.matches ? 0 : 250);
+    later(() => {
+      typeNotes(NOTES, () => {
+        if (saveFailBtn) {
+          saveFailBtn.disabled = false;
+          saveFailBtn.classList.add('is-pulse');
+        }
+      });
+    }, REDUCE_MQ.matches ? 0 : 500);
+  }
+
+  function saveFailInteractive() {
+    if (stepIndex !== 1) return;
+    trackDemo('demo_fail_save');
+    clearTimers();
+    completeFailFromSheet();
+    playing = autoplayOn && inView;
+    if (canAutoplay()) scheduleAdvance(1600);
+    else updateControls();
+  }
+
   prevBtn?.addEventListener('click', () => {
     trackDemo('demo_prev');
     goTo(stepIndex - 1, { instant: true });
@@ -318,9 +536,11 @@
     clearTimers();
     if (autoplayOn) {
       playing = true;
-      pausedByFocus = false;
-      applyEndState(stepIndex);
-      scheduleAdvance(STEP_HOLD_MS);
+      if (stepIndex === 1 && !failComplete) runFailAutofill(() => scheduleAdvance(2200));
+      else {
+        applyEndState(stepIndex);
+        scheduleAdvance(STEP_HOLD_MS);
+      }
     } else {
       playing = false;
       applyEndState(stepIndex);
@@ -334,44 +554,54 @@
     goTo(0, { instant: false });
   });
 
-  function pausePlayback() {
-    clearTimers();
-    applyEndState(stepIndex);
-  }
-
-  // Pause on hover / focus within controls+stage
-  root.addEventListener('mouseenter', () => {
-    pausedByHover = true;
-    pausePlayback();
-  });
-  root.addEventListener('mouseleave', () => {
-    pausedByHover = false;
-    if (canAutoplay()) scheduleAdvance(STEP_HOLD_MS);
-  });
-  root.addEventListener('focusin', () => {
-    pausedByFocus = true;
-    pausePlayback();
-  });
-  root.addEventListener('focusout', (e) => {
-    if (root.contains(e.relatedTarget)) return;
-    pausedByFocus = false;
-    if (canAutoplay()) scheduleAdvance(STEP_HOLD_MS);
+  failBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openFailInteractive();
   });
 
-  // Off-screen pause
+  passBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Pass is decorative in the demo — nudge toward Fail
+    if (failBtn) failBtn.classList.add('is-pulse');
+  });
+
+  saveFailBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (saveFailBtn.disabled) return;
+    saveFailInteractive();
+  });
+
+  reasonChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      if (stepIndex !== 1) return;
+      selectReason(chip.getAttribute('data-reason'));
+      if (notesText && !notesText.textContent) {
+        typeNotes(NOTES, () => {
+          if (saveFailBtn) saveFailBtn.disabled = false;
+        });
+      } else if (saveFailBtn) {
+        saveFailBtn.disabled = false;
+      }
+    });
+  });
+
   const io = new IntersectionObserver(
     (entries) => {
       const entry = entries[0];
-      inView = !!(entry && entry.isIntersecting && entry.intersectionRatio > 0.2);
+      inView = !!(entry && entry.isIntersecting && entry.intersectionRatio > 0.15);
       if (!inView) {
-        pausePlayback();
+        clearTimers();
       } else if (autoplayOn && !REDUCE_MQ.matches) {
         playing = true;
-        applyEndState(stepIndex);
-        scheduleAdvance(STEP_HOLD_MS);
+        if (stepIndex === 1 && !failComplete) {
+          runFailAutofill(() => scheduleAdvance(2200));
+        } else {
+          applyEndState(stepIndex);
+          scheduleAdvance(STEP_HOLD_MS);
+        }
       }
     },
-    { threshold: [0, 0.2, 0.5] }
+    { threshold: [0, 0.15, 0.4] }
   );
   io.observe(root);
 
@@ -393,13 +623,13 @@
     }
   });
 
-  // Boot
   if (REDUCE_MQ.matches) {
     autoplayOn = false;
     playing = false;
   } else {
     playing = true;
   }
-  buildDots();
+
+  buildSteps();
   goTo(0, { instant: REDUCE_MQ.matches });
 })();
