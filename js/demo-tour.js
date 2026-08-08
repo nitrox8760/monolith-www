@@ -19,6 +19,7 @@
   const screenEls = {
     overview: root.querySelector('[data-demo-screen="overview"]'),
     test: root.querySelector('[data-demo-screen="test"]'),
+    console: root.querySelector('[data-demo-screen="console"]'),
   };
 
   const navItems = {
@@ -38,7 +39,6 @@
   const defectNew = root.querySelector('[data-demo-defect-new]');
   const snapDefects = root.querySelector('[data-demo-snap-defects]');
   const syncIcon = root.querySelector('[data-demo-sync]');
-  const coda = root.querySelector('[data-demo-coda]');
   const codaRow = root.querySelector('[data-demo-coda-row]');
   const toast = root.querySelector('[data-demo-toast]');
   const progressLabel = root.querySelector('[data-demo-progress-label]');
@@ -61,7 +61,6 @@
   const DESKTOP_MQ = window.matchMedia('(min-width: 900px)');
   const REDUCE_MQ = window.matchMedia('(prefers-reduced-motion: reduce)');
   const NOTES = 'Lamp failed to strike';
-  const STEP_HOLD_MS = 2800;
 
   const STEPS = [
     {
@@ -91,9 +90,9 @@
     {
       title: 'Office sees it',
       narration:
-        'In Console, the same site can show needs attention — so the office isn’t waiting on a photo of a paper checklist.',
-      tip: 'Console is the office side of the same site record',
-      screen: 'overview',
+        'Same site in Console — needs attention shows up for the office, without a photo of a paper checklist.',
+      tip: 'Console Sites list — Riverside Court needs attention',
+      screen: 'console',
       spot: null,
     },
   ];
@@ -251,9 +250,9 @@
       }
       notesText.textContent += text[i];
       i += 1;
-      later(tick, 26);
+      later(tick, 48);
     };
-    later(tick, 40);
+    later(tick, 80);
   }
 
   function setEl018Failed(failed) {
@@ -313,7 +312,6 @@
     setDefectsOpen(false);
     clearSpots();
     showToast(false);
-    if (coda) coda.setAttribute('aria-hidden', 'true');
     if (codaRow) codaRow.classList.remove('is-pulse');
   }
 
@@ -326,10 +324,6 @@
     if (index >= 1) setEl018Failed(true);
     if (index >= 2) setDefectsOpen(true);
     if (index === 1) clearSpots();
-
-    if (index >= 3 && desktopCodaEnabled()) {
-      if (coda) coda.setAttribute('aria-hidden', 'false');
-    }
   }
 
   function updateCopy() {
@@ -394,14 +388,14 @@
     }
   }
 
-  function scheduleAdvance(holdMs = STEP_HOLD_MS) {
+  function scheduleAdvance(holdMs) {
     if (!canAutoAdvance()) return;
     const last = stepCount() - 1;
     if (stepIndex >= last) {
       finishAutoplay();
       return;
     }
-    later(() => goTo(stepIndex + 1, { fromAutoplay: true }), holdMs);
+    later(() => goTo(stepIndex + 1), holdMs);
   }
 
   function completeFailFromSheet() {
@@ -409,7 +403,7 @@
     setEl018Failed(true);
     if (el018) el018.classList.remove('is-active');
     showToast(true);
-    later(() => showToast(false), 1600);
+    later(() => showToast(false), 2200);
   }
 
   function runFailAutofill(onDone) {
@@ -429,27 +423,33 @@
       return;
     }
 
+    // Let people notice FAIL before the sheet opens
     later(() => {
       if (failBtn) failBtn.classList.remove('is-pulse');
       setFailSheetOpen(true);
       if (reasonOptions) reasonOptions.hidden = false;
-    }, 800);
+    }, 1600);
 
-    later(() => selectReason('Lamp fault'), 1400);
+    // Pause on the open sheet, then pick a reason
+    later(() => selectReason('Lamp fault'), 2800);
 
+    // Brief beat after reason, then type notes slowly
     later(() => {
       typeNotes(NOTES, () => {
         later(() => {
           attachPhoto();
-          if (saveFailBtn) saveFailBtn.classList.add('is-pulse');
           later(() => {
-            if (saveFailBtn) saveFailBtn.classList.remove('is-pulse');
-            completeFailFromSheet();
-            onDone?.();
+            if (saveFailBtn) saveFailBtn.classList.add('is-pulse');
+            later(() => {
+              if (saveFailBtn) saveFailBtn.classList.remove('is-pulse');
+              completeFailFromSheet();
+              // Hold on the failed row + toast before leaving
+              later(() => onDone?.(), 2800);
+            }, 1200);
           }, 900);
-        }, 350);
+        }, 700);
       });
-    }, 1750);
+    }, 3600);
   }
 
   function runStepTimeline(index) {
@@ -458,17 +458,17 @@
 
     if (index === 0) {
       applyEndState(0);
-      scheduleAdvance(4200);
+      // First look at Overview — enough time to read status + tip
+      scheduleAdvance(6500);
       return;
     }
 
     if (index === 1) {
-      runFailAutofill(() => scheduleAdvance(2400));
+      runFailAutofill(() => scheduleAdvance(2000));
       return;
     }
 
     if (index === 2) {
-      // Start from failed checklist state, then reveal defect on overview
       resetChrome();
       setEl018Failed(true);
       setScreen('overview');
@@ -476,8 +476,9 @@
       later(() => {
         setDefectsOpen(true);
         if (defects) defects.classList.add('is-spot');
-        scheduleAdvance(2600);
-      }, reduced ? 0 : 450);
+        // Give time to notice the new defect row
+        scheduleAdvance(4800);
+      }, reduced ? 0 : 900);
       return;
     }
 
@@ -485,19 +486,18 @@
       resetChrome();
       setEl018Failed(true);
       setDefectsOpen(true);
-      setScreen('overview');
-      if (coda) coda.setAttribute('aria-hidden', 'false');
+      setScreen('console');
       later(() => {
         if (codaRow) codaRow.classList.add('is-pulse');
-      }, reduced ? 0 : 350);
+      }, reduced ? 0 : 600);
       later(() => {
         if (codaRow) codaRow.classList.remove('is-pulse');
         scheduleAdvance(0);
-      }, reduced ? 0 : 2400);
+      }, reduced ? 0 : 5200);
       return;
     }
 
-    scheduleAdvance();
+    scheduleAdvance(3000);
   }
 
   function goTo(index) {
@@ -639,7 +639,6 @@
         goTo(0);
         return;
       }
-      // Resume one-shot autoplay only if still active (paused by scroll-away)
       if (autoplayActive && !REDUCE_MQ.matches) {
         runStepTimeline(stepIndex);
       }
@@ -662,7 +661,6 @@
   buildSteps();
   updateCopy();
   updateControls();
-  // Start when in view (IO), or immediately if already visible
   if (REDUCE_MQ.matches) {
     autoplayActive = false;
     applyEndState(0);
