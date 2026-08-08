@@ -579,7 +579,7 @@
             later(() => {
               if (saveFailBtn) saveFailBtn.classList.remove('is-pulse');
               completeFailFromSheet();
-              later(() => onDone?.(), 2200);
+              later(() => onDone?.(), 900);
             }, 1000);
           }, 700);
         }, 550);
@@ -700,7 +700,7 @@
       later(() => {
         setDefectsOpen(true);
         if (defects) defects.classList.add('is-spot');
-        scheduleAdvance(3800);
+        scheduleAdvance(2800);
       }, reduced ? 0 : 1100);
       return;
     }
