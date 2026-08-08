@@ -36,6 +36,7 @@
   const codaSummary = root.querySelector('[data-demo-coda-summary]');
   const testNav = root.querySelector('[data-nav="test"]');
   const completeBtn = root.querySelector('[data-demo-complete]');
+  const completeFoot = root.querySelector('[data-demo-test-foot]');
 
   const rows = {
     el012: {
@@ -342,6 +343,7 @@
     if (progressPct) progressPct.textContent = `${pct}%`;
     if (progressBar) progressBar.style.width = `${pct}%`;
     if (groupCount) groupCount.textContent = `${n}/3 tested`;
+    if (completeFoot) completeFoot.hidden = n < 3;
   }
 
   function setRowPassed(key, passed) {

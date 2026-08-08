@@ -618,15 +618,15 @@ a {
   }
 }
 
-/* Playback only — the mock stage isn't selectable or clickable */
+/* Playback only — the mock stage isn't selectable, clickable, or hoverable */
 .demo-tour__stage {
   -webkit-user-select: none;
   user-select: none;
 }
 
-.demo-field,
-.demo-console-focus {
-  pointer-events: none;
+.demo-tour__stage * {
+  pointer-events: none !important;
+  cursor: default !important;
 }
 
 .demo-tour__phone-wrap {
@@ -899,6 +899,7 @@ a {
 
 .demo-field__body.is-shown {
   position: relative;
+  height: 100%;
   opacity: 1;
   visibility: visible;
   transform: none;
@@ -916,6 +917,7 @@ a {
 
 .demo-field__body.is-entering {
   position: relative;
+  height: 100%;
   opacity: 1;
   visibility: visible;
   transform: none;
@@ -1661,33 +1663,47 @@ a {
 }
 
 .demo-field__test-foot {
-  padding: 0.6rem 0.1rem 0.3rem;
+  padding: 0.7rem 0.1rem 0.3rem;
+}
+
+.demo-field__test-foot[hidden] {
+  display: none;
 }
 
 .demo-field__complete {
   appearance: none;
   border: 0;
   width: 100%;
-  border-radius: 0.55rem;
-  padding: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 0.65rem;
+  padding: 0.72rem;
   font: inherit;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.04em;
-  color: #f5f1ea;
-  background: #1a1714;
+  letter-spacing: 0.02em;
+  color: #1a1714;
+  background: linear-gradient(180deg, #d8b45e, #c9a24a);
+  box-shadow: 0 6px 16px rgb(201 162 74 / 0.35);
   transition:
-    transform 0.2s var(--ease),
-    box-shadow 0.2s var(--ease),
-    background 0.2s var(--ease),
-    color 0.2s var(--ease);
+    transform 0.18s var(--ease),
+    box-shadow 0.18s var(--ease),
+    filter 0.18s var(--ease);
+}
+
+.demo-field__complete svg {
+  width: 0.95rem;
+  height: 0.95rem;
 }
 
 .demo-field__complete.is-press {
   transform: scale(0.97);
-  background: #c9a24a;
-  color: #1a1714;
-  box-shadow: 0 0 0 3px rgb(201 162 74 / 0.3);
+  filter: brightness(0.94);
+  box-shadow:
+    inset 0 0 0 2px rgb(26 23 20 / 0.18),
+    0 3px 10px rgb(201 162 74 / 0.35);
 }
 
 .demo-field__toast {
