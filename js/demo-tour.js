@@ -882,10 +882,17 @@
     saveFailInteractive();
   });
 
+  const stageEl = root.querySelector('.demo-tour__stage') || root;
   const io = new IntersectionObserver(
     (entries) => {
       const entry = entries[0];
-      const nowInView = !!(entry && entry.isIntersecting && entry.intersectionRatio > 0.15);
+      // Only start/resume once the demo screen itself is (nearly) fully in view —
+      // not while the reader is still on the copy above it.
+      const ratio = entry ? entry.intersectionRatio : 0;
+      const rb = entry && entry.rootBounds;
+      const ir = entry && entry.intersectionRect;
+      const coversViewport = !!(rb && rb.height && ir && ir.height / rb.height >= 0.7);
+      const nowInView = !!(entry && entry.isIntersecting && (ratio >= 0.8 || coversViewport));
       if (!nowInView) {
         inView = false;
         clearTimers();
@@ -900,9 +907,9 @@
         runStepTimeline(stepIndex);
       }
     },
-    { threshold: [0, 0.15, 0.4] }
+    { threshold: [0, 0.5, 0.8, 1] }
   );
-  io.observe(root);
+  io.observe(stageEl);
 
   DESKTOP_MQ.addEventListener('change', onViewportChange);
   REDUCE_MQ.addEventListener('change', () => {
