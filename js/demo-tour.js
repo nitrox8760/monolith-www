@@ -1,6 +1,5 @@
 /**
- * Field-led homepage demo stepper.
- * Side narration + fail-sheet autofill + light annotations.
+ * Field-led homepage demo — simplified real Field flow.
  */
 (function () {
   const root = document.querySelector('[data-demo-root]');
@@ -9,6 +8,7 @@
   const kickerEl = root.querySelector('[data-demo-kicker]');
   const titleEl = root.querySelector('[data-demo-title]');
   const narrationEl = root.querySelector('[data-demo-narration]');
+  const tipTextEl = root.querySelector('[data-demo-tip-text]');
   const hintEl = root.querySelector('[data-demo-hint]');
   const stepsEl = root.querySelector('[data-demo-steps]');
   const prevBtn = root.querySelector('[data-demo-prev]');
@@ -19,41 +19,47 @@
   const screenEls = {
     overview: root.querySelector('[data-demo-screen="overview"]'),
     test: root.querySelector('[data-demo-screen="test"]'),
-    report: root.querySelector('[data-demo-screen="report"]'),
   };
 
-  const annotEls = {
-    sync: root.querySelector('[data-annot="sync"]'),
-    fail: root.querySelector('[data-annot="fail"]'),
-    defects: root.querySelector('[data-annot="defects"]'),
-    issued: root.querySelector('[data-annot="issued"]'),
+  const navItems = {
+    overview: root.querySelector('[data-nav="overview"]'),
+    test: root.querySelector('[data-nav="test"]'),
   };
 
   const el018 = root.querySelector('[data-demo-row="el018"]');
-  const el018Result = root.querySelector('[data-demo-el018-result]');
+  const el018Badge = root.querySelector('[data-demo-el018-badge]');
+  const el018Fault = root.querySelector('[data-demo-el018-fault]');
+  const el018Change = root.querySelector('[data-demo-el018-change]');
   const el018Actions = root.querySelector('[data-demo-actions]');
   const failBtn = root.querySelector('[data-demo-fail]');
   const passBtn = root.querySelector('[data-demo-pass]');
-  const tapHint = root.querySelector('[data-demo-tap-hint]');
-  const previewEl018 = root.querySelector('[data-demo-preview-el018]');
-  const previewResult = root.querySelector('[data-demo-preview-result]');
   const defects = root.querySelector('[data-demo-defects]');
   const defectTitle = root.querySelector('[data-demo-defect-title]');
-  const defectSub = root.querySelector('[data-demo-defect-sub]');
-  const issued = root.querySelector('[data-demo-issued]');
+  const defectNew = root.querySelector('[data-demo-defect-new]');
+  const snapDefects = root.querySelector('[data-demo-snap-defects]');
   const syncIcon = root.querySelector('[data-demo-sync]');
   const coda = root.querySelector('[data-demo-coda]');
   const codaRow = root.querySelector('[data-demo-coda-row]');
+  const toast = root.querySelector('[data-demo-toast]');
+  const progressLabel = root.querySelector('[data-demo-progress-label]');
+  const progressPct = root.querySelector('[data-demo-progress-pct]');
+  const progressBar = root.querySelector('[data-demo-progress-bar]');
+  const groupCount = root.querySelector('[data-demo-group-count]');
 
   const failSheet = root.querySelector('[data-demo-fail-sheet]');
+  const reasonSelect = root.querySelector('[data-demo-reason-select]');
+  const reasonLabel = root.querySelector('[data-demo-reason-label]');
+  const reasonOptions = root.querySelector('[data-demo-reasons]');
+  const reasonButtons = Array.from(root.querySelectorAll('[data-reason]'));
   const notesText = root.querySelector('[data-demo-notes-text]');
+  const notesPh = root.querySelector('[data-demo-notes-ph]');
   const caret = root.querySelector('[data-demo-caret]');
+  const photo = root.querySelector('[data-demo-photo]');
+  const photoSub = root.querySelector('[data-demo-photo-sub]');
   const saveFailBtn = root.querySelector('[data-demo-save-fail]');
-  const reasonChips = Array.from(root.querySelectorAll('[data-reason]'));
 
   const DESKTOP_MQ = window.matchMedia('(min-width: 900px)');
   const REDUCE_MQ = window.matchMedia('(prefers-reduced-motion: reduce)');
-
   const NOTES = 'Lamp failed to strike';
   const STEP_HOLD_MS = 2800;
 
@@ -61,42 +67,38 @@
     {
       title: 'Open Riverside Court',
       narration:
-        'You’re on site. Status and open defects sit at the top — so you know what you’re walking into before you test.',
+        'Overview is the site home — status for the period, and any open defects still on the register.',
+      tip: 'the sync icon — green when the site is up to date',
       hint: 'Or just watch — autoplay walks through it.',
       screen: 'overview',
-      annot: 'sync',
+      spot: 'sync',
     },
     {
-      title: 'Fail EL-018 Plant room',
+      title: 'Fail EL-018 on Test',
       narration:
-        'Tap Fail on a fitting, pick a fault reason, and save. The defect is logged with the test — not scribbled for later.',
-      hint: 'You can tap Fail on the phone, or let autoplay fill it in.',
+        'On Test, each fitting has PASS and FAIL. Fail opens Log failure — reason, optional notes, and a defect photo.',
+      tip: 'PASS / FAIL on the fitting row — same as in Field',
+      hint: 'Tap FAIL on the phone, or let autoplay fill the sheet.',
       screen: 'test',
-      annot: 'fail',
+      spot: 'fail',
     },
     {
       title: 'Defect stays on the site',
       narration:
-        'Failed fittings don’t disappear when you leave. They stay on the site record until someone clears them.',
-      hint: 'Next shows how that visit becomes paperwork.',
+        'After you save, the fail is on the checklist — and Open defects on Overview keeps it until it’s cleared.',
+      tip: 'Open defects — the new EL-018 row on the register',
+      hint: 'This is the bit that stops fails vanishing between visits.',
       screen: 'overview',
-      annot: 'defects',
-    },
-    {
-      title: 'Issue the visit report',
-      narration:
-        'When the visit is done, issue the report. Assessment and the fail travel with it — ready for the file.',
-      hint: 'This is stylised Field chrome, not a live login.',
-      screen: 'report',
-      annot: 'issued',
+      spot: 'defects',
     },
     {
       title: 'Office sees it',
       narration:
-        'Back in Console, the same site shows needs attention — so the office isn’t waiting on a WhatsApp photo of a checklist.',
+        'In Console, the same site can show needs attention — so the office isn’t waiting on a photo of a paper checklist.',
+      tip: 'Console is the office side of the same site record',
       hint: 'Desktop only for this last beat.',
-      screen: 'report',
-      annot: null,
+      screen: 'overview',
+      spot: null,
     },
   ];
 
@@ -108,6 +110,7 @@
   let completedTracked = false;
   let failComplete = false;
   let typingToken = 0;
+  let selectedReason = '';
 
   function trackDemo(name) {
     if (!name) return;
@@ -131,7 +134,7 @@
   }
 
   function stepCount() {
-    return desktopCodaEnabled() ? 5 : 4;
+    return desktopCodaEnabled() ? 4 : 3;
   }
 
   function clearTimers() {
@@ -149,15 +152,10 @@
   function setScreen(name) {
     root.dataset.screen = name;
     Object.entries(screenEls).forEach(([key, el]) => {
-      if (!el) return;
-      el.hidden = key !== name;
+      if (el) el.hidden = key !== name;
     });
-  }
-
-  function setAnnot(name) {
-    Object.entries(annotEls).forEach(([key, el]) => {
-      if (!el) return;
-      el.hidden = key !== name;
+    Object.entries(navItems).forEach(([key, el]) => {
+      if (el) el.classList.toggle('is-active', key === name);
     });
   }
 
@@ -167,24 +165,56 @@
     failSheet.setAttribute('aria-hidden', open ? 'false' : 'true');
   }
 
+  function showToast(show) {
+    if (!toast) return;
+    toast.hidden = !show;
+  }
+
   function resetFailSheet() {
     setFailSheetOpen(false);
-    reasonChips.forEach((chip) => chip.classList.remove('is-selected'));
+    selectedReason = '';
+    if (reasonOptions) reasonOptions.hidden = true;
+    if (reasonLabel) {
+      reasonLabel.textContent = 'Select fault reason';
+      reasonLabel.classList.add('is-placeholder');
+    }
+    if (reasonSelect) reasonSelect.classList.remove('is-filled');
+    reasonButtons.forEach((btn) => btn.classList.remove('is-selected'));
     if (notesText) notesText.textContent = '';
+    if (notesPh) notesPh.hidden = false;
     if (caret) caret.hidden = true;
+    if (photo) photo.classList.remove('is-ready');
+    if (photoSub) photoSub.textContent = 'Required when logging a new failure';
     if (saveFailBtn) {
       saveFailBtn.disabled = true;
       saveFailBtn.classList.remove('is-pulse');
     }
   }
 
+  function updateSaveEnabled() {
+    if (!saveFailBtn) return;
+    const hasPhoto = photo?.classList.contains('is-ready');
+    saveFailBtn.disabled = !(selectedReason && hasPhoto);
+  }
+
   function selectReason(label) {
-    reasonChips.forEach((chip) => {
-      chip.classList.toggle('is-selected', chip.getAttribute('data-reason') === label);
+    selectedReason = label;
+    reasonButtons.forEach((btn) => {
+      btn.classList.toggle('is-selected', btn.getAttribute('data-reason') === label);
     });
-    if (saveFailBtn && notesText && notesText.textContent.length > 0) {
-      saveFailBtn.disabled = false;
+    if (reasonLabel) {
+      reasonLabel.textContent = label;
+      reasonLabel.classList.remove('is-placeholder');
     }
+    if (reasonSelect) reasonSelect.classList.add('is-filled');
+    if (reasonOptions) reasonOptions.hidden = true;
+    updateSaveEnabled();
+  }
+
+  function attachPhoto() {
+    if (photo) photo.classList.add('is-ready');
+    if (photoSub) photoSub.textContent = 'Demo photo attached';
+    updateSaveEnabled();
   }
 
   function typeNotes(text, done) {
@@ -194,22 +224,20 @@
     }
     const token = ++typingToken;
     notesText.textContent = '';
+    if (notesPh) notesPh.hidden = true;
     if (caret) caret.hidden = false;
     let i = 0;
-
     const tick = () => {
       if (token !== typingToken) return;
       if (i >= text.length) {
         if (caret) caret.hidden = true;
-        if (saveFailBtn) saveFailBtn.disabled = false;
         done?.();
         return;
       }
       notesText.textContent += text[i];
       i += 1;
-      later(tick, 28);
+      later(tick, 26);
     };
-
     later(tick, 40);
   }
 
@@ -221,35 +249,55 @@
       el018.classList.toggle('is-active', !failed && stepIndex === 1);
     }
     if (el018Actions) el018Actions.hidden = failed;
-    if (el018Result) el018Result.hidden = !failed;
-    if (tapHint) tapHint.hidden = failed;
+    if (el018Badge) el018Badge.hidden = !failed;
+    if (el018Fault) el018Fault.hidden = !failed;
+    if (el018Change) el018Change.hidden = !failed;
     if (failBtn) failBtn.classList.remove('is-pulse');
 
-    if (previewEl018) {
-      previewEl018.classList.toggle('is-fail', failed);
-      previewEl018.classList.toggle('is-pending', !failed);
-      previewEl018.classList.toggle('is-pass', false);
+    if (failed) {
+      if (progressLabel) progressLabel.textContent = '3/3 tested';
+      if (progressPct) progressPct.textContent = '100%';
+      if (progressBar) progressBar.style.width = '100%';
+      if (groupCount) groupCount.textContent = '3/3 tested';
+    } else {
+      if (progressLabel) progressLabel.textContent = '2/3 tested';
+      if (progressPct) progressPct.textContent = '67%';
+      if (progressBar) progressBar.style.width = '67%';
+      if (groupCount) groupCount.textContent = '2/3 tested';
     }
-    if (previewResult) previewResult.textContent = failed ? 'Fail' : '—';
   }
 
   function setDefectsOpen(open) {
-    if (defectTitle) defectTitle.textContent = open ? 'Open defects (3)' : 'Open defects (2)';
-    if (defectSub) {
-      defectSub.textContent = open
-        ? 'EL-018 Plant room — lamp failed to strike'
-        : 'EL-031 still open from last visit';
+    if (defectTitle) defectTitle.textContent = open ? 'Open defects (2)' : 'Open defects (1)';
+    if (defectNew) {
+      defectNew.hidden = !open;
+      defectNew.classList.toggle('is-new', open);
+    }
+    if (snapDefects) {
+      snapDefects.innerHTML = open ? '<strong>2</strong> Open defects' : '<strong>1</strong> Open defect';
     }
     if (defects) defects.classList.toggle('is-spot', open && stepIndex === 2);
+  }
+
+  function clearSpots() {
+    if (syncIcon) syncIcon.classList.remove('is-spot');
+    if (defects) defects.classList.remove('is-spot');
+    if (failBtn) failBtn.classList.remove('is-pulse');
+  }
+
+  function applySpot(spot) {
+    clearSpots();
+    if (spot === 'sync' && syncIcon) syncIcon.classList.add('is-spot');
+    if (spot === 'fail' && failBtn && !failComplete) failBtn.classList.add('is-pulse');
+    if (spot === 'defects' && defects) defects.classList.add('is-spot');
   }
 
   function resetChrome() {
     resetFailSheet();
     setEl018Failed(false);
     setDefectsOpen(false);
-    if (defects) defects.classList.remove('is-bump', 'is-spot');
-    if (syncIcon) syncIcon.classList.remove('is-spot');
-    if (issued) issued.classList.remove('is-spot');
+    clearSpots();
+    showToast(false);
     if (coda) coda.setAttribute('aria-hidden', 'true');
     if (codaRow) codaRow.classList.remove('is-pulse');
   }
@@ -258,16 +306,13 @@
     resetChrome();
     const step = STEPS[index];
     setScreen(step.screen);
-    setAnnot(step.annot);
+    applySpot(step.spot);
 
     if (index >= 1) setEl018Failed(true);
     if (index >= 2) setDefectsOpen(true);
+    if (index === 1) clearSpots();
 
-    if (index === 0 && syncIcon) syncIcon.classList.add('is-spot');
-    if (index === 2 && defects) defects.classList.add('is-spot');
-    if (index === 3 && issued) issued.classList.add('is-spot');
-
-    if (index >= 4 && desktopCodaEnabled()) {
+    if (index >= 3 && desktopCodaEnabled()) {
       if (coda) coda.setAttribute('aria-hidden', 'false');
     }
   }
@@ -278,6 +323,7 @@
     if (kickerEl) kickerEl.textContent = `Step ${stepIndex + 1} of ${total}`;
     if (titleEl) titleEl.textContent = step.title;
     if (narrationEl) narrationEl.textContent = step.narration;
+    if (tipTextEl) tipTextEl.textContent = step.tip;
     if (hintEl) hintEl.textContent = step.hint;
   }
 
@@ -350,11 +396,12 @@
     setFailSheetOpen(false);
     setEl018Failed(true);
     if (el018) el018.classList.remove('is-active');
+    showToast(true);
+    later(() => showToast(false), 1600);
   }
 
   function runFailAutofill(onDone) {
     setScreen('test');
-    setAnnot('fail');
     setEl018Failed(false);
     resetFailSheet();
     if (el018) el018.classList.add('is-active');
@@ -363,7 +410,8 @@
     if (REDUCE_MQ.matches) {
       selectReason('Lamp fault');
       if (notesText) notesText.textContent = NOTES;
-      if (saveFailBtn) saveFailBtn.disabled = false;
+      if (notesPh) notesPh.hidden = true;
+      attachPhoto();
       completeFailFromSheet();
       onDone?.();
       return;
@@ -372,22 +420,24 @@
     later(() => {
       if (failBtn) failBtn.classList.remove('is-pulse');
       setFailSheetOpen(true);
-    }, 900);
+      if (reasonOptions) reasonOptions.hidden = false;
+    }, 800);
 
-    later(() => {
-      selectReason('Lamp fault');
-    }, 1500);
+    later(() => selectReason('Lamp fault'), 1400);
 
     later(() => {
       typeNotes(NOTES, () => {
-        if (saveFailBtn) saveFailBtn.classList.add('is-pulse');
         later(() => {
-          if (saveFailBtn) saveFailBtn.classList.remove('is-pulse');
-          completeFailFromSheet();
-          onDone?.();
-        }, 900);
+          attachPhoto();
+          if (saveFailBtn) saveFailBtn.classList.add('is-pulse');
+          later(() => {
+            if (saveFailBtn) saveFailBtn.classList.remove('is-pulse');
+            completeFailFromSheet();
+            onDone?.();
+          }, 900);
+        }, 350);
       });
-    }, 1900);
+    }, 1750);
   }
 
   function runStepTimeline(index) {
@@ -396,55 +446,33 @@
 
     if (index === 0) {
       applyEndState(0);
-      if (syncIcon && !reduced) {
-        later(() => syncIcon.classList.add('is-spot'), 300);
-      }
       scheduleAdvance(4200);
       return;
     }
 
     if (index === 1) {
-      runFailAutofill(() => scheduleAdvance(2200));
+      runFailAutofill(() => scheduleAdvance(2400));
       return;
     }
 
     if (index === 2) {
       applyEndState(1);
       setScreen('overview');
-      setAnnot('defects');
       later(() => {
         setDefectsOpen(true);
-        if (defects) defects.classList.add('is-bump');
-      }, reduced ? 0 : 400);
-      later(() => {
-        if (defects) {
-          defects.classList.remove('is-bump');
-          defects.classList.add('is-spot');
-        }
-        scheduleAdvance(2400);
-      }, reduced ? 0 : 1600);
+        if (defects) defects.classList.add('is-spot');
+        scheduleAdvance(2600);
+      }, reduced ? 0 : 500);
       return;
     }
 
     if (index === 3) {
       applyEndState(2);
-      setScreen('report');
-      setAnnot('issued');
-      later(() => {
-        if (issued) issued.classList.add('is-spot');
-        scheduleAdvance(2600);
-      }, reduced ? 0 : 450);
-      return;
-    }
-
-    if (index === 4) {
-      applyEndState(3);
-      setScreen('report');
-      setAnnot(null);
+      setScreen('overview');
       if (coda) coda.setAttribute('aria-hidden', 'false');
       later(() => {
         if (codaRow) codaRow.classList.add('is-pulse');
-      }, reduced ? 0 : 400);
+      }, reduced ? 0 : 350);
       later(() => {
         if (codaRow) codaRow.classList.remove('is-pulse');
         scheduleAdvance(0);
@@ -485,9 +513,7 @@
     buildSteps();
     updateCopy();
     updateControls();
-    if (stepIndex > last || (stepIndex === 4 && !desktopCodaEnabled())) {
-      goTo(Math.min(stepIndex, last), { instant: true });
-    }
+    if (stepIndex > last) goTo(last, { instant: true });
   }
 
   function openFailInteractive() {
@@ -497,24 +523,16 @@
     playing = false;
     setFailSheetOpen(true);
     if (failBtn) failBtn.classList.remove('is-pulse');
-    later(() => selectReason('Lamp fault'), REDUCE_MQ.matches ? 0 : 250);
-    later(() => {
-      typeNotes(NOTES, () => {
-        if (saveFailBtn) {
-          saveFailBtn.disabled = false;
-          saveFailBtn.classList.add('is-pulse');
-        }
-      });
-    }, REDUCE_MQ.matches ? 0 : 500);
+    if (reasonOptions) reasonOptions.hidden = false;
   }
 
   function saveFailInteractive() {
-    if (stepIndex !== 1) return;
+    if (stepIndex !== 1 || saveFailBtn?.disabled) return;
     trackDemo('demo_fail_save');
     clearTimers();
     completeFailFromSheet();
     playing = autoplayOn && inView;
-    if (canAutoplay()) scheduleAdvance(1600);
+    if (canAutoplay()) scheduleAdvance(1800);
     else updateControls();
   }
 
@@ -536,7 +554,7 @@
     clearTimers();
     if (autoplayOn) {
       playing = true;
-      if (stepIndex === 1 && !failComplete) runFailAutofill(() => scheduleAdvance(2200));
+      if (stepIndex === 1 && !failComplete) runFailAutofill(() => scheduleAdvance(2400));
       else {
         applyEndState(stepIndex);
         scheduleAdvance(STEP_HOLD_MS);
@@ -561,41 +579,47 @@
 
   passBtn?.addEventListener('click', (e) => {
     e.preventDefault();
-    // Pass is decorative in the demo — nudge toward Fail
     if (failBtn) failBtn.classList.add('is-pulse');
+  });
+
+  reasonSelect?.addEventListener('click', () => {
+    if (stepIndex !== 1 || !failSheet?.classList.contains('is-open')) return;
+    if (reasonOptions) reasonOptions.hidden = !reasonOptions.hidden;
+  });
+
+  reasonButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (stepIndex !== 1) return;
+      selectReason(btn.getAttribute('data-reason'));
+      if (notesText && !notesText.textContent) {
+        typeNotes(NOTES, () => {
+          if (!photo?.classList.contains('is-ready')) attachPhoto();
+        });
+      } else if (!photo?.classList.contains('is-ready')) {
+        attachPhoto();
+      }
+    });
+  });
+
+  photo?.addEventListener('click', () => {
+    if (stepIndex !== 1 || !failSheet?.classList.contains('is-open')) return;
+    attachPhoto();
   });
 
   saveFailBtn?.addEventListener('click', (e) => {
     e.preventDefault();
-    if (saveFailBtn.disabled) return;
     saveFailInteractive();
-  });
-
-  reasonChips.forEach((chip) => {
-    chip.addEventListener('click', () => {
-      if (stepIndex !== 1) return;
-      selectReason(chip.getAttribute('data-reason'));
-      if (notesText && !notesText.textContent) {
-        typeNotes(NOTES, () => {
-          if (saveFailBtn) saveFailBtn.disabled = false;
-        });
-      } else if (saveFailBtn) {
-        saveFailBtn.disabled = false;
-      }
-    });
   });
 
   const io = new IntersectionObserver(
     (entries) => {
       const entry = entries[0];
       inView = !!(entry && entry.isIntersecting && entry.intersectionRatio > 0.15);
-      if (!inView) {
-        clearTimers();
-      } else if (autoplayOn && !REDUCE_MQ.matches) {
+      if (!inView) clearTimers();
+      else if (autoplayOn && !REDUCE_MQ.matches) {
         playing = true;
-        if (stepIndex === 1 && !failComplete) {
-          runFailAutofill(() => scheduleAdvance(2200));
-        } else {
+        if (stepIndex === 1 && !failComplete) runFailAutofill(() => scheduleAdvance(2400));
+        else {
           applyEndState(stepIndex);
           scheduleAdvance(STEP_HOLD_MS);
         }

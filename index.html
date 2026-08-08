@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/site.css?v=20260808d" />
+  <link rel="stylesheet" href="/css/site.css?v=20260808e" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -419,10 +419,9 @@
     <section class="section section--elevated" id="demo">
       <div class="section__inner reveal">
         <p class="section__label">See it move</p>
-        <h2 class="section__title">A short visit, from fail to paperwork.</h2>
+        <h2 class="section__title">A short visit, from fail to the site register.</h2>
         <p class="section__lede">
-          An interactive walkthrough of Field — no account needed. Watch a fitting fail, a defect stay open, and the
-          visit report get issued.
+          A simplified walkthrough of the real Field flow — same screens you’d use on site, no account needed.
         </p>
 
         <div class="demo-tour" data-demo-root data-step="1" data-screen="overview">
@@ -431,8 +430,11 @@
               <p class="demo-tour__kicker" data-demo-kicker>Step 1 of 4</p>
               <h3 class="demo-tour__heading" data-demo-title>Open Riverside Court</h3>
               <p class="demo-tour__narration" data-demo-narration aria-live="polite">
-                You’re on site. Status and open defects sit at the top — so you know what you’re walking into before you
-                test.
+                Overview is the site home — status for the period, and any open defects still on the register.
+              </p>
+              <p class="demo-tour__tip" data-demo-tip>
+                <span class="demo-tour__tip-label">Look for</span>
+                <span data-demo-tip-text>the sync icon — green when the site is up to date</span>
               </p>
 
               <ol class="demo-tour__steps" data-demo-steps aria-label="Demo steps"></ol>
@@ -457,7 +459,7 @@
               </div>
 
               <p class="demo-tour__hint" data-demo-hint>Or just watch — autoplay walks through it.</p>
-              <p class="demo-tour__note">Demo only — your real sites stay in the app.</p>
+              <p class="demo-tour__note">Demo only — simplified Field chrome, not a live login.</p>
 
               <div class="demo-tour__cta">
                 <a
@@ -471,28 +473,11 @@
 
             <div class="demo-tour__stage-col">
               <div class="demo-tour__stage">
-                <div class="demo-annot demo-annot--sync" data-annot="sync" hidden>
-                  <span class="demo-annot__arrow" aria-hidden="true"></span>
-                  <p>Sync — catches up when you’re back online</p>
-                </div>
-                <div class="demo-annot demo-annot--fail" data-annot="fail" hidden>
-                  <span class="demo-annot__arrow" aria-hidden="true"></span>
-                  <p>Fail opens a short log — reason stays with the fitting</p>
-                </div>
-                <div class="demo-annot demo-annot--defects" data-annot="defects" hidden>
-                  <span class="demo-annot__arrow" aria-hidden="true"></span>
-                  <p>Open defects stay on the site until they’re cleared</p>
-                </div>
-                <div class="demo-annot demo-annot--issued" data-annot="issued" hidden>
-                  <span class="demo-annot__arrow" aria-hidden="true"></span>
-                  <p>Issued locks the visit report for the file</p>
-                </div>
-
                 <div class="device device--phone demo-tour__phone">
                   <div class="device__screen">
                     <div class="demo-field" data-demo-field>
                       <header class="demo-field__header">
-                        <span class="demo-field__home" aria-hidden="true">
+                        <span class="demo-field__icon-btn" aria-hidden="true">
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z" />
                           </svg>
@@ -509,127 +494,164 @@
 
                       <div class="demo-field__body" data-demo-screen="overview">
                         <div class="demo-field__panel">
-                          <p class="demo-field__label">Status</p>
+                          <p class="demo-field__panel-title">Status</p>
                           <div class="demo-field__status">
-                            <div class="demo-field__card demo-field__card--ok">Monthly · In progress</div>
-                            <div class="demo-field__card demo-field__card--warn">Annual · Due from Aug 2026</div>
+                            <div class="demo-field__card demo-field__card--progress">
+                              Monthly · In progress — Jul 2026
+                            </div>
+                            <div class="demo-field__card demo-field__card--warn">
+                              Annual · Due from Aug 2026
+                            </div>
                           </div>
                         </div>
 
                         <div class="demo-field__defects" data-demo-defects>
-                          <strong data-demo-defect-title>Open defects (2)</strong>
-                          <span data-demo-defect-sub>EL-031 still open from last visit</span>
-                        </div>
-
-                        <div class="demo-field__panel">
-                          <p class="demo-field__label">Monthly test</p>
-                          <ul class="demo-field__checks demo-field__checks--preview">
-                            <li class="is-pass">
-                              <span class="demo-field__mark"></span>
-                              <span>EL-012 Stair A</span>
-                              <strong>Pass</strong>
-                            </li>
-                            <li class="is-pending" data-demo-preview-el018>
-                              <span class="demo-field__mark"></span>
-                              <span>EL-018 Plant room</span>
-                              <strong data-demo-preview-result>—</strong>
-                            </li>
-                            <li class="is-pass">
-                              <span class="demo-field__mark"></span>
-                              <span>EL-024 Corridor B</span>
-                              <strong>Pass</strong>
-                            </li>
+                          <p class="demo-field__defects-title" data-demo-defect-title>Open defects (1)</p>
+                          <ul class="demo-field__defect-list">
+                            <li data-demo-defect-old>EL-031 — Indicator fault · Interim</li>
+                            <li data-demo-defect-new hidden>EL-018 — Lamp fault · Interim</li>
                           </ul>
                         </div>
-                      </div>
 
-                      <div class="demo-field__body" data-demo-screen="test" hidden>
-                        <div class="demo-field__panel">
-                          <p class="demo-field__label">Monthly test · Checklist</p>
-                          <ul class="demo-field__checks">
-                            <li class="is-pass">
-                              <span class="demo-field__mark"></span>
-                              <div class="demo-field__row-main">
-                                <span>EL-012 Stair A</span>
-                                <small>Lobby</small>
-                              </div>
-                              <strong>Pass</strong>
-                            </li>
-                            <li class="is-pending is-active" data-demo-row="el018">
-                              <span class="demo-field__mark"></span>
-                              <div class="demo-field__row-main">
-                                <span>EL-018 Plant room</span>
-                                <small>Basement</small>
-                              </div>
-                              <div class="demo-field__actions" data-demo-actions>
-                                <button type="button" class="demo-field__pass" data-demo-pass tabindex="-1">
-                                  Pass
-                                </button>
-                                <button type="button" class="demo-field__fail" data-demo-fail>
-                                  Fail
-                                </button>
-                              </div>
-                              <strong class="demo-field__result" data-demo-el018-result hidden>Fail</strong>
-                            </li>
-                            <li class="is-pass">
-                              <span class="demo-field__mark"></span>
-                              <div class="demo-field__row-main">
-                                <span>EL-024 Corridor B</span>
-                                <small>Floor 2</small>
-                              </div>
-                              <strong>Pass</strong>
-                            </li>
-                          </ul>
-                          <p class="demo-field__tap-hint" data-demo-tap-hint>Tap <strong>Fail</strong> on EL-018 — or watch autoplay.</p>
-                        </div>
-                      </div>
-
-                      <div class="demo-field__body" data-demo-screen="report" hidden>
-                        <div class="demo-field__issued" data-demo-issued>
-                          <span class="demo-field__issued-badge">Issued</span>
-                          <strong>Visit inspection report</strong>
-                          <p>Ref PIR-A1B2C3D4 · Locked · 14 Jul 2026</p>
-                          <div class="demo-field__mini-doc">
-                            <div class="demo-field__mini-doc-bar">C · Overall assessment</div>
-                            <div class="demo-field__mini-doc-assess">UNSATISFACTORY</div>
-                            <p class="demo-field__mini-doc-note">EL-018 Plant room — lamp failed to strike</p>
+                        <div class="demo-field__panel demo-field__panel--muted">
+                          <p class="demo-field__panel-title">Site snapshot</p>
+                          <div class="demo-field__snapshot">
+                            <span><strong>48</strong> Fittings</span>
+                            <span><strong>6</strong> Switches</span>
+                            <span data-demo-snap-defects><strong>1</strong> Open defect</span>
                           </div>
                         </div>
                       </div>
 
+                      <div class="demo-field__body" data-demo-screen="test" hidden>
+                        <div class="demo-field__sticky">
+                          <p class="demo-field__sticky-eye">July monthly test</p>
+                          <div class="demo-field__progress">
+                            <span data-demo-progress-label>2/3 tested</span>
+                            <span data-demo-progress-pct>67%</span>
+                          </div>
+                          <div class="demo-field__progress-track">
+                            <span class="demo-field__progress-bar" data-demo-progress-bar style="width: 67%"></span>
+                          </div>
+                        </div>
+
+                        <div class="demo-field__group">
+                          <div class="demo-field__group-head">
+                            <span class="demo-field__chev" aria-hidden="true">▾</span>
+                            <strong>Basement</strong>
+                            <span data-demo-group-count>2/3 tested</span>
+                          </div>
+
+                          <article class="demo-field__row is-pass">
+                            <div class="demo-field__row-top">
+                              <p class="demo-field__asset">EL-012</p>
+                              <span class="demo-field__badge demo-field__badge--pass">pass</span>
+                            </div>
+                            <p class="demo-field__area">Stair A</p>
+                            <p class="demo-field__change">Tap to change result</p>
+                          </article>
+
+                          <article class="demo-field__row is-pending is-active" data-demo-row="el018">
+                            <div class="demo-field__row-top">
+                              <p class="demo-field__asset">EL-018</p>
+                              <span class="demo-field__badge demo-field__badge--fail" data-demo-el018-badge hidden>fail</span>
+                            </div>
+                            <p class="demo-field__area">Plant room</p>
+                            <p class="demo-field__fault" data-demo-el018-fault hidden>Lamp fault</p>
+                            <div class="demo-field__actions" data-demo-actions>
+                              <button type="button" class="demo-field__pass" data-demo-pass tabindex="-1">PASS</button>
+                              <button type="button" class="demo-field__fail" data-demo-fail>FAIL</button>
+                            </div>
+                            <p class="demo-field__change" data-demo-el018-change hidden>Tap to change result</p>
+                          </article>
+
+                          <article class="demo-field__row is-pass">
+                            <div class="demo-field__row-top">
+                              <p class="demo-field__asset">EL-024</p>
+                              <span class="demo-field__badge demo-field__badge--pass">pass</span>
+                            </div>
+                            <p class="demo-field__area">Corridor B</p>
+                            <p class="demo-field__change">Tap to change result</p>
+                          </article>
+                        </div>
+                      </div>
+
                       <div class="demo-fail-sheet" data-demo-fail-sheet aria-hidden="true">
-                        <div class="demo-fail-sheet__backdrop" data-demo-fail-backdrop></div>
+                        <div class="demo-fail-sheet__backdrop"></div>
                         <div class="demo-fail-sheet__panel" role="dialog" aria-label="Log failure">
                           <div class="demo-fail-sheet__handle" aria-hidden="true"></div>
                           <header class="demo-fail-sheet__head">
-                            <strong>Log failure</strong>
-                            <span>EL-018 · Plant room</span>
+                            <div>
+                              <strong>Log failure</strong>
+                              <span>EL-018 · Plant room</span>
+                            </div>
+                            <span class="demo-fail-sheet__close" aria-hidden="true">×</span>
                           </header>
                           <label class="demo-fail-sheet__field">
                             <span>Fault reason</span>
-                            <div class="demo-fail-sheet__reasons" data-demo-reasons>
-                              <button type="button" class="demo-fail-sheet__chip" data-reason="Battery fault">
-                                Battery fault
-                              </button>
-                              <button type="button" class="demo-fail-sheet__chip" data-reason="Lamp fault">
-                                Lamp fault
-                              </button>
-                              <button type="button" class="demo-fail-sheet__chip" data-reason="Driver fault">
-                                Driver fault
-                              </button>
+                            <div class="demo-fail-sheet__select" data-demo-reason-select>
+                              <span data-demo-reason-label class="is-placeholder">Select fault reason</span>
+                            </div>
+                            <div class="demo-fail-sheet__options" data-demo-reasons hidden>
+                              <button type="button" data-reason="Battery fault">Battery fault</button>
+                              <button type="button" data-reason="Lamp fault">Lamp fault</button>
+                              <button type="button" data-reason="Driver fault">Driver fault</button>
                             </div>
                           </label>
                           <label class="demo-fail-sheet__field">
-                            <span>Visual notes</span>
+                            <span>Visual notes (optional)</span>
                             <div class="demo-fail-sheet__notes" data-demo-notes>
-                              <span data-demo-notes-text></span><span class="demo-fail-sheet__caret" data-demo-caret hidden></span>
+                              <span class="demo-fail-sheet__placeholder" data-demo-notes-ph
+                                >e.g. dirty, damaged, obscured</span
+                              >
+                              <span data-demo-notes-text></span
+                              ><span class="demo-fail-sheet__caret" data-demo-caret hidden></span>
                             </div>
                           </label>
+                          <div class="demo-fail-sheet__field">
+                            <span>Defect photo</span>
+                            <div class="demo-fail-sheet__photo" data-demo-photo>
+                              <strong>Take or upload photo</strong>
+                              <p data-demo-photo-sub>Required when logging a new failure</p>
+                            </div>
+                          </div>
                           <button type="button" class="demo-fail-sheet__save" data-demo-save-fail disabled>
                             Save failure
                           </button>
+                          <button type="button" class="demo-fail-sheet__cancel" tabindex="-1">Cancel</button>
                         </div>
                       </div>
+
+                      <div class="demo-field__toast" data-demo-toast hidden>Failure logged</div>
+
+                      <nav class="demo-field__nav" data-demo-nav aria-hidden="true">
+                        <span data-nav="overview" class="is-active">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+                          </svg>
+                          Overview
+                        </span>
+                        <span data-nav="test">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 3h6l1 3h4v15H4V6h4l1-3Zm3 6v7m-3.5-3.5L12 16l3.5-3.5" />
+                          </svg>
+                          Test
+                        </span>
+                        <span>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 3h8l4 4v14H7V3Zm8 0v4h4M9 13h6M9 17h4" />
+                          </svg>
+                          History
+                        </span>
+                        <span>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                              d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5Z"
+                            />
+                          </svg>
+                          Setup
+                        </span>
+                      </nav>
                     </div>
                   </div>
                 </div>
@@ -650,7 +672,7 @@
                     <span class="demo-coda__tone demo-coda__tone--ok">Up to date</span>
                   </div>
                 </div>
-                <p class="demo-coda__hint">Same visit, visible in the office.</p>
+                <p class="demo-coda__hint">Same site record, visible in the office.</p>
               </aside>
             </div>
           </div>
@@ -1199,7 +1221,7 @@
     </div>
   </footer>
 
-  <script src="/js/site.js?v=20260808d" defer></script>
-  <script src="/js/demo-tour.js?v=20260808d" defer></script>
+  <script src="/js/site.js?v=20260808e" defer></script>
+  <script src="/js/demo-tour.js?v=20260808e" defer></script>
 </body>
 </html>
