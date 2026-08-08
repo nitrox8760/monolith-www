@@ -881,33 +881,48 @@
   });
 
   const stageEl = root.querySelector('.demo-tour__stage') || root;
-  const io = new IntersectionObserver(
-    (entries) => {
-      const entry = entries[0];
-      // Only start/resume once the demo screen itself is (nearly) fully in view —
-      // not while the reader is still on the copy above it.
-      const ratio = entry ? entry.intersectionRatio : 0;
-      const rb = entry && entry.rootBounds;
-      const ir = entry && entry.intersectionRect;
-      const coversViewport = !!(rb && rb.height && ir && ir.height / rb.height >= 0.7);
-      const nowInView = !!(entry && entry.isIntersecting && (ratio >= 0.8 || coversViewport));
-      if (!nowInView) {
-        inView = false;
-        clearTimers();
-        return;
-      }
-      inView = true;
-      if (!hasStarted) {
-        goTo(0);
-        return;
-      }
-      if (autoplayActive && !REDUCE_MQ.matches) {
-        runStepTimeline(stepIndex);
-      }
-    },
-    { threshold: [0, 0.5, 0.8, 1] }
-  );
-  io.observe(stageEl);
+
+  // Decide visibility from real geometry rather than relying on IntersectionObserver
+  // ratio thresholds, which are unreliable on iOS Safari when the target (the phone)
+  // is tall relative to the viewport. Normalising by the smaller of the element or the
+  // viewport means a phone taller than the screen still counts once it fills it.
+  function stageVisibleEnough() {
+    const rect = stageEl.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+    if (!vh || !rect.height) return false;
+    const visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+    if (visible <= 0) return false;
+    return visible / Math.min(rect.height, vh) >= 0.6;
+  }
+
+  function evaluateInView() {
+    // Only start/resume once the demo screen itself is well in view — not while the
+    // reader is still on the copy above it.
+    if (!stageVisibleEnough()) {
+      inView = false;
+      clearTimers();
+      return;
+    }
+    inView = true;
+    if (!hasStarted) {
+      goTo(0);
+      return;
+    }
+    if (autoplayActive && !REDUCE_MQ.matches) {
+      runStepTimeline(stepIndex);
+    }
+  }
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(evaluateInView, {
+      threshold: [0, 0.2, 0.4, 0.6, 0.8, 1],
+    });
+    io.observe(stageEl);
+  } else {
+    evaluateInView();
+    window.addEventListener('scroll', evaluateInView, { passive: true });
+    window.addEventListener('resize', evaluateInView, { passive: true });
+  }
 
   DESKTOP_MQ.addEventListener('change', onViewportChange);
   REDUCE_MQ.addEventListener('change', () => {
