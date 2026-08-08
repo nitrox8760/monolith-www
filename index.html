@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/site.css?v=20260808b" />
+  <link rel="stylesheet" href="/css/site.css?v=20260808c" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -415,21 +415,139 @@
       </div>
     </section>
 
-    <!-- Product demo placeholder — HTML walkthrough comes next -->
+    <!-- Product demo — Field-led HTML stepper -->
     <section class="section section--elevated" id="demo">
       <div class="section__inner reveal">
         <p class="section__label">See it move</p>
         <h2 class="section__title">A short visit, from fail to paperwork.</h2>
         <p class="section__lede">
-          We’re building a crafted on-page walkthrough here — Field from fail to paperwork, without a screen recording.
-          The stage below is reserved for it.
+          An interactive walkthrough of Field — no account, no App Store. Watch a fitting fail, a defect stay open, and
+          the visit report get issued.
         </p>
-        <div class="demo-slot" data-demo-root>
-          <div class="demo-slot__stage" aria-hidden="true">
-            <div class="demo-slot__frame">
-              <span class="demo-slot__badge">Demo coming soon</span>
-              <p class="demo-slot__hint">HTML walkthrough · Visit, defect, then report</p>
+
+        <div class="demo-tour" data-demo-root data-step="1">
+          <p class="demo-tour__caption" data-demo-caption aria-live="polite">
+            Step 1 of 4 — Open Riverside Court
+          </p>
+
+          <div class="demo-tour__layout">
+            <div class="demo-tour__stage">
+              <div class="device device--phone demo-tour__phone" aria-hidden="true">
+                <div class="device__screen">
+                  <div class="demo-field" data-demo-field>
+                    <header class="demo-field__header">
+                      <span class="demo-field__home" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z" />
+                        </svg>
+                      </span>
+                      <span class="demo-field__title">Riverside Court</span>
+                      <span class="demo-field__sync" title="Synced" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path
+                            d="M21 12a9 9 0 0 0-15.5-6.3M3 4v5h5M3 12a9 9 0 0 0 15.5 6.3M21 20v-5h-5"
+                          />
+                        </svg>
+                      </span>
+                    </header>
+
+                    <div class="demo-field__panel" data-demo-panel="overview">
+                      <p class="demo-field__label">Status</p>
+                      <div class="demo-field__status">
+                        <div class="demo-field__card demo-field__card--ok">Monthly · In progress</div>
+                        <div class="demo-field__card demo-field__card--warn">Annual · Due from Aug 2026</div>
+                      </div>
+                    </div>
+
+                    <div class="demo-field__defects" data-demo-defects>
+                      <strong data-demo-defect-title>Open defects (2)</strong>
+                      <span data-demo-defect-sub>EL-031 still open from last visit</span>
+                    </div>
+
+                    <div class="demo-field__panel" data-demo-panel="checks">
+                      <p class="demo-field__label">Monthly test</p>
+                      <ul class="demo-field__checks">
+                        <li class="is-pass" data-demo-row="el012">
+                          <span class="demo-field__mark"></span>
+                          <span>EL-012 Stair A</span>
+                          <strong>Pass</strong>
+                        </li>
+                        <li class="is-pending" data-demo-row="el018">
+                          <span class="demo-field__mark"></span>
+                          <span>EL-018 Plant room</span>
+                          <strong data-demo-el018-result>—</strong>
+                        </li>
+                        <li class="is-pass" data-demo-row="el024">
+                          <span class="demo-field__mark"></span>
+                          <span>EL-024 Corridor B</span>
+                          <strong>Pass</strong>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="demo-field__issued" data-demo-issued hidden>
+                      <span class="demo-field__issued-badge">Issued</span>
+                      <strong>Visit inspection report</strong>
+                      <p>Ref PIR-A1B2C3D4 · Locked · 14 Jul 2026</p>
+                      <div class="demo-field__mini-doc">
+                        <div class="demo-field__mini-doc-bar">C · Overall assessment</div>
+                        <div class="demo-field__mini-doc-assess">UNSATISFACTORY</div>
+                        <p class="demo-field__mini-doc-note">EL-018 Plant room — lamp failed to strike</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <aside class="demo-coda" data-demo-coda aria-hidden="true">
+              <p class="demo-coda__label">Console</p>
+              <div class="demo-coda__card">
+                <div class="demo-coda__row demo-coda__row--head">
+                  <span>Site</span><span>Status</span>
+                </div>
+                <div class="demo-coda__row is-alert" data-demo-coda-row>
+                  <span>Riverside Court</span>
+                  <span class="demo-coda__tone">Needs attention</span>
+                </div>
+                <div class="demo-coda__row">
+                  <span>Harbour House</span>
+                  <span class="demo-coda__tone demo-coda__tone--ok">Up to date</span>
+                </div>
+              </div>
+              <p class="demo-coda__hint">Same visit, visible in the office.</p>
+            </aside>
+          </div>
+
+          <div class="demo-tour__controls">
+            <button type="button" class="demo-tour__btn" data-demo-prev aria-label="Previous step">Back</button>
+            <div class="demo-tour__dots" data-demo-dots role="tablist" aria-label="Demo steps"></div>
+            <button type="button" class="demo-tour__btn demo-tour__btn--primary" data-demo-next aria-label="Next step">
+              Next
+            </button>
+            <button
+              type="button"
+              class="demo-tour__btn demo-tour__btn--ghost"
+              data-demo-autoplay
+              aria-pressed="true"
+              aria-label="Toggle autoplay"
+            >
+              Autoplay on
+            </button>
+            <button type="button" class="demo-tour__btn demo-tour__btn--ghost" data-demo-replay hidden>
+              Replay
+            </button>
+          </div>
+
+          <p class="demo-tour__note">Demo only — your real sites stay in the app.</p>
+
+          <div class="demo-tour__cta">
+            <a
+              class="btn btn--primary"
+              data-cta="demo"
+              href="https://beacon.monolithcompliance.co.uk/login.html"
+              >Try Beacon free</a
+            >
           </div>
         </div>
       </div>
@@ -976,6 +1094,7 @@
     </div>
   </footer>
 
-  <script src="/js/site.js?v=20260808a" defer></script>
+  <script src="/js/site.js?v=20260808c" defer></script>
+  <script src="/js/demo-tour.js?v=20260808c" defer></script>
 </body>
 </html>
