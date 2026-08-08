@@ -1,5 +1,6 @@
 /**
  * Field-led homepage demo — simplified real Field flow.
+ * Autoplays once on first view; manual Back/Next always runs step animations.
  */
 (function () {
   const root = document.querySelector('[data-demo-root]');
@@ -13,7 +14,6 @@
   const stepsEl = root.querySelector('[data-demo-steps]');
   const prevBtn = root.querySelector('[data-demo-prev]');
   const nextBtn = root.querySelector('[data-demo-next]');
-  const autoplayBtn = root.querySelector('[data-demo-autoplay]');
   const replayBtn = root.querySelector('[data-demo-replay]');
 
   const screenEls = {
@@ -69,7 +69,6 @@
       narration:
         'Overview is the site home — status for the period, and any open defects still on the register.',
       tip: 'the sync icon — green when the site is up to date',
-      hint: 'Or just watch — autoplay walks through it.',
       screen: 'overview',
       spot: 'sync',
     },
@@ -78,7 +77,6 @@
       narration:
         'On Test, each fitting has PASS and FAIL. Fail opens Log failure — reason, optional notes, and a defect photo.',
       tip: 'PASS / FAIL on the fitting row — same as in Field',
-      hint: 'Tap FAIL on the phone, or let autoplay fill the sheet.',
       screen: 'test',
       spot: 'fail',
     },
@@ -87,7 +85,6 @@
       narration:
         'After you save, the fail is on the checklist — and Open defects on Overview keeps it until it’s cleared.',
       tip: 'Open defects — the new EL-018 row on the register',
-      hint: 'This is the bit that stops fails vanishing between visits.',
       screen: 'overview',
       spot: 'defects',
     },
@@ -96,16 +93,17 @@
       narration:
         'In Console, the same site can show needs attention — so the office isn’t waiting on a photo of a paper checklist.',
       tip: 'Console is the office side of the same site record',
-      hint: 'Desktop only for this last beat.',
       screen: 'overview',
       spot: null,
     },
   ];
 
   let stepIndex = 0;
-  let autoplayOn = !REDUCE_MQ.matches;
-  let playing = false;
+  /** One-shot guided play; false after finish or any user control click. */
+  let autoplayActive = !REDUCE_MQ.matches;
+  let autoplayFinished = false;
   let inView = true;
+  let hasStarted = false;
   let timers = [];
   let completedTracked = false;
   let failComplete = false;
@@ -147,6 +145,23 @@
     const id = setTimeout(fn, ms);
     timers.push(id);
     return id;
+  }
+
+  function stopAutoplay() {
+    if (!autoplayActive) {
+      clearTimers();
+      return;
+    }
+    autoplayActive = false;
+    clearTimers();
+    updateCopy();
+  }
+
+  function hintForState() {
+    if (REDUCE_MQ.matches) return 'Use Back and Next to step through the visit.';
+    if (autoplayActive) return 'Playing through once — click Back or Next anytime to take over.';
+    if (autoplayFinished) return 'Use Back and Next to step through again — animations still play.';
+    return 'Use Back and Next to explore — animations play on each step.';
   }
 
   function setScreen(name) {
@@ -324,7 +339,7 @@
     if (titleEl) titleEl.textContent = step.title;
     if (narrationEl) narrationEl.textContent = step.narration;
     if (tipTextEl) tipTextEl.textContent = step.tip;
-    if (hintEl) hintEl.textContent = step.hint;
+    if (hintEl) hintEl.textContent = hintForState();
   }
 
   function buildSteps() {
@@ -342,7 +357,7 @@
         `<span class="demo-tour__step-label">${STEPS[i].title}</span>`;
       btn.addEventListener('click', () => {
         trackDemo('demo_dot');
-        goTo(i, { instant: true });
+        userGoTo(i);
       });
       li.appendChild(btn);
       stepsEl.appendChild(li);
@@ -356,12 +371,7 @@
       nextBtn.disabled = stepIndex >= last;
       nextBtn.hidden = stepIndex >= last;
     }
-    if (replayBtn) replayBtn.hidden = stepIndex < last;
-    if (autoplayBtn) {
-      autoplayBtn.setAttribute('aria-pressed', autoplayOn ? 'true' : 'false');
-      autoplayBtn.textContent = autoplayOn ? 'Autoplay on' : 'Autoplay off';
-      autoplayBtn.disabled = REDUCE_MQ.matches;
-    }
+    if (replayBtn) replayBtn.hidden = !(autoplayFinished || stepIndex >= last);
     if (stepsEl) {
       stepsEl.querySelectorAll('.demo-tour__step').forEach((btn, i) => {
         btn.setAttribute('aria-current', i === stepIndex ? 'step' : 'false');
@@ -369,12 +379,14 @@
     }
   }
 
-  function canAutoplay() {
-    return autoplayOn && playing && inView && !REDUCE_MQ.matches;
+  function canAutoAdvance() {
+    return autoplayActive && inView && !REDUCE_MQ.matches;
   }
 
   function finishAutoplay() {
-    playing = false;
+    autoplayActive = false;
+    autoplayFinished = true;
+    updateCopy();
     updateControls();
     if (!completedTracked) {
       completedTracked = true;
@@ -383,7 +395,7 @@
   }
 
   function scheduleAdvance(holdMs = STEP_HOLD_MS) {
-    if (!canAutoplay()) return;
+    if (!canAutoAdvance()) return;
     const last = stepCount() - 1;
     if (stepIndex >= last) {
       finishAutoplay();
@@ -456,18 +468,23 @@
     }
 
     if (index === 2) {
-      applyEndState(1);
+      // Start from failed checklist state, then reveal defect on overview
+      resetChrome();
+      setEl018Failed(true);
       setScreen('overview');
+      applySpot(null);
       later(() => {
         setDefectsOpen(true);
         if (defects) defects.classList.add('is-spot');
         scheduleAdvance(2600);
-      }, reduced ? 0 : 500);
+      }, reduced ? 0 : 450);
       return;
     }
 
     if (index === 3) {
-      applyEndState(2);
+      resetChrome();
+      setEl018Failed(true);
+      setDefectsOpen(true);
       setScreen('overview');
       if (coda) coda.setAttribute('aria-hidden', 'false');
       later(() => {
@@ -483,29 +500,28 @@
     scheduleAdvance();
   }
 
-  function goTo(index, opts = {}) {
+  function goTo(index) {
     const last = stepCount() - 1;
     stepIndex = Math.max(0, Math.min(last, index));
     clearTimers();
     root.dataset.step = String(stepIndex + 1);
     updateCopy();
     updateControls();
+    hasStarted = true;
 
-    if (opts.instant || REDUCE_MQ.matches) {
+    if (REDUCE_MQ.matches) {
       applyEndState(stepIndex);
-      if (stepIndex >= last && opts.fromAutoplay) {
-        finishAutoplay();
-        return;
-      }
-      if (autoplayOn && !REDUCE_MQ.matches && inView) {
-        playing = true;
-        scheduleAdvance(opts.fromAutoplay ? STEP_HOLD_MS : 4500);
-      }
+      if (autoplayActive) finishAutoplay();
       return;
     }
 
-    playing = autoplayOn && inView;
     runStepTimeline(stepIndex);
+  }
+
+  function userGoTo(index) {
+    stopAutoplay();
+    autoplayFinished = true;
+    goTo(index);
   }
 
   function onViewportChange() {
@@ -513,14 +529,18 @@
     buildSteps();
     updateCopy();
     updateControls();
-    if (stepIndex > last) goTo(last, { instant: true });
+    if (stepIndex > last) {
+      stopAutoplay();
+      goTo(last);
+    }
   }
 
   function openFailInteractive() {
     if (stepIndex !== 1 || failComplete) return;
     trackDemo('demo_fail_tap');
-    clearTimers();
-    playing = false;
+    stopAutoplay();
+    autoplayFinished = true;
+    updateControls();
     setFailSheetOpen(true);
     if (failBtn) failBtn.classList.remove('is-pulse');
     if (reasonOptions) reasonOptions.hidden = false;
@@ -529,47 +549,29 @@
   function saveFailInteractive() {
     if (stepIndex !== 1 || saveFailBtn?.disabled) return;
     trackDemo('demo_fail_save');
-    clearTimers();
+    stopAutoplay();
+    autoplayFinished = true;
     completeFailFromSheet();
-    playing = autoplayOn && inView;
-    if (canAutoplay()) scheduleAdvance(1800);
-    else updateControls();
+    updateControls();
   }
 
   prevBtn?.addEventListener('click', () => {
     trackDemo('demo_prev');
-    goTo(stepIndex - 1, { instant: true });
+    userGoTo(stepIndex - 1);
   });
 
   nextBtn?.addEventListener('click', () => {
     trackDemo('demo_next');
-    goTo(stepIndex + 1, { instant: true });
-  });
-
-  autoplayBtn?.addEventListener('click', () => {
-    if (REDUCE_MQ.matches) return;
-    autoplayOn = !autoplayOn;
-    trackDemo('demo_autoplay');
-    updateControls();
-    clearTimers();
-    if (autoplayOn) {
-      playing = true;
-      if (stepIndex === 1 && !failComplete) runFailAutofill(() => scheduleAdvance(2400));
-      else {
-        applyEndState(stepIndex);
-        scheduleAdvance(STEP_HOLD_MS);
-      }
-    } else {
-      playing = false;
-      applyEndState(stepIndex);
-    }
+    userGoTo(stepIndex + 1);
   });
 
   replayBtn?.addEventListener('click', () => {
     trackDemo('demo_replay');
     completedTracked = false;
-    playing = autoplayOn;
-    goTo(0, { instant: false });
+    autoplayFinished = false;
+    autoplayActive = !REDUCE_MQ.matches;
+    updateCopy();
+    goTo(0);
   });
 
   failBtn?.addEventListener('click', (e) => {
@@ -579,17 +581,26 @@
 
   passBtn?.addEventListener('click', (e) => {
     e.preventDefault();
+    stopAutoplay();
+    autoplayFinished = true;
+    updateControls();
     if (failBtn) failBtn.classList.add('is-pulse');
   });
 
   reasonSelect?.addEventListener('click', () => {
     if (stepIndex !== 1 || !failSheet?.classList.contains('is-open')) return;
+    stopAutoplay();
+    autoplayFinished = true;
+    updateControls();
     if (reasonOptions) reasonOptions.hidden = !reasonOptions.hidden;
   });
 
   reasonButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       if (stepIndex !== 1) return;
+      stopAutoplay();
+      autoplayFinished = true;
+      updateControls();
       selectReason(btn.getAttribute('data-reason'));
       if (notesText && !notesText.textContent) {
         typeNotes(NOTES, () => {
@@ -603,6 +614,9 @@
 
   photo?.addEventListener('click', () => {
     if (stepIndex !== 1 || !failSheet?.classList.contains('is-open')) return;
+    stopAutoplay();
+    autoplayFinished = true;
+    updateControls();
     attachPhoto();
   });
 
@@ -614,15 +628,20 @@
   const io = new IntersectionObserver(
     (entries) => {
       const entry = entries[0];
-      inView = !!(entry && entry.isIntersecting && entry.intersectionRatio > 0.15);
-      if (!inView) clearTimers();
-      else if (autoplayOn && !REDUCE_MQ.matches) {
-        playing = true;
-        if (stepIndex === 1 && !failComplete) runFailAutofill(() => scheduleAdvance(2400));
-        else {
-          applyEndState(stepIndex);
-          scheduleAdvance(STEP_HOLD_MS);
-        }
+      const nowInView = !!(entry && entry.isIntersecting && entry.intersectionRatio > 0.15);
+      if (!nowInView) {
+        inView = false;
+        clearTimers();
+        return;
+      }
+      inView = true;
+      if (!hasStarted) {
+        goTo(0);
+        return;
+      }
+      // Resume one-shot autoplay only if still active (paused by scroll-away)
+      if (autoplayActive && !REDUCE_MQ.matches) {
+        runStepTimeline(stepIndex);
       }
     },
     { threshold: [0, 0.15, 0.4] }
@@ -632,28 +651,22 @@
   DESKTOP_MQ.addEventListener('change', onViewportChange);
   REDUCE_MQ.addEventListener('change', () => {
     if (REDUCE_MQ.matches) {
-      autoplayOn = false;
-      playing = false;
+      autoplayActive = false;
       clearTimers();
       applyEndState(stepIndex);
+      updateCopy();
       updateControls();
-    } else {
-      autoplayOn = true;
-      updateControls();
-      if (inView) {
-        playing = true;
-        goTo(stepIndex, { instant: false });
-      }
     }
   });
 
-  if (REDUCE_MQ.matches) {
-    autoplayOn = false;
-    playing = false;
-  } else {
-    playing = true;
-  }
-
   buildSteps();
-  goTo(0, { instant: REDUCE_MQ.matches });
+  updateCopy();
+  updateControls();
+  // Start when in view (IO), or immediately if already visible
+  if (REDUCE_MQ.matches) {
+    autoplayActive = false;
+    applyEndState(0);
+    hasStarted = true;
+    updateCopy();
+  }
 })();
