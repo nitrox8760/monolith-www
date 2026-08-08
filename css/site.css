@@ -719,9 +719,14 @@ html {
     justify-content: center;
   }
 
-  /* Console payoff becomes an in-flow card in place of the phone */
+  /* Console payoff becomes an in-flow card in place of the phone.
+     Reserve the phone's height so the page doesn't jump as it collapses. */
   .demo-tour.is-console-focus .demo-tour__stage {
     width: 100%;
+    min-height: 33rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   /* Phone collapses and fades as the Console card rises in — no hard cut */
@@ -2231,8 +2236,9 @@ html {
 @media (max-width: 899px) {
   .hero {
     min-height: auto;
-    padding-top: 5.75rem;
-    padding-bottom: 2.5rem;
+    /* Header clearance plus a gap that grows a little on taller phones */
+    padding-top: clamp(7rem, 4.75rem + 6svh, 9.5rem);
+    padding-bottom: 2.75rem;
   }
 }
 
