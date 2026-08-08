@@ -526,9 +526,9 @@
       scheduleAdvance(REDUCE_MQ.matches ? 0 : 1600);
       return;
     }
-    // Reveal the button, then show a clear press before moving on
+    // The button lives in the sticky top bar — scroll up so it's in view, then press
     const testBody = screenEls.test;
-    if (testBody) testBody.scrollTo({ top: testBody.scrollHeight, behavior: 'smooth' });
+    if (testBody) testBody.scrollTo({ top: 0, behavior: 'smooth' });
     later(() => completeBtn.classList.add('is-press'), 650);
     later(() => {
       completeBtn.classList.remove('is-press');

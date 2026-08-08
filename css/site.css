@@ -1403,6 +1403,9 @@ a {
 }
 
 .demo-field__sticky {
+  position: sticky;
+  top: 0;
+  z-index: 5;
   padding: 0.5rem 0.55rem 0.4rem;
   background: #fff;
   border-bottom: 1px solid #e4ddd2;
@@ -1671,7 +1674,7 @@ a {
 }
 
 .demo-field__test-foot {
-  padding: 0.7rem 0.1rem 0.3rem;
+  margin-top: 0.45rem;
 }
 
 .demo-field__test-foot[hidden] {
