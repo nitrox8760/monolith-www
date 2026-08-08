@@ -417,7 +417,7 @@
     clearSpots();
     showToast(false);
     setConsoleFocus(false);
-    if (codaRow) codaRow.classList.remove('is-pulse');
+    if (codaRow) codaRow.classList.remove('is-pulse', 'is-spotlight');
     if (sitesScroll) sitesScroll.scrollTop = 0;
   }
 

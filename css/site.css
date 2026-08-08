@@ -1528,7 +1528,8 @@ a {
   border-radius: 0.35rem;
   font-size: 0.5rem;
   font-weight: 800;
-  text-transform: lowercase;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .demo-field__badge--pass {
@@ -1578,11 +1579,6 @@ a {
 
 .demo-field__fail.is-pulse {
   animation: demo-fail-pulse 0.9s var(--ease) infinite;
-}
-
-.demo-field__badge {
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
 @keyframes demo-fail-pulse {
