@@ -748,22 +748,96 @@ html {
 
   .demo-tour.is-console-focus .demo-console-focus {
     display: block;
-    width: min(100%, 24rem);
+    width: min(100%, 30rem);
     margin-inline: auto;
     animation: demo-console-enter 0.55s var(--ease) 0.12s both;
   }
 
   .demo-console-focus__label {
     text-align: center;
+    font-size: 0.75rem;
   }
 
   .demo-tour.is-console-focus .demo-console-focus__shell {
     grid-template-columns: 1fr;
     min-height: 0;
+    border-radius: 1rem;
   }
 
   .demo-tour.is-console-focus .demo-console-focus__nav {
     display: none;
+  }
+
+  /* On mobile the Console is a standalone card, not a shrunken desktop overlay —
+     scale its type and spacing up so it reads properly at phone width. */
+  .demo-tour.is-console-focus .demo-console-focus__main {
+    padding: 0.9rem 0.95rem 1rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__top {
+    margin-bottom: 0.75rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__top p {
+    font-size: 0.62rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__top strong {
+    font-size: 1.35rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__top > span {
+    font-size: 0.78rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__summary {
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__summary > div {
+    padding: 0.5rem 0.55rem;
+    border-radius: 0.6rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__summary strong {
+    font-size: 1.15rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__summary span {
+    font-size: 0.6rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__toolbar {
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__search {
+    padding: 0.55rem 0.7rem;
+    font-size: 0.75rem;
+    border-radius: 0.55rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__add {
+    padding: 0.55rem 0.85rem;
+    font-size: 0.75rem;
+    border-radius: 0.55rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__table {
+    border-radius: 0.6rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__row {
+    grid-template-columns: 1.3fr 0.9fr 0.9fr;
+    gap: 0.5rem;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.75rem;
+  }
+
+  .demo-tour.is-console-focus .demo-console-focus__row--head {
+    font-size: 0.62rem;
   }
 }
 
