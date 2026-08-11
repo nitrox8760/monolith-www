@@ -1,0 +1,27 @@
+# Beacon by Monolith
+
+> Emergency lighting testing software for UK contractors. Test on site (even offline), keep a living site register, and issue BS 5266 paperwork from the visit — free in open beta.
+
+Monolith Compliance builds Beacon: Field (phone/tablet, offline-capable) for on-site monthly and annual emergency lighting tests, and Console (desktop) for sites, team, history, and certificates.
+
+## Site
+
+- [Home](https://www.monolithcompliance.co.uk/): Product overview, demo walkthrough, sample paperwork, FAQ
+- [Privacy](https://www.monolithcompliance.co.uk/privacy.html): Privacy notice
+- [Beacon app](https://beacon.monolithcompliance.co.uk/): Sign in / open beta product
+
+## Product facts
+
+- Audience: UK contractors, competent persons, multi-site managers doing BS 5266 emergency lighting work
+- Field: on-site testing, defects, history; works with no signal; add to home screen (no App Store)
+- Console: sites, team, audit history, organisation branding on PDFs
+- Paperwork: fitting test report, visit periodic inspection report, site periodic inspection and testing certificate
+- Import: bring fittings from an existing spreadsheet/logbook
+- Pricing: free in open beta; pricing announced before any charges
+- Not a BSI product certification; duty-holder remains responsible for fire-safety compliance
+- Contact: feedback@monolithcompliance.co.uk
+
+## Optional
+
+- [robots.txt](https://www.monolithcompliance.co.uk/robots.txt)
+- [sitemap.xml](https://www.monolithcompliance.co.uk/sitemap.xml)

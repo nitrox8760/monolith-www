@@ -9,6 +9,9 @@
     content="Beacon helps UK contractors test emergency lighting on site, keep a living logbook, and leave with the paperwork done — even with no signal. Free in open beta."
   />
   <link rel="canonical" href="https://www.monolithcompliance.co.uk/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.monolithcompliance.co.uk/" />
   <meta property="og:title" content="Beacon by Monolith — Emergency lighting testing that doesn’t fight you" />
@@ -19,19 +22,76 @@
   <meta property="og:image" content="https://www.monolithcompliance.co.uk/assets/og-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:site_name" content="Beacon by Monolith" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Beacon by Monolith — Emergency lighting testing that doesn’t fight you" />
+  <meta
+    name="twitter:description"
+    content="Test on site. Catch up later. Hand over paperwork you didn’t have to rewrite in the van. Free in open beta."
+  />
   <meta name="twitter:image" content="https://www.monolithcompliance.co.uk/assets/og-card.png" />
   <meta name="theme-color" content="#1a1714" />
   <link rel="icon" href="/assets/brand/pillar.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/site.css?v=20260809a" />
+  <link rel="stylesheet" href="/css/site.css?v=20260808y" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.monolithcompliance.co.uk/#organization",
+        "name": "Monolith Compliance",
+        "url": "https://www.monolithcompliance.co.uk/",
+        "email": "feedback@monolithcompliance.co.uk",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.monolithcompliance.co.uk/assets/brand/pillar.svg"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.monolithcompliance.co.uk/#website",
+        "url": "https://www.monolithcompliance.co.uk/",
+        "name": "Beacon by Monolith",
+        "description": "Beacon helps UK contractors test emergency lighting on site, keep a living logbook, and leave with the paperwork done — even with no signal. Free in open beta.",
+        "publisher": { "@id": "https://www.monolithcompliance.co.uk/#organization" },
+        "inLanguage": "en-GB"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://www.monolithcompliance.co.uk/#beacon",
+        "name": "Beacon",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web, iOS, Android",
+        "url": "https://beacon.monolithcompliance.co.uk/",
+        "description": "Emergency lighting testing for UK contractors: offline Field app for monthly and annual BS 5266 tests, Console for sites and certificates, and paperwork issued from the visit.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "GBP",
+          "description": "Free in open beta"
+        },
+        "publisher": { "@id": "https://www.monolithcompliance.co.uk/#organization" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.monolithcompliance.co.uk/#webpage",
+        "url": "https://www.monolithcompliance.co.uk/",
+        "name": "Beacon by Monolith — Emergency lighting testing that doesn’t fight you",
+        "description": "Beacon helps UK contractors test emergency lighting on site, keep a living logbook, and leave with the paperwork done — even with no signal. Free in open beta.",
+        "isPartOf": { "@id": "https://www.monolithcompliance.co.uk/#website" },
+        "about": { "@id": "https://www.monolithcompliance.co.uk/#beacon" },
+        "inLanguage": "en-GB"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.monolithcompliance.co.uk/#faq",
+        "isPartOf": { "@id": "https://www.monolithcompliance.co.uk/#webpage" },
+        "mainEntity": [
       {
         "@type": "Question",
         "name": "Does Beacon work when there’s no signal?",
@@ -95,6 +155,8 @@
           "@type": "Answer",
           "text": "Your organisation’s data is stored securely in Beacon’s cloud. On site, Field can keep the visit on the phone until you’re back online. See the privacy page for details."
         }
+      }
+        ]
       }
     ]
   }
@@ -1386,7 +1448,7 @@
     </div>
   </footer>
 
-  <script src="/js/site.js?v=20260809a" defer></script>
-  <script src="/js/demo-tour.js?v=20260809a" defer></script>
+  <script src="/js/site.js?v=20260808y" defer></script>
+  <script src="/js/demo-tour.js?v=20260808y" defer></script>
 </body>
 </html>
