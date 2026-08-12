@@ -38,7 +38,7 @@
       <p class="section__label">Legal</p>
       <h1 class="legal__title">Privacy notice</h1>
       <p class="legal__meta">
-        <strong>Version 1.1</strong> · Effective 7 August 2026 · Last updated 7 August 2026
+        <strong>Version 1.2</strong> · Effective 12 August 2026 · Last updated 12 August 2026
       </p>
       <p class="legal__lede">
         This notice explains how Samuel James, trading as Monolith Compliance (“<strong>we</strong>”, “<strong>us</strong>”,
@@ -51,9 +51,9 @@
         <ul>
           <li>We process account details and the site/test data you put into Beacon to run the service.</li>
           <li>Field can keep visit data on your device until you are back online.</li>
-          <li>We use trusted providers (including Supabase, Cloudflare, and Resend) to host and send mail.</li>
+          <li>Core cloud data is hosted in the EU (Ireland); we also use Cloudflare and Resend.</li>
+          <li>Organisation owners can export data or schedule account closure from Console Settings.</li>
           <li>We do not sell your data.</li>
-          <li>You can ask to access, correct, or delete your personal data — contact details below.</li>
         </ul>
       </aside>
 
@@ -250,13 +250,13 @@
             <tbody>
               <tr>
                 <td><strong>Supabase</strong> (Supabase Inc. / affiliated infrastructure)</td>
-                <td>Authentication, database, file storage, edge functions</td>
+                <td>Authentication, database, file storage, edge functions — project region <strong>AWS eu-west-1 (Ireland)</strong></td>
                 <td>Accounts, organisation/site/test data, media (for example photos and signatures), feedback records</td>
               </tr>
               <tr>
                 <td><strong>Cloudflare</strong></td>
-                <td>Hosting and delivery of the websites/app</td>
-                <td>Connection and security logs; static assets</td>
+                <td>Hosting and delivery of the websites/app; optional encrypted platform backup copies in Cloudflare R2</td>
+                <td>Connection and security logs; static assets; logical database backup files (not a substitute for your own exports)</td>
               </tr>
               <tr>
                 <td><strong>Resend</strong> (when feedback email notify is enabled)</td>
@@ -285,31 +285,34 @@
       <section class="legal__section" id="international">
         <h2>7. International transfers</h2>
         <p>
-          Our core application data is processed using Supabase and delivered via Cloudflare. Provider infrastructure
-          may involve processing outside the United Kingdom. Where personal data is transferred internationally, we rely
-          on appropriate safeguards recognised under UK data protection law (for example the UK International Data
+          Beacon’s primary application database, authentication, and file storage are hosted with Supabase in
+          <strong>AWS eu-west-1 (Ireland)</strong>, inside the European Economic Area. The app and marketing site are
+          delivered via Cloudflare. Provider infrastructure (including support tooling and email) may still involve
+          processing outside the United Kingdom. Where personal data is transferred internationally, we rely on
+          appropriate safeguards recognised under UK data protection law (for example the UK International Data
           Transfer Agreement / Addendum, or an adequacy regulation), as offered by our providers’ terms and
           configurations.
-        </p>
-        <p>
-          If you need more detail about the current hosting location for our Supabase project, contact us using the
-          address in section 14 and we will provide what we can from our provider settings.
         </p>
       </section>
 
       <section class="legal__section" id="retain">
         <h2>8. How long we keep data</h2>
+        <p>Current automated practice for Beacon’s open beta:</p>
         <ul>
-          <li><strong>Account data</strong> — while your account is active, and for a reasonable period afterward if needed to close the account securely or resolve disputes.</li>
-          <li><strong>Organisation / site / test / document records</strong> — while the organisation uses Beacon and as required for the product’s history and issued-document features. Issued reports and certificates are designed to remain as locked snapshots for audit integrity; deleting or closing an account may not automatically erase every historical artefact if your organisation still needs them — contact us to discuss deletion.</li>
-          <li><strong>On-device offline data</strong> — until synced, cleared, or removed with browser/app data.</li>
-          <li><strong>Feedback</strong> — for as long as useful to improve the product during beta and for a limited period afterward, unless you ask us to delete it sooner where we can.</li>
-          <li><strong>Security logs</strong> — for a limited period consistent with security and abuse prevention.</li>
+          <li><strong>Active organisation data</strong> — while the organisation uses Beacon.</li>
+          <li><strong>Soft-deleted sites and related records</strong> — recoverable for about <strong>90 days</strong>, then permanently removed by automated jobs (including associated file objects where applicable).</li>
+          <li><strong>Organisation closure</strong> — owners can schedule closure in Console; after about a <strong>14-day</strong> grace period we permanently delete the organisation’s cloud data, stored files under that organisation, and member sign-in accounts (except any Monolith staff accounts). You can cancel during the grace period. Export your data first if you need to keep compliance records.</li>
+          <li><strong>Customer activity / audit logs</strong> — about <strong>24 months</strong>, then removed.</li>
+          <li><strong>Staff / platform audit logs</strong> — about <strong>24 months</strong>.</li>
+          <li><strong>Product telemetry</strong> (performance samples and heartbeats) — about <strong>90 days</strong>.</li>
+          <li><strong>In-app feedback</strong> — about <strong>24 months</strong> (copies in email inboxes are outside automated deletion).</li>
+          <li><strong>Platform logical backups</strong> — weekly encrypted copies of database content to Cloudflare R2, kept about <strong>56 days</strong>. These do not include photo/signature binary files. After erasure, residual copies may remain until those backups expire.</li>
+          <li><strong>On-device offline data</strong> — until synced, cleared, or removed with browser/app data. Closing a cloud account does not wipe phones or laptops you control.</li>
         </ul>
         <p>
-          Soft-deleted records may remain recoverable for a period according to product design before permanent removal.
-          If you need a specific retention schedule for a procurement questionnaire, email us and we will confirm the
-          current practice in writing.
+          Issued reports and certificates are kept as locked snapshots while the organisation exists, for audit integrity.
+          Download what you need before requesting erasure. If you need a written retention schedule for procurement,
+          email us and we will confirm the current practice.
         </p>
       </section>
 
@@ -321,7 +324,10 @@
           <li>authentication and access control (including organisation roles and database access rules);</li>
           <li>hashed passwords via our auth provider;</li>
           <li>separation of customer organisations in the application data model;</li>
-          <li>careful handling of signature and media uploads.</li>
+          <li>private storage for photos and signatures;</li>
+          <li>automated retention and erasure jobs;</li>
+          <li>weekly logical database backups to Cloudflare R2 for disaster recovery (founding beta; not a full photo archive);</li>
+          <li>Monolith staff access only through a locked-down Staff Ops path that is audited (staff do not “log in as you”).</li>
         </ul>
         <p>
           No method of transmission or storage is perfectly secure. You can help by using a strong unique password,
@@ -342,6 +348,11 @@
           <li><strong>Withdraw consent</strong> — where processing is based on consent (not our main basis for core service data).</li>
         </ul>
         <p>
+          Organisation owners can also download an organisation data export and schedule organisation closure from
+          Beacon Console → Settings → Data &amp; privacy. Team members should ask their organisation owner for site-level
+          exports where appropriate.
+        </p>
+        <p>
           To exercise these rights, email
           <a href="mailto:feedback@monolithcompliance.co.uk?subject=Privacy%20request">feedback@monolithcompliance.co.uk</a>
           with enough detail for us to verify your identity and find the relevant records. We will respond within the
@@ -357,14 +368,17 @@
         <h2>11. Cookies and similar tech</h2>
         <h3>Marketing site (www.monolithcompliance.co.uk)</h3>
         <p>
-          The marketing site is primarily static. We may use essential storage needed for the site to function (for
-          example remembering a UI preference if we add one). We do not currently set advertising cookies.
+          The marketing site is primarily static. We may use essential cookies or similar storage required for security
+          and delivery (for example Cloudflare bot/security cookies). We do <strong>not</strong> currently load
+          third-party advertising or analytics cookies that would require a consent banner. If that changes, we will
+          update this notice and ask for consent where required.
         </p>
         <h3>Beacon app (beacon.monolithcompliance.co.uk)</h3>
         <p>
           Beacon uses essential local storage and similar technologies that are required to sign you in, keep preferences
           (for example theme), support offline Field use, and operate as an installable web app. These are necessary for
-          the service you request, not for advertising.
+          the service you request, not for advertising. No separate cookie consent popup is shown for these essential
+          technologies.
         </p>
       </section>
 
@@ -420,6 +434,7 @@
         <a href="https://beacon.monolithcompliance.co.uk/">Beacon app</a>
         <a href="/">Home</a>
         <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
         <a href="mailto:feedback@monolithcompliance.co.uk">Contact</a>
       </div>
     </div>
