@@ -92,7 +92,7 @@ html {
 
   .btn:hover,
   .topbar__cta:hover,
-  .paper-sample:hover .comp-doc {
+  .paper-sample:hover .paper-flip__frame {
     transform: none !important;
   }
 }
@@ -2717,7 +2717,7 @@ html {
 /* Decorative product/PDF chrome — read as screenshots, not copy */
 .device,
 .feature-band__visual,
-.comp-doc,
+.paper-flip__frame,
 .hero__phone-frame {
   -webkit-user-select: none;
   user-select: none;
@@ -3388,7 +3388,7 @@ html {
   margin-bottom: 0.15rem;
 }
 
-/* Sample paperwork — compliance chrome */
+/* Sample paperwork — real PDF page flips */
 .paper-samples {
   display: grid;
   gap: 2.5rem;
@@ -3422,226 +3422,99 @@ html {
   margin-bottom: 0.2rem;
 }
 
-.paper-sample figcaption code {
-  font-size: 0.78em;
-  font-weight: 600;
-  color: var(--ink-soft);
+.paper-sample__pdf {
+  display: inline-block;
+  margin-top: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
-.comp-doc {
+.paper-flip {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.paper-flip__frame {
+  position: relative;
   background: #fff;
   border: 1px solid #d0c7b8;
   border-radius: 0.25rem;
   box-shadow: 0 16px 36px rgb(26 23 20 / 0.1);
   overflow: hidden;
-  font-size: 0.68rem;
-  color: #1a1714;
   transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
 
-.paper-sample:hover .comp-doc {
+.paper-sample:hover .paper-flip__frame {
   transform: translateY(-4px) scale(1.012);
   box-shadow: 0 24px 48px rgb(26 23 20 / 0.16);
 }
 
-.comp-doc__rule {
-  height: 3px;
-  background: #1a1714;
-}
-
-.comp-doc__banner {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.75rem;
-  padding: 0.75rem 0.85rem 0.7rem 1rem;
-  background: #f5f1ea;
-  border-bottom: 1px solid #d0c7b8;
-  border-left: 4px solid #c9a24a;
-}
-
-.comp-doc__title {
-  margin: 0;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  line-height: 1.25;
-}
-
-.comp-doc__sub,
-.comp-doc__std {
-  margin: 0.2rem 0 0;
-  font-size: 0.58rem;
-  font-weight: 500;
-  color: #8a7a66;
-  line-height: 1.35;
-}
-
-.comp-doc__banner-side {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.1rem;
-  font-size: 0.58rem;
-  font-weight: 700;
-  color: #1a1714;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.comp-doc__sec {
-  padding: 0.55rem 0.85rem 0.35rem;
-}
-
-.comp-doc__bar {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin-bottom: 0.4rem;
-  padding: 0.28rem 0.4rem;
-  background: #1a1714;
-  color: #f5f1ea;
-  font-size: 0.62rem;
-  font-weight: 700;
-  border-left: 3px solid #c9a24a;
-}
-
-.comp-doc__bar--caps {
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.comp-doc__bar span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.1rem;
-  color: #f0d090;
-}
-
-.comp-doc__fields {
-  display: grid;
-  gap: 0.35rem;
-}
-
-.comp-doc__fields--2 {
-  grid-template-columns: 1fr 1fr;
-  gap: 0.35rem;
-}
-
-.comp-doc__field {
-  border: 1px solid #d0c7b8;
-  border-radius: 0.2rem;
-  padding: 0.3rem 0.4rem;
-  background: #faf7f2;
-}
-
-.comp-doc__field label {
+.paper-flip__img {
   display: block;
-  font-size: 0.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #8a7a66;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
 }
 
-.comp-doc__field p {
-  margin: 0.1rem 0 0;
-  font-size: 0.65rem;
-  font-weight: 650;
-  color: #1a1714;
-}
-
-.comp-doc__assess {
-  margin-bottom: 0.4rem;
-  padding: 0.45rem 0.55rem;
-  border-radius: 0.2rem;
-  border-left: 3px solid #c9a24a;
-  font-size: 0.78rem;
+.paper-flip__watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-28deg);
+  font-size: clamp(2.4rem, 8vw, 3.6rem);
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.12em;
+  color: rgb(26 23 20 / 0.07);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
 }
 
-.comp-doc__assess--ok {
-  background: #ecfdf5;
-  color: #166534;
-}
-
-.comp-doc__signoff {
-  margin-top: 0.4rem;
-  padding: 0.45rem 0.5rem;
-  background: #f5f1ea;
-  border: 1px solid #d0c7b8;
-  border-left: 3px solid #c9a24a;
+.paper-flip__toolbar {
   display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
-.comp-doc__signoff strong {
-  font-size: 0.55rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #8a7a66;
-}
-
-.comp-doc__signoff span {
-  font-size: 0.65rem;
+.paper-flip__meta {
+  font-size: 0.78rem;
   font-weight: 650;
+  color: var(--stone);
+  text-align: center;
+  flex: 1;
 }
 
-.comp-doc__decl {
-  margin: 0 0 0.35rem;
-  padding: 0.4rem 0.45rem;
-  border: 1px solid #d0c7b8;
-  background: #faf7f2;
-  font-size: 0.6rem;
-  font-weight: 500;
-  color: #3d342c;
-  line-height: 1.4;
+.paper-flip__nav {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--cream-hi);
+  color: var(--ink);
+  border-radius: 0.45rem;
+  padding: 0.45rem 0.75rem;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 5.5rem;
 }
 
-.comp-doc__table {
-  border: 1px solid #d0c7b8;
-  border-radius: 0.2rem;
-  overflow: hidden;
+.paper-flip__nav:hover:not(:disabled) {
+  background: var(--cream);
+  border-color: var(--ink-soft);
 }
 
-.comp-doc__trow {
-  display: grid;
-  grid-template-columns: 3.5rem 1fr;
-  gap: 0.35rem;
-  padding: 0.3rem 0.4rem;
-  border-top: 1px solid #d0c7b8;
-  font-weight: 600;
-  font-size: 0.6rem;
+.paper-flip__nav:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
-.comp-doc__trow--head {
-  border-top: 0;
-  background: #1a1714;
-  color: #f5f1ea;
-  font-size: 0.52rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.comp-doc__next {
-  margin: 0;
-  padding: 0.4rem 0.45rem;
-  border: 1px solid #d0c7b8;
-  background: #faf3e0;
-  font-size: 0.65rem;
-  font-weight: 600;
-}
-
-.comp-doc__footer {
-  margin-top: 0.35rem;
-  padding: 0.45rem 0.85rem 0.55rem;
-  border-top: 1px solid #d0c7b8;
-  font-size: 0.52rem;
-  font-weight: 600;
-  color: #8a7a66;
+.paper-flip__nav:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 /* Feature bands */

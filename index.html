@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/site.css?v=20260808y" />
+  <link rel="stylesheet" href="/css/site.css?v=20260815a" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -137,7 +137,7 @@
         "name": "What paperwork can I issue today?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "After a visit you can issue a fitting test report and a visit periodic inspection report. For the site you can issue a periodic inspection and testing certificate. Once something is issued and locked, it stays as signed."
+          "text": "After a visit you can issue a fitting test report and a visit periodic inspection report. For the site you can issue a periodic inspection and testing certificate. Once something is issued and signed, it stays as signed."
         }
       },
       {
@@ -1016,7 +1016,7 @@
           <h3 class="feature-band__title">Paperwork you can hand over before you leave</h3>
           <p>
             Fitting results, a visit inspection report, or a site certificate — each with its own reference. Once it’s
-            issued and locked, it stays that way. History keeps the trail.
+            issued and signed, it stays that way. You can always look back at what was handed over.
           </p>
           <ul class="feature-band__list">
             <li>Test report with the fittings you covered</li>
@@ -1027,8 +1027,8 @@
         <div class="feature-band__visual">
           <div class="feature-card feature-card--docs">
             <div><strong>Test report</strong><span>What passed and what didn’t</span></div>
-            <div><strong>Visit report</strong><span>Ref PIR-…</span></div>
-            <div><strong>Site certificate</strong><span>Ref BCN-…</span></div>
+            <div><strong>Visit report</strong><span>With its own reference</span></div>
+            <div><strong>Site certificate</strong><span>With its own reference</span></div>
           </div>
         </div>
       </div>
@@ -1138,125 +1138,91 @@
       </div>
     </section>
 
-    <!-- 7. Sample paperwork — proof climax -->
+    <!-- 7. Sample paperwork — real PDF renders -->
     <section class="section section--elevated" id="paperwork">
       <div class="section__inner reveal">
         <p class="section__label">The paperwork</p>
-        <h2 class="section__title">Real documents. Not a pretty mock that falls apart later.</h2>
+        <h2 class="section__title">Examples of the paperwork Beacon issues.</h2>
         <p class="section__lede">
-          These are the layouts Beacon issues from a visit — proper titles, references, lettered sections, and sign-off.
-          Once you lock a document, it stays as it was signed. No quiet rewrites after you’ve left site.
+          Flip through sample pages from a real Beacon visit. Once you issue and sign a document, it stays as signed.
         </p>
 
         <div class="paper-samples">
           <figure class="paper-sample">
-            <div class="comp-doc" aria-hidden="true">
-              <div class="comp-doc__rule"></div>
-              <header class="comp-doc__banner">
-                <div class="comp-doc__banner-main">
-                  <h3 class="comp-doc__title">Emergency Lighting Periodic Inspection Report</h3>
-                  <p class="comp-doc__sub">Issued with Monolith Beacon · visit record for an existing installation</p>
-                  <p class="comp-doc__std">BS 5266-1 · BS EN 50172 / BS 5266-8</p>
-                </div>
-                <div class="comp-doc__banner-side">
-                  <span>Beacon report</span>
-                  <span>Page 1</span>
-                  <span>Ref: PIR-A1B2C3D4</span>
-                  <span>Acme Lighting Ltd</span>
-                </div>
-              </header>
-
-              <div class="comp-doc__sec">
-                <div class="comp-doc__bar"><span>A</span> Client details</div>
-                <div class="comp-doc__fields">
-                  <div class="comp-doc__field"><label>Client</label><p>Riverside Court Management</p></div>
-                  <div class="comp-doc__field"><label>Address</label><p>12 Quay Road, Bristol, BS1 4QH</p></div>
-                </div>
+            <div
+              class="paper-flip"
+              data-paper-flip
+              data-paper-id="periodic-inspection-report"
+              data-paper-pages='["/assets/paperwork-samples/periodic-inspection-report-p1.png","/assets/paperwork-samples/periodic-inspection-report-p2.png"]'
+            >
+              <div class="paper-flip__toolbar">
+                <button type="button" class="paper-flip__nav" data-paper-prev aria-label="Previous page">
+                  ‹ Back
+                </button>
+                <span class="paper-flip__meta" data-paper-meta>Page 1 of 2</span>
+                <button type="button" class="paper-flip__nav" data-paper-next aria-label="Next page">
+                  Next ›
+                </button>
               </div>
-
-              <div class="comp-doc__sec">
-                <div class="comp-doc__bar"><span>C</span> Overall assessment</div>
-                <div class="comp-doc__assess comp-doc__assess--ok">SATISFACTORY</div>
-                <div class="comp-doc__fields comp-doc__fields--2">
-                  <div class="comp-doc__field"><label>Next inspection due</label><p>Aug 2026</p></div>
-                  <div class="comp-doc__field"><label>This visit</label><p>Monthly function test · 42 tested · 2 failed</p></div>
-                </div>
+              <div class="paper-flip__frame">
+                <span class="paper-flip__watermark" aria-hidden="true">SAMPLE</span>
+                <img
+                  class="paper-flip__img"
+                  data-paper-img
+                  src="/assets/paperwork-samples/periodic-inspection-report-p1.png"
+                  width="1190"
+                  height="1683"
+                  alt="Sample Emergency Lighting Periodic Inspection Report, page 1"
+                  decoding="async"
+                  loading="lazy"
+                />
               </div>
-
-              <div class="comp-doc__sec">
-                <div class="comp-doc__bar"><span>D</span> Inspecting organisation</div>
-                <div class="comp-doc__fields">
-                  <div class="comp-doc__field"><label>Trading title</label><p>Acme Lighting Ltd</p></div>
-                </div>
-                <div class="comp-doc__signoff">
-                  <strong>Competent person</strong>
-                  <span>J. Hart · Competent Person · 14 Jul 2026</span>
-                </div>
-              </div>
-
-              <footer class="comp-doc__footer">Prepared with Monolith Beacon · Page 1 of 2 · monolithcompliance.co.uk</footer>
             </div>
             <figcaption>
               <strong>Emergency Lighting Periodic Inspection Report</strong>
-              The visit report you can issue when the test is done — sample preview.
+              Visit report issued from a completed test — sample only.
+              <a class="paper-sample__pdf" href="/assets/paperwork-samples/periodic-inspection-report.pdf"
+                >Download sample PDF</a
+              >
             </figcaption>
           </figure>
 
           <figure class="paper-sample">
-            <div class="comp-doc" aria-hidden="true">
-              <div class="comp-doc__rule"></div>
-              <header class="comp-doc__banner">
-                <div class="comp-doc__banner-main">
-                  <h3 class="comp-doc__title">Emergency Lighting Periodic Inspection and Testing Certificate</h3>
-                  <p class="comp-doc__sub">For certifying continued compliance of an existing emergency lighting installation</p>
-                  <p class="comp-doc__std">BS 5266-1 · BS EN 50172 / BS 5266-8 · BS EN 1838</p>
-                </div>
-                <div class="comp-doc__banner-side">
-                  <span>Beacon certificate</span>
-                  <span>Page 1 of 4</span>
-                  <span>Ref: BCN-RIVR-20260714</span>
-                  <span>Monolith Beacon</span>
-                </div>
-              </header>
-
-              <div class="comp-doc__sec">
-                <div class="comp-doc__bar comp-doc__bar--caps"><span>A</span> Details of the client</div>
-                <div class="comp-doc__fields comp-doc__fields--2">
-                  <div class="comp-doc__field"><label>Occupier / Client</label><p>Riverside Court Management</p></div>
-                  <div class="comp-doc__field"><label>Postcode</label><p>BS1 4QH</p></div>
-                </div>
+            <div
+              class="paper-flip"
+              data-paper-flip
+              data-paper-id="periodic-certificate"
+              data-paper-pages='["/assets/paperwork-samples/periodic-certificate-p1.png","/assets/paperwork-samples/periodic-certificate-p2.png","/assets/paperwork-samples/periodic-certificate-p3.png","/assets/paperwork-samples/periodic-certificate-p4.png"]'
+            >
+              <div class="paper-flip__toolbar">
+                <button type="button" class="paper-flip__nav" data-paper-prev aria-label="Previous page">
+                  ‹ Back
+                </button>
+                <span class="paper-flip__meta" data-paper-meta>Page 1 of 4</span>
+                <button type="button" class="paper-flip__nav" data-paper-next aria-label="Next page">
+                  Next ›
+                </button>
               </div>
-
-              <div class="comp-doc__sec">
-                <div class="comp-doc__bar comp-doc__bar--caps"><span>D</span> Certification</div>
-                <p class="comp-doc__decl">
-                  I certify that the emergency lighting installation has been inspected and tested in accordance with
-                  BS 5266-1 and BS EN 50172 / BS 5266-8…
-                </p>
-                <div class="comp-doc__signoff">
-                  <strong>Competent person</strong>
-                  <span>J. Hart · Inspector · 14 Jul 2026</span>
-                </div>
+              <div class="paper-flip__frame">
+                <span class="paper-flip__watermark" aria-hidden="true">SAMPLE</span>
+                <img
+                  class="paper-flip__img"
+                  data-paper-img
+                  src="/assets/paperwork-samples/periodic-certificate-p1.png"
+                  width="1190"
+                  height="1683"
+                  alt="Sample Emergency Lighting Periodic Inspection and Testing Certificate, page 1"
+                  decoding="async"
+                  loading="lazy"
+                />
               </div>
-
-              <div class="comp-doc__sec">
-                <div class="comp-doc__bar comp-doc__bar--caps"><span>E</span> Details of deviations</div>
-                <div class="comp-doc__table">
-                  <div class="comp-doc__trow comp-doc__trow--head"><span>Clause</span><span>Details of deviations</span></div>
-                  <div class="comp-doc__trow"><span>—</span><span>EL-018 Plant room — lamp failed to strike (open on register)</span></div>
-                </div>
-              </div>
-
-              <div class="comp-doc__sec">
-                <div class="comp-doc__bar comp-doc__bar--caps"><span>G</span> Next inspection</div>
-                <p class="comp-doc__next">Recommended interval <strong>12 months</strong></p>
-              </div>
-
-              <footer class="comp-doc__footer">Prepared with Monolith Beacon · Page 1 of 4 · monolithcompliance.co.uk</footer>
             </div>
             <figcaption>
               <strong>Emergency Lighting Periodic Inspection and Testing Certificate</strong>
-              The site certificate for continued compliance — sample preview.
+              Site certificate for continued compliance — sample only.
+              <a class="paper-sample__pdf" href="/assets/paperwork-samples/periodic-certificate.pdf"
+                >Download sample PDF</a
+              >
             </figcaption>
           </figure>
         </div>
@@ -1391,7 +1357,7 @@
             <summary>What paperwork can I issue today?</summary>
             <p>
               After a visit: a fitting test report and a visit periodic inspection report. For the site: a periodic
-              inspection and testing certificate. Once something is issued and locked, it stays as signed.
+              inspection and testing certificate. Once something is issued and signed, it stays as signed.
             </p>
           </details>
           <details class="faq__item">
@@ -1449,7 +1415,7 @@
     </div>
   </footer>
 
-  <script src="/js/site.js?v=20260808y" defer></script>
+  <script src="/js/site.js?v=20260815a" defer></script>
   <script src="/js/demo-tour.js?v=20260808y" defer></script>
 </body>
 </html>

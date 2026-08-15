@@ -13,6 +13,19 @@ Serve the repo root as the site root, e.g.:
 npx --yes serve -l 5173 .
 ```
 
+## Paperwork samples
+
+`assets/paperwork-samples/` holds PDFs and page PNGs generated from Beacon’s real PDF builders.
+
+**Regenerate whenever certificate / inspection-report layouts change** (in the sibling `monolith-beacon` repo):
+
+```bash
+cd ../monolith-beacon
+npm run generate:marketing-samples
+```
+
+See `assets/paperwork-samples/README.md`.
+
 ## Deploy
 
 See [DEPLOY.md](./DEPLOY.md).
