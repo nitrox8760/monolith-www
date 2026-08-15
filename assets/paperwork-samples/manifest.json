@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-08-15T19:16:11.570Z",
+  "fixedAt": "2026-07-14T10:30:00.000Z",
+  "scenario": "fail",
+  "testType": "duration",
+  "source": {
+    "repo": "monolith-beacon",
+    "builders": [
+      "app/js/export/export-inspection-report-pdf.js",
+      "app/js/export/export-certificate-pdf.js"
+    ],
+    "fixtures": "app/js/dev/dev-sample-fixtures.js",
+    "exportHelper": "app/js/dev/marketing-sample-export.js"
+  },
+  "note": "Regenerate with `npm run generate:marketing-samples` in monolith-beacon whenever PDF layouts change.",
+  "documents": [
+    {
+      "id": "periodic-inspection-report",
+      "title": "Emergency Lighting Periodic Inspection Report",
+      "pdf": "periodic-inspection-report.pdf",
+      "pageCount": 2,
+      "pages": [
+        {
+          "page": 1,
+          "file": "periodic-inspection-report-p1.png",
+          "width": 1190,
+          "height": 1683
+        },
+        {
+          "page": 2,
+          "file": "periodic-inspection-report-p2.png",
+          "width": 1190,
+          "height": 1683
+        }
+      ]
+    },
+    {
+      "id": "periodic-certificate",
+      "title": "Emergency Lighting Periodic Inspection and Testing Certificate",
+      "pdf": "periodic-certificate.pdf",
+      "pageCount": 4,
+      "pages": [
+        {
+          "page": 1,
+          "file": "periodic-certificate-p1.png",
+          "width": 1190,
+          "height": 1683
+        },
+        {
+          "page": 2,
+          "file": "periodic-certificate-p2.png",
+          "width": 1190,
+          "height": 1683
+        },
+        {
+          "page": 3,
+          "file": "periodic-certificate-p3.png",
+          "width": 1190,
+          "height": 1683
+        },
+        {
+          "page": 4,
+          "file": "periodic-certificate-p4.png",
+          "width": 1190,
+          "height": 1683
+        }
+      ]
+    }
+  ]
+}

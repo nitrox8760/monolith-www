@@ -1,0 +1,3 @@
+# Keep generated paperwork samples binary (avoid CRLF corruption)
+*.pdf binary
+*.png binary
