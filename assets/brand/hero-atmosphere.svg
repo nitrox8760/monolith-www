@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 640" width="1920" height="640" role="img" aria-label="Beacon by Monolith social banner">
+  <defs>
+    <!-- Exact .hero background: 165deg wash + ellipse 90% 70% at 70% 20% + ellipse 60% 50% at 15% 80% -->
+    <linearGradient id="heroBase" x1="815.7" y1="-218.6" x2="1104.3" y2="858.6" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1a1714"/>
+      <stop offset="0.42" stop-color="#2a241c"/>
+      <stop offset="1" stop-color="#1a1714"/>
+    </linearGradient>
+    <!-- Same colours/stops as the site hero, but ellipses oversized for a short banner so you only see a wash. -->
+    <radialGradient id="heroGold" cx="1500" cy="-80" r="2800" gradientUnits="userSpaceOnUse" gradientTransform="translate(1500 -80) scale(1 0.48) translate(-1500 80)">
+      <stop offset="0" stop-color="#c9a24a" stop-opacity="0.22"/>
+      <stop offset="0.55" stop-color="#c9a24a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="heroEmber" cx="-40" cy="700" r="2000" gradientUnits="userSpaceOnUse" gradientTransform="translate(-40 700) scale(1 0.5) translate(40 -700)">
+      <stop offset="0" stop-color="#5c4a32" stop-opacity="0.4"/>
+      <stop offset="0.5" stop-color="#5c4a32" stop-opacity="0"/>
+    </radialGradient>
+
+    <pattern id="heroGrid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <rect width="56" height="2.25" fill="#f5f1ea" fill-opacity="0.028"/>
+      <rect width="2.25" height="56" fill="#f5f1ea" fill-opacity="0.028"/>
+    </pattern>
+
+    <radialGradient id="heroVeilFade" cx="960" cy="256" r="1536" gradientUnits="userSpaceOnUse" gradientTransform="translate(960 256) scale(1 0.42) translate(-960 -256)">
+      <stop offset="0.2" stop-color="#fff"/>
+      <stop offset="0.75" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="heroVeilMask">
+      <rect width="1920" height="640" fill="url(#heroVeilFade)"/>
+    </mask>
+
+    <linearGradient id="heroFaceL" x1="38" y1="16" x2="64" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c1c1c1"/>
+      <stop offset="1" stop-color="#686868"/>
+    </linearGradient>
+    <linearGradient id="heroFaceR" x1="64" y1="16" x2="90" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#818181"/>
+      <stop offset="1" stop-color="#3e3e3e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="640" fill="url(#heroBase)"/>
+  <rect width="1920" height="640" fill="url(#heroEmber)"/>
+  <rect width="1920" height="640" fill="url(#heroGold)"/>
+  <rect width="1920" height="640" fill="url(#heroGrid)" mask="url(#heroVeilMask)"/>
+
+  <!-- Full mark: plate + pillar. ~896px, hangs off top/bottom/right like the site hero. -->
+  <g opacity="0.3" transform="translate(1440 -128) scale(7)">
+    <rect width="128" height="128" rx="28" fill="#0e0e0e" stroke="#f5f1ea" stroke-opacity="0.14" stroke-width="0.6"/>
+    <path d="M64 16 46.3 30v72L64 114Z" fill="url(#heroFaceL)"/>
+    <path d="M64 16 81.7 30v72L64 114Z" fill="url(#heroFaceR)"/>
+    <path d="M64 16 46.3 30 64 38 81.7 30Z" fill="#d8d8d8"/>
+    <path d="M64 16 81.7 30 64 38Z" fill="#959595"/>
+  </g>
+</svg>
