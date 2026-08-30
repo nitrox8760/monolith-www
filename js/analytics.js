@@ -27,6 +27,11 @@
     }
   }
 
+  function hasAnalyticsConsent() {
+    const stored = readConsent();
+    return !!(stored && stored.analytics);
+  }
+
   function saveConsent(analytics) {
     const record = {
       version: CONSENT_VERSION,
@@ -104,6 +109,12 @@
       clearAnalyticsCookies();
     }
   }
+
+  /** Fire a GA4 event when analytics consent is granted. */
+  window.trackBeaconEvent = function (name, params) {
+    if (!name || typeof window.gtag !== 'function' || !hasAnalyticsConsent()) return;
+    window.gtag('event', name, params || {});
+  };
 
   function bannerEl() {
     return document.getElementById('cookie-banner');

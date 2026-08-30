@@ -15,6 +15,7 @@
   const prevBtn = root.querySelector('[data-demo-prev]');
   const nextBtn = root.querySelector('[data-demo-next]');
   const replayBtn = root.querySelector('[data-demo-replay]');
+  const codaCta = root.querySelector('[data-demo-coda-cta]');
   const headerTitle = root.querySelector('[data-demo-header-title]');
   const headerEl = root.querySelector('[data-demo-header]');
 
@@ -148,15 +149,15 @@
   function trackDemo(name) {
     if (!name) return;
     try {
-      if (typeof window.plausible === 'function') {
-        window.plausible('CTA', { props: { id: name } });
-      }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'beacon_cta', cta_id: name });
     } catch (_) {
       /* ignore */
     }
     try {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'beacon_cta', cta_id: name });
+      if (typeof window.trackBeaconEvent === 'function') {
+        window.trackBeaconEvent('beacon_cta', { cta_id: name });
+      }
     } catch (_) {
       /* ignore */
     }
@@ -475,12 +476,14 @@
 
   function updateControls() {
     const last = stepCount() - 1;
+    const atEnd = autoplayFinished || stepIndex >= last;
     if (prevBtn) prevBtn.disabled = stepIndex <= 0;
     if (nextBtn) {
       nextBtn.disabled = stepIndex >= last;
       nextBtn.hidden = stepIndex >= last;
     }
-    if (replayBtn) replayBtn.hidden = !(autoplayFinished || stepIndex >= last);
+    if (replayBtn) replayBtn.hidden = !atEnd;
+    if (codaCta) codaCta.hidden = !atEnd;
     if (stepsEl) {
       stepsEl.querySelectorAll('.demo-tour__step').forEach((btn, i) => {
         btn.setAttribute('aria-current', i === stepIndex ? 'step' : 'false');
