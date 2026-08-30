@@ -1,13 +1,25 @@
 # Beacon by Monolith
 
-> Emergency lighting testing software for UK contractors. Test on site (even offline), keep a living site register, and issue BS 5266 paperwork from the visit — free in open beta.
+> Emergency lighting test software for UK contractors. Test on site (even offline), keep a living site register, and issue BS 5266 paperwork from the visit — free in open beta.
 
 Monolith Compliance builds Beacon: Field (phone/tablet, offline-capable) for on-site monthly and annual emergency lighting tests, and Console (desktop) for sites, team, history, and certificates.
 
 ## Site
 
 - [Home](https://www.monolithcompliance.co.uk/): Product overview, demo walkthrough, sample paperwork, FAQ
-- [Privacy](https://www.monolithcompliance.co.uk/privacy.html): Privacy notice
+- [Templates](https://www.monolithcompliance.co.uk/resources/): Free blank Beacon certificate and visit report PDFs
+- [Periodic Inspection Report template](https://www.monolithcompliance.co.uk/resources/emergency-lighting-periodic-inspection-report-template.html): Blank visit report PDF
+- [Periodic certificate template](https://www.monolithcompliance.co.uk/resources/emergency-lighting-certificate-template.html): Blank site certificate PDF
+- [Guides](https://www.monolithcompliance.co.uk/guides/): Practical BS 5266 guides for UK contractors
+- [How often to test](https://www.monolithcompliance.co.uk/guides/how-often-to-test-emergency-lighting.html): Monthly function vs annual duration
+- [Monthly flick test](https://www.monolithcompliance.co.uk/guides/how-to-do-monthly-emergency-lighting-test.html): Step-by-step monthly function test
+- [Annual duration test](https://www.monolithcompliance.co.uk/guides/how-to-run-annual-emergency-lighting-duration-test.html): How to run the three-hour annual
+- [Visit report vs certificate vs logbook](https://www.monolithcompliance.co.uk/guides/visit-report-vs-certificate-vs-logbook.html): Which paperwork after a test
+- [Logbook: what to record](https://www.monolithcompliance.co.uk/guides/emergency-lighting-logbook-uk.html): What each logbook entry needs
+- [Living site register](https://www.monolithcompliance.co.uk/guides/living-site-register.html): Stop rewriting the fitting list every visit
+- [Test software (UK)](https://www.monolithcompliance.co.uk/guides/emergency-lighting-testing-software-uk.html): Compare Beacon, FireCert, cert apps, and scheduling tools
+- [Privacy](https://www.monolithcompliance.co.uk/privacy.html): Privacy policy (Monolith Compliance)
+- [Terms](https://www.monolithcompliance.co.uk/terms.html): Terms of service
 - [Beacon app](https://beacon.monolithcompliance.co.uk/): Sign in / open beta product
 
 ## Product facts
@@ -16,9 +28,10 @@ Monolith Compliance builds Beacon: Field (phone/tablet, offline-capable) for on-
 - Field: on-site testing, defects, history; works with no signal; add to home screen (no App Store)
 - Console: sites, team, audit history, organisation branding on PDFs
 - Paperwork: fitting test report, visit periodic inspection report, site periodic inspection and testing certificate
+- Templates: blank versions of the visit report and site certificate are free to download for manual completion
 - Import: bring fittings from an existing spreadsheet/logbook
 - Pricing: free in open beta; pricing announced before any charges
-- Not a BSI product certification; duty-holder remains responsible for fire-safety compliance
+- Not certified or endorsed by BSI; duty-holder remains responsible for fire-safety compliance
 - Contact: feedback@monolithcompliance.co.uk
 
 ## Optional
