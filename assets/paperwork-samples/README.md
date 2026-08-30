@@ -11,7 +11,7 @@ cd ../monolith-beacon
 npm run generate:marketing-samples
 ```
 
-That rewrites this folder (PDFs, PNGs, `manifest.json`).
+That rewrites this folder (PDFs, PNGs, `manifest.json`) and the blank templates folder.
 
 ## Notes
 
