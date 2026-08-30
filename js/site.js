@@ -109,27 +109,49 @@ if (countdownEl && !prefersReducedMotion) {
   }
 }
 
-/** Lightweight CTA funnel hooks — works with Plausible if present; always logs locally for debug. */
+const BEACON_HOST = 'beacon.monolithcompliance.co.uk';
+
 function trackCta(name) {
   if (!name) return;
-  try {
-    if (typeof window.plausible === 'function') {
-      window.plausible('CTA', { props: { id: name } });
-    }
-  } catch (_) {
-    /* ignore */
-  }
   try {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: 'beacon_cta', cta_id: name });
   } catch (_) {
     /* ignore */
   }
+  try {
+    if (typeof window.trackBeaconEvent === 'function') {
+      window.trackBeaconEvent('beacon_cta', { cta_id: name });
+    }
+  } catch (_) {
+    /* ignore */
+  }
+}
+
+function appendBeaconUtms(url, campaign) {
+  if (!campaign) return url;
+  try {
+    const parsed = new URL(url, location.origin);
+    if (!parsed.hostname.includes(BEACON_HOST)) return url;
+    parsed.searchParams.set('utm_source', 'www');
+    parsed.searchParams.set('utm_medium', 'cta');
+    parsed.searchParams.set('utm_campaign', campaign);
+    return parsed.toString();
+  } catch {
+    return url;
+  }
 }
 
 document.querySelectorAll('[data-cta]').forEach((el) => {
-  el.addEventListener('click', () => {
-    trackCta(el.getAttribute('data-cta'));
+  el.addEventListener('click', (event) => {
+    const name = el.getAttribute('data-cta');
+    trackCta(name);
+    if (el.tagName !== 'A' || !el.href) return;
+    if (!el.href.includes(BEACON_HOST)) return;
+    const withUtms = appendBeaconUtms(el.href, name);
+    if (withUtms === el.href) return;
+    event.preventDefault();
+    location.assign(withUtms);
   });
 });
 

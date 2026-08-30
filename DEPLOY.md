@@ -14,10 +14,12 @@
 
 Push to `main` auto-deploys. Do **not** attach www/apex to the Beacon Worker (`monolith-beacon`).
 
-### Analytics (optional)
+### Analytics
 
-- Enable **Cloudflare Web Analytics** on the `monolith-www` Pages project (dashboard — no code required).
-- Homepage CTAs emit `data-cta` events via `js/site.js` into `dataLayer` / Plausible if you add that later.
+- **Google Analytics 4** (`G-GFWP9D7SZL`): consent-gated in `js/analytics.js`. CTA clicks fire `beacon_cta` events with a `cta_id` param when analytics cookies are accepted.
+- In GA4 admin, mark **`beacon_cta`** as a conversion event and explore by `cta_id`.
+- Enable **Cloudflare Web Analytics** on the `monolith-www` Pages project (Cloudflare dashboard — no code, no cookie banner).
+- Outbound Beacon links get `utm_source=www`, `utm_medium=cta`, `utm_campaign={data-cta}` appended on click via `js/site.js`.
 
 ### Leave alone
 

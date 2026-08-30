@@ -2475,8 +2475,18 @@ html {
   line-height: 1.05;
 }
 
+.hero__tagline {
+  margin: 0.85rem 0 0;
+  max-width: 30rem;
+  font-size: clamp(1.15rem, 3vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: rgb(245 241 234 / 0.92);
+}
+
 .hero__lede {
-  margin: 1.15rem 0 0;
+  margin: 0.85rem 0 0;
   max-width: 30rem;
   font-size: 1.1rem;
   font-weight: 500;

@@ -67,3 +67,5 @@ User-agent: Bytespider
 Allow: /
 
 Sitemap: https://www.monolithcompliance.co.uk/sitemap.xml
+
+# LLM / agent site map: https://www.monolithcompliance.co.uk/llms.txt
