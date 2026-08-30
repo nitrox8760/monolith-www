@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080" />
+  <title>Beacon — Facebook announcement (1080×1080)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1714;
+      --ink-mid: #2a241c;
+      --cream: #f5f1ea;
+      --gold: #c9a24a;
+      --gold-hi: #f0d090;
+      --gold-mid: #d4a84b;
+      --pad: 88px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    .card {
+      position: relative;
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      color: var(--cream);
+      font-family: Outfit, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(ellipse 90% 70% at 70% 20%, rgb(201 162 74 / 0.28), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 15% 80%, rgb(92 74 50 / 0.55), transparent 50%),
+        linear-gradient(165deg, #1a1714 0%, #2a241c 42%, #1a1714 100%);
+    }
+
+    .veil {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgb(245 241 234 / 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(245 241 234 / 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 75%);
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 75%);
+    }
+
+    .mark {
+      pointer-events: none;
+      position: absolute;
+      right: -120px;
+      bottom: -180px;
+      width: 720px;
+      height: 720px;
+      opacity: 0.28;
+    }
+
+    .inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+      padding: var(--pad);
+    }
+
+    .lockup {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .lockup img {
+      width: 64px;
+      height: 64px;
+      display: block;
+      border-radius: 14px;
+    }
+
+    .lockup__text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      line-height: 1.1;
+    }
+
+    .lockup__name {
+      position: relative;
+      display: inline-block;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+    }
+
+    .lockup__tm {
+      position: absolute;
+      left: 100%;
+      top: 0;
+      margin-left: 0.08em;
+      font-size: 0.5em;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .lockup__tag {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold-hi);
+      letter-spacing: 0.02em;
+    }
+
+    .headline {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 860px;
+      padding: 24px 0;
+    }
+
+    .headline h1 {
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.14;
+      color: var(--cream);
+    }
+
+    .headline h1 span {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .footer {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .rule {
+      width: 72px;
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--gold-hi), var(--gold));
+    }
+
+    .beta {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--gold-mid);
+      letter-spacing: -0.01em;
+    }
+
+    .url {
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(245 241 234 / 0.55);
+      letter-spacing: 0.01em;
+    }
+  </style>
+</head>
+<body>
+  <article class="card" id="card" aria-label="Beacon Facebook announcement">
+    <div class="veil" aria-hidden="true"></div>
+    <img class="mark" src="../brand/pillar.svg" width="720" height="720" alt="" aria-hidden="true" />
+    <div class="inner">
+      <header class="lockup">
+        <img src="../brand/pillar.svg" width="64" height="64" alt="" />
+        <div class="lockup__text">
+          <span class="lockup__name">Beacon<span class="lockup__tm">™</span></span>
+          <span class="lockup__tag">by Monolith</span>
+        </div>
+      </header>
+
+      <div class="headline">
+        <h1>
+          <span>Test it while you’re there.</span>
+          <span>Catch up when you’re back online.</span>
+          <span>Skip the evening of admin.</span>
+        </h1>
+      </div>
+
+      <footer class="footer">
+        <div class="rule" aria-hidden="true"></div>
+        <p class="beta">Free in open beta · No card required</p>
+        <p class="url">monolithcompliance.co.uk</p>
+      </footer>
+    </div>
+  </article>
+</body>
+</html>

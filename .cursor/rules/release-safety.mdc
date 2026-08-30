@@ -1,0 +1,45 @@
+---
+description: Production and Git safety — never push or merge to main; open a PR and wait for explicit release.
+alwaysApply: true
+---
+
+# Production and Git safety
+
+The Monolith marketing website is a live production website.
+
+## Git workflow
+
+- NEVER push directly to `main`.
+- NEVER merge into `main` without explicit confirmation from me.
+- NEVER force push.
+- NEVER rewrite published Git history.
+- NEVER delete remote branches unless I explicitly request it.
+
+For every code change:
+
+1. Check the current Git status and branch before making changes.
+2. Create or use a dedicated feature/fix branch.
+3. Make only the requested changes.
+4. Run the relevant tests and checks.
+5. Review the diff for unrelated changes.
+6. Commit the changes with a clear commit message.
+7. Push ONLY the feature/fix branch.
+8. Open a pull request targeting `main`.
+9. Stop and tell me the pull request is ready.
+10. Do NOT merge it.
+
+The final merge to `main` is always a manual decision made by me.
+
+This workflow applies to every change, including small copy, styling, SEO, metadata, images, PDF resources, and other minor marketing changes.
+
+## Production safety
+
+- Do not deploy directly to production.
+- Do not make unrelated changes while completing a requested task.
+- Do not modify production configuration, domains, DNS, environment variables, analytics, forms, redirects, or deployment settings unless the requested task requires it.
+- Explicitly warn me before making any change that could affect routing, forms, authentication, external integrations, production configuration, or availability of the live site.
+- Preserve existing URLs and backwards compatibility unless the requested change explicitly requires otherwise.
+- Never use production credentials for development or testing.
+- Do not remove pages, assets, redirects, metadata, or downloadable resources without explicit approval.
+
+Cursor prepares changes and pull requests. I make the final decision to merge and release them.
